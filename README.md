@@ -7,6 +7,8 @@
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres-green?logo=supabase)](https://supabase.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
 
+**Live demo:** [cricket-iq-coach.vercel.app](https://cricket-iq-coach.vercel.app/)
+
 ---
 
 ## Features
@@ -161,14 +163,19 @@ docs/                       # Architecture, deployment, Supabase, Excel format
 
 ---
 
-## Deployment (Vercel)
+## Deploy on Vercel (step-by-step)
 
-1. Push the repo to GitHub (e.g. `wvpssriraj10/cricket-iq-coach`).
-2. In [Vercel](https://vercel.com), **Add New → Project** and import the repo.
-3. Add **Environment Variables**: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
-4. Deploy. Vercel will run `next build` automatically.
+1. **GitHub** — Push this repo to GitHub (e.g. `wvpssriraj10/cricket-iq-coach`).
+2. **Vercel** — Go to [vercel.com](https://vercel.com) → **Add New → Project** → Import your repo.
+3. **Build settings** — Leave defaults (Next.js, root directory `.`). If you set Install Command, use only `pnpm install` or leave it empty so Vercel auto-detects from `pnpm-lock.yaml`.
+4. **Environment variables** — Add `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (from Supabase → Settings → API).
+5. **Deploy** — Click **Deploy**; wait for the build, then **Visit**.
+6. **Supabase** — In Supabase **SQL Editor**, run `scripts/supabase-schema.sql` (and optionally `add-player-profile-columns.sql`, `setup-database.sql`).
+7. **Verify** — Open the Vercel URL; Dashboard, Players, and Practice should use real data.
 
-Full steps, including Supabase production setup: **`docs/DEPLOYMENT.md`**.
+**Live app:** [https://cricket-iq-coach.vercel.app](https://cricket-iq-coach.vercel.app)
+
+**Full guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) — prerequisites, screens, checklist, custom domain, rollback.
 
 ---
 
