@@ -157,11 +157,7 @@ export function DashboardContent() {
 
       {/* Filters: player, role, time range */}
       <section aria-label="Filter data">
-<<<<<<< HEAD
         <Card className="border-border/80 shadow-md">
-=======
-        <Card className="rounded-2xl border-border/50 bg-card/50 backdrop-blur-sm">
->>>>>>> origin/website-enhancement
           <CardContent className="pt-6">
             <div className="flex flex-wrap items-end gap-4">
               {isValidating && effectiveData && (
@@ -258,7 +254,6 @@ export function DashboardContent() {
 
       {/* Insight card */}
       {effectiveData?.insight && (
-<<<<<<< HEAD
         <Card className="border-primary/25 bg-gradient-to-r from-primary/10 to-primary/5 shadow-md">
           <CardContent className="flex items-start gap-3 pt-6">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/20 ring-1 ring-primary/30">
@@ -267,20 +262,6 @@ export function DashboardContent() {
             <p className="text-sm font-medium text-foreground">
               {effectiveData.insight}
             </p>
-=======
-        <Card className="overflow-hidden rounded-2xl border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-sm">
-          <CardContent className="flex items-center gap-4 py-5">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/20 ring-1 ring-primary/20">
-              <Lightbulb className="h-6 w-6 text-primary" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium uppercase tracking-wider text-primary/70 mb-1">AI Insight</p>
-              <p className="text-sm font-medium text-foreground">
-                {effectiveData.insight}
-              </p>
-            </div>
-            <ChevronRight className="h-5 w-5 text-primary/50 hidden sm:block" />
->>>>>>> origin/website-enhancement
           </CardContent>
         </Card>
       )}
@@ -326,7 +307,6 @@ export function DashboardContent() {
         
         {/* Quick Actions */}
         <div className="grid gap-4 sm:grid-cols-2">
-<<<<<<< HEAD
           <Card className="overflow-hidden border-border/80 shadow-md transition-all duration-200 hover:shadow-lg hover:border-primary/20 hover:bg-muted/30">
             <CardContent className="flex flex-col items-center justify-center p-6 text-center">
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/20 shadow-inner">
@@ -361,22 +341,6 @@ export function DashboardContent() {
               </a>
             </CardContent>
           </Card>
-=======
-          <QuickActionCard
-            title="Match Scenarios"
-            description="Chase/defend calculator and cricket IQ"
-            href="/scenarios"
-            icon={Target}
-            gradient="from-primary/20 to-accent/10"
-          />
-          <QuickActionCard
-            title="Practice Planner"
-            description="Schedule practices and add drills"
-            href="/practice"
-            icon={ListTodo}
-            gradient="from-accent/20 to-primary/10"
-          />
->>>>>>> origin/website-enhancement
         </div>
       </div>
     </div>
