@@ -28,7 +28,7 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground shadow-xl">
+    <aside className="flex h-full min-h-screen w-64 flex-col bg-sidebar text-sidebar-foreground shadow-xl">
       <div className="relative flex h-16 items-center gap-3 border-b border-sidebar-border/80 px-6">
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sidebar-primary to-sidebar-primary/60" aria-hidden />
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl ring-2 ring-sidebar-primary/40 shadow-lg">

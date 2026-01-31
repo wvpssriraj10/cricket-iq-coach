@@ -24,8 +24,8 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Desktop sidebar — fixed so it stays in place when scrolling */}
-      <div className="fixed left-0 top-0 z-20 hidden h-screen w-64 flex-col lg:flex">
+      {/* Desktop sidebar — fixed to viewport so it never moves when scrolling */}
+      <div className="fixed inset-y-0 left-0 z-20 hidden w-64 flex-col overflow-hidden lg:flex">
         <AppSidebar />
       </div>
 
