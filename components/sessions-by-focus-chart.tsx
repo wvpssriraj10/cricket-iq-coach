@@ -31,9 +31,9 @@ export function SessionsByFocusChart({ data }: SessionsByFocusChartProps) {
   }));
 
   return (
-    <Card>
+    <Card className="rounded-xl border-border/80 shadow-md">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">
+        <CardTitle className="text-lg font-bold tracking-tight">
           Sessions by Focus
         </CardTitle>
       </CardHeader>

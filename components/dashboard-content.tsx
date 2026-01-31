@@ -99,6 +99,14 @@ export function DashboardContent() {
 
   return (
     <div className="mx-auto max-w-7xl space-y-8">
+      {/* Welcome strip */}
+      <section className="rounded-2xl border border-border/80 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent px-6 py-5 shadow-sm">
+        <h2 className="text-lg font-semibold text-foreground">Welcome back</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Here’s your team performance at a glance. Use the filters below to narrow by player, role, or time range.
+        </p>
+      </section>
+
       {/* Demo data banner: shown when API unavailable (e.g. Supabase not configured); dismissible */}
       {isDemoData && !demoBannerDismissed && (
         <div
@@ -137,7 +145,7 @@ export function DashboardContent() {
 
       {/* Filters: player, role, time range */}
       <section aria-label="Filter data">
-        <Card>
+        <Card className="border-border/80 shadow-md">
           <CardContent className="pt-6">
             <div className="flex flex-wrap items-end gap-4">
             {isValidating && effectiveData && (
@@ -227,9 +235,11 @@ export function DashboardContent() {
 
       {/* Insight rule-based text */}
       {effectiveData?.insight && (
-        <Card className="border-primary/20 bg-primary/5">
+        <Card className="border-primary/25 bg-gradient-to-r from-primary/10 to-primary/5 shadow-md">
           <CardContent className="flex items-start gap-3 pt-6">
-            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/20 ring-1 ring-primary/30">
+              <Lightbulb className="h-5 w-5 text-primary" />
+            </div>
             <p className="text-sm font-medium text-foreground">
               {effectiveData.insight}
             </p>
@@ -252,35 +262,35 @@ export function DashboardContent() {
       <div className="grid gap-6 lg:grid-cols-2">
         <RecentSessions sessions={effectiveData?.recentSessions ?? []} />
         <div className="grid gap-4 sm:grid-cols-2">
-          <Card className="overflow-hidden transition-colors hover:bg-muted/50">
+          <Card className="overflow-hidden border-border/80 shadow-md transition-all duration-200 hover:shadow-lg hover:border-primary/20 hover:bg-muted/30">
             <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
-                <Target className="h-5 w-5 text-primary" />
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/20 shadow-inner">
+                <Target className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-base font-semibold">Match Scenarios</h3>
+              <h3 className="text-base font-bold">Match Scenarios</h3>
               <p className="mt-1 text-xs text-muted-foreground">
                 Chase/defend calculator and cricket IQ
               </p>
               <a
                 href="/scenarios"
-                className="mt-3 inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                className="mt-4 inline-flex h-9 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow"
               >
                 Try Scenarios
               </a>
             </CardContent>
           </Card>
-          <Card className="overflow-hidden transition-colors hover:bg-muted/50">
+          <Card className="overflow-hidden border-border/80 shadow-md transition-all duration-200 hover:shadow-lg hover:border-primary/20 hover:bg-muted/30">
             <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10">
-                <ListTodo className="h-5 w-5 text-primary" />
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/20 shadow-inner">
+                <ListTodo className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-base font-semibold">Practice Planner</h3>
+              <h3 className="text-base font-bold">Practice Planner</h3>
               <p className="mt-1 text-xs text-muted-foreground">
                 Schedule practices and add drills
               </p>
               <a
                 href="/practice"
-                className="mt-3 inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                className="mt-4 inline-flex h-9 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow"
               >
                 Plan Practice
               </a>

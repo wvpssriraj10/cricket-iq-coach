@@ -24,19 +24,19 @@ const focusAreaColors: Record<string, string> = {
 
 export function RecentSessions({ sessions }: RecentSessionsProps) {
   return (
-    <Card className="rounded-xl border bg-card shadow-sm">
+    <Card className="rounded-xl border-border/80 bg-card shadow-md">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold tracking-tight">Recent Sessions</CardTitle>
+        <CardTitle className="text-lg font-bold tracking-tight">Recent Sessions</CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
         <div className="space-y-3">
           {sessions.length === 0 ? (
-            <p className="rounded-lg border bg-muted/30 px-4 py-6 text-center text-sm text-muted-foreground">No recent sessions</p>
+            <p className="rounded-xl border border-dashed border-border/80 bg-muted/20 px-4 py-6 text-center text-sm text-muted-foreground">No recent sessions</p>
           ) : (
             sessions.map((session) => (
               <div
                 key={session.id}
-                className="flex items-center justify-between rounded-xl border bg-card p-4 shadow-sm transition-colors hover:bg-muted/30"
+                className="flex items-center justify-between rounded-xl border border-border/80 bg-card p-4 shadow-sm transition-all hover:bg-muted/30 hover:shadow"
               >
                 <div className="space-y-1">
                   <p className="font-medium capitalize">

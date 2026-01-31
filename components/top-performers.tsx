@@ -16,21 +16,21 @@ interface TopPerformersProps {
 
 export function TopPerformers({ performers }: TopPerformersProps) {
   return (
-    <Card>
+    <Card className="rounded-xl border-border/80 shadow-md">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">Top Performers</CardTitle>
+        <CardTitle className="text-lg font-bold tracking-tight">Top Performers</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {performers.length === 0 ? (
-            <p className="text-sm text-muted-foreground">No data available</p>
+            <p className="rounded-xl border border-dashed border-border/80 bg-muted/20 px-4 py-6 text-center text-sm text-muted-foreground">No data available</p>
           ) : (
             performers.map((performer, index) => (
               <div
                 key={performer.id}
-                className="flex items-center gap-4 rounded-lg border p-4"
+                className="flex items-center gap-4 rounded-xl border border-border/80 p-4 transition-all hover:bg-muted/20"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/20 text-sm font-bold text-primary shadow-inner">
                   {index + 1}
                 </div>
                 <div className="flex-1 space-y-1">

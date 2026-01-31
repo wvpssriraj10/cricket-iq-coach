@@ -1,46 +1,35 @@
-# Deploy Cricket IQ Coach
+# Deploy Cricket IQ Coach on Vercel
 
-## GitHub — Repo name and description
-
-**Suggested repository names** (pick one):
-
-- `cricket-iq-coach` — matches the app name, clear and short
-- `cricket-iq-coach-app` — if you want to distinguish from other cricket-iq repos
-- `cricket-coach-dashboard` — emphasizes the dashboard/analytics side
-
-**Suggested description** (for the repo “About” on GitHub):
-
-```
-Cricket IQ Coach — Analytics dashboard and coaching tool for cricket academies and teams. Track sessions, players, drills, and performance with Supabase + Next.js. Built for VIT-AP Prompt to Production.
-```
-
-Or shorter:
-
-```
-Analytics and coaching dashboard for cricket teams. Sessions, players, drills, performance tracking. Next.js + Supabase.
-```
+Step-by-step guide to deploy the app to [Vercel](https://vercel.com) with [Supabase](https://supabase.com) as the database.
 
 ---
 
-## Step-by-step: Deploy on Vercel
+## Before you start
 
-### Step 1: Create the GitHub repository
+- **GitHub account** — You'll connect Vercel to GitHub.
+- **Vercel account** — Sign up at [vercel.com](https://vercel.com) (use "Continue with GitHub").
+- **Supabase project** — Create one at [supabase.com](https://supabase.com) and note:
+  - **Project URL** (e.g. `https://xxxxx.supabase.co`)
+  - **service_role** key (Settings → API → Project API keys → `service_role`)
+
+---
+
+## Step 1: Have your code on GitHub
+
+Your app must be in a GitHub repository so Vercel can import it.
+
+**If you already pushed this project to GitHub** (e.g. `wvpssriraj10/cricket-iq-coach`), skip to **Step 2**.
+
+**If the project is not on GitHub yet:**
 
 1. Go to [github.com/new](https://github.com/new).
 2. **Repository name:** e.g. `cricket-iq-coach`.
-3. **Description:** Paste one of the descriptions above (or your own).
-4. Choose **Public** (or Private if you prefer).
-5. Do **not** add a README, .gitignore, or license if your project already has them.
-6. Click **Create repository**.
-
----
-
-### Step 2: Push your code to GitHub
-
-If the project is **not** yet a git repo:
+3. **Description (optional):** e.g. *Analytics and coaching dashboard for cricket teams. Next.js + Supabase.*
+4. Choose **Public**. Do **not** add a README, .gitignore, or license (the project already has them).
+5. Click **Create repository**.
+6. In your project folder, run (replace `YOUR_USERNAME` with your GitHub username):
 
 ```bash
-cd "Prompt to Production VIT-AP (Cricket IQ Coach)"
 git init
 git add .
 git commit -m "Initial commit: Cricket IQ Coach"
@@ -49,94 +38,94 @@ git remote add origin https://github.com/YOUR_USERNAME/cricket-iq-coach.git
 git push -u origin main
 ```
 
-If it **is** already a git repo and you only need to add the new remote:
-
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/cricket-iq-coach.git
-git branch -M main
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` with your GitHub username and `cricket-iq-coach` with your repo name.
-
 ---
 
-### Step 3: Sign in to Vercel and import the project
+## Step 2: Import the project in Vercel
 
-1. Go to [vercel.com](https://vercel.com) and sign in (use **Continue with GitHub** if you use GitHub).
+1. Go to [vercel.com](https://vercel.com) and sign in (**Continue with GitHub** if needed).
 2. Click **Add New…** → **Project**.
-3. You should see your GitHub account; select the **cricket-iq-coach** (or your repo name) repository.
-4. If you don’t see it, click **Import Git Repository** and paste the repo URL, then **Import**.
+3. Under **Import Git Repository**, find **cricket-iq-coach** (or your repo name) and click **Import**.
+4. If the repo does not appear, click **Import Third-Party Git Repository**, paste  
+   `https://github.com/wvpssriraj10/cricket-iq-coach` (or your repo URL), then **Import**.
 
 ---
 
-### Step 4: Configure the project (Vercel)
+## Step 3: Configure build settings (Vercel)
 
-1. **Project Name:** Leave as-is or set something like `cricket-iq-coach`.
-2. **Root Directory:** Leave as **.** (root) unless the app lives in a subfolder (e.g. in a monorepo).
-3. **Framework Preset:** Vercel should detect **Next.js**; leave it.
-4. **Build Command:** Leave default (`next build`).
-5. **Output Directory:** Leave default (Next.js sets this).
-6. **Install Command:** Leave default (`npm install`).
+On the import configuration screen, leave defaults unless your app is in a subfolder:
 
-Do **not** click Deploy yet — add environment variables first.
+| Setting | Value |
+|--------|--------|
+| **Project Name** | `cricket-iq-coach` (or any name) |
+| **Root Directory** | `.` (leave as root) |
+| **Framework Preset** | Next.js (auto-detected) |
+| **Build Command** | `next build` |
+| **Output Directory** | (default) |
+| **Install Command** | Leave **empty** (Vercel auto-detects pnpm from `pnpm-lock.yaml`) or set `pnpm install` only — do not enter "npm install or pnpm install" |
+
+Do **not** click **Deploy** yet — add environment variables next.
 
 ---
 
-### Step 5: Add environment variables
+## Step 4: Add environment variables in Vercel
 
-1. In the same import/setup screen, open **Environment Variables** (or go to **Project → Settings → Environment Variables** after the first deploy).
-2. Add these for **Production** (and **Preview** if you want branch deploys to use the same DB):
+1. On the same page, expand **Environment Variables**.
+2. Add these two variables (use **Production**; add **Preview** too if you want preview deployments to use the same DB):
 
-| Name | Value | Notes |
-|------|--------|------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL | Supabase Dashboard → Project Settings → API |
-| `SUPABASE_SERVICE_ROLE_KEY` | Your Supabase **service_role** key | Same page; use **service_role**, not anon |
+| Name | Value | Where to get it |
+|------|--------|------------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://YOUR_PROJECT_REF.supabase.co` | Supabase → Project Settings → API → **Project URL** |
+| `SUPABASE_SERVICE_ROLE_KEY` | Long secret key | Same page → **Project API keys** → **service_role** (secret) |
 
-3. For each variable: enter **Name** and **Value**, choose **Production** (and optionally **Preview**), then click **Add** or **Save**.
+3. For each row: type the **Name**, paste the **Value**, select **Production** (and optionally **Preview**), then click **Add**.
+4. Double-check for typos and that you used the **service_role** key, not the `anon` key.
 
-Optional (only if you enable AI features):
+**Optional (only if you enable AI features):**
 
 - `NEXT_PUBLIC_AI_BEHAVIORAL_ENABLED` = `true`
 - `NEXT_PUBLIC_AI_CHAT_ENABLED` = `true`
 
-4. Click **Deploy** (or **Save** then trigger a deploy).
+---
+
+## Step 5: Deploy
+
+1. Click **Deploy**.
+2. Wait for the build to finish (usually 1–2 minutes). You can follow the build logs on the deployment page.
+3. When the status is **Ready**, click **Visit** to open your app (e.g. `https://cricket-iq-coach.vercel.app`).
 
 ---
 
-### Step 6: Prepare Supabase (database)
+## Step 6: Set up the database in Supabase
 
-1. In [Supabase](https://supabase.com), open your project.
+The app needs tables and seed data in Supabase. Do this once per Supabase project.
+
+1. Open [Supabase](https://supabase.com) → your project.
 2. Go to **SQL Editor**.
-3. Run the full script in **`scripts/supabase-schema.sql`** (creates tables and drill catalog).
-4. (Optional) Run **`scripts/add-player-profile-columns.sql`** if the schema was created before those columns existed.
-5. (Optional) Run **`scripts/setup-database.sql`** for demo players/sessions/stats.
+3. **Create schema and drill catalog:**  
+   Open `scripts/supabase-schema.sql` from this repo, copy its full contents, paste into a new query in the SQL Editor, and click **Run**.
+4. **Optional — extra player columns:**  
+   If you use player profile fields (batting arm, bowler type, etc.), run `scripts/add-player-profile-columns.sql` in the SQL Editor once.
+5. **Optional — demo data:**  
+   Run `scripts/setup-database.sql` in the SQL Editor to add sample players/sessions/stats.
+
+After this, your Vercel app will use the same Supabase project (via the env vars you set) and show real data.
 
 ---
 
-### Step 7: Deploy and open the app
+## Step 7: Verify the deployment
 
-1. On Vercel, click **Deploy** (if you didn’t already).
-2. Wait for the build to finish (usually 1–2 minutes).
-3. When it’s done, click **Visit** or open the URL Vercel shows (e.g. `https://cricket-iq-coach.vercel.app`).
-
----
-
-### Step 8: Verify after deploy
-
-- Open the deployed URL; you should see the app (Dashboard or landing).
-- If env vars are missing or wrong, the Dashboard may show demo data and messages like “Supabase not configured.”
-- After Supabase is set up and env vars are correct, the Dashboard, Players, Sessions, and Practice Planner should use real data.
+1. Open your Vercel URL (e.g. `https://cricket-iq-coach.vercel.app`).
+2. You should see the Dashboard. If env vars were wrong or missing, you might see "Supabase not configured" or empty data.
+3. Check **Players**, **Sessions**, and **Practice** — they should load and, after Step 6, use data from Supabase.
 
 ---
 
 ## Summary checklist
 
-- [ ] Create GitHub repo (name + description).
-- [ ] Push code to GitHub (`main` branch).
+- [ ] Code is on GitHub (`main` branch).
 - [ ] Vercel → Add New → Project → Import repo.
 - [ ] Add `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
-- [ ] Deploy.
+- [ ] Click Deploy and wait for build to finish.
 - [ ] Run `scripts/supabase-schema.sql` in Supabase SQL Editor.
 - [ ] Open the Vercel URL and verify the app.
 
@@ -154,3 +143,15 @@ Optional (only if you enable AI features):
 
 - **Revert code:** Push a previous commit to `main`; Vercel will redeploy.
 - **Previous deployment:** Vercel → **Deployments** → open a past deployment → **Promote to Production**.
+
+---
+
+## Repo name and description (for GitHub)
+
+**Repo name examples:** `cricket-iq-coach`, `cricket-iq-coach-app`
+
+**Repo description (for GitHub "About"):**
+
+```
+Cricket IQ Coach — Analytics dashboard and coaching tool for cricket academies and teams. Track sessions, players, drills, and performance. Next.js + Supabase. Built for VIT-AP Prompt to Production.
+```

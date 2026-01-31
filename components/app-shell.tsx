@@ -20,8 +20,8 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Desktop sidebar */}
-      <div className="hidden lg:block">
+      {/* Desktop sidebar — fixed so it stays in place when scrolling */}
+      <div className="fixed left-0 top-0 z-20 hidden h-screen w-64 flex-col lg:flex">
         <AppSidebar />
       </div>
 
@@ -43,18 +43,19 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
         </SheetContent>
       </Sheet>
 
-      {/* Main content */}
-      <main className="flex-1 overflow-auto bg-gradient-to-b from-muted/30 to-background">
-        <header className="sticky top-0 z-30 border-b border-border/80 bg-background/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/80">
-          <div className="flex h-16 items-center gap-4 px-6 lg:px-8">
+      {/* Main content — offset by sidebar width on desktop so it doesn't sit under the fixed sidebar */}
+      <main className="min-h-screen w-full flex-1 overflow-auto bg-gradient-to-b from-primary/[0.04] via-background to-background lg:ml-64">
+        <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/85">
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" aria-hidden />
+          <div className="relative flex h-16 items-center gap-4 px-6 lg:px-8">
             <div className="lg:hidden w-10 shrink-0" />
-            <Link href="/" className="block h-9 w-9 shrink-0 rounded-lg overflow-hidden" aria-label="Cricket IQ Coach home">
+            <Link href="/" className="block h-9 w-9 shrink-0 rounded-xl overflow-hidden ring-1 ring-border/50 shadow-sm transition hover:ring-primary/30 hover:shadow" aria-label="Cricket IQ Coach home">
               <span className="relative block h-full w-full">
                 <Image src="/logo.png" alt="" fill className="object-contain" priority sizes="36px" />
               </span>
             </Link>
             <div className="min-w-0">
-              <h1 className="text-xl font-semibold tracking-tight">{title}</h1>
+              <h1 className="text-xl font-bold tracking-tight text-foreground">{title}</h1>
               {subtitle && (
                 <p className="text-sm text-muted-foreground mt-0.5">{subtitle}</p>
               )}
