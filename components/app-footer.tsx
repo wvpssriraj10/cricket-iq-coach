@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Twitter } from "lucide-react";
+import { Github } from "lucide-react";
+
+const GITHUB_REPO_URL = "https://github.com/wvpssriraj10/cricket-iq-coach";
 
 const productLinks = [
   { name: "Dashboard", href: "/" },
@@ -15,9 +17,9 @@ const productLinks = [
 ];
 
 const resourceLinks = [
-  { name: "Documentation", href: "#" },
-  { name: "Changelog", href: "#" },
-  { name: "Examples", href: "#" },
+  { name: "Documentation" },
+  { name: "Changelog" },
+  { name: "Examples" },
 ];
 
 export function AppFooter() {
@@ -82,13 +84,15 @@ export function AppFooter() {
             </h3>
             <ul className="mt-4 space-y-2">
               {resourceLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-sidebar-foreground/90 transition hover:text-sidebar-primary"
-                  >
-                    {item.name}
-                  </Link>
+                <li
+                  key={item.name}
+                  className="text-sm text-sidebar-foreground/60 cursor-default"
+                  title="Coming soon"
+                >
+                  {item.name}
+                  <span className="ml-1.5 text-xs text-sidebar-foreground/50">
+                    (Coming soon)
+                  </span>
                 </li>
               ))}
             </ul>
@@ -101,7 +105,7 @@ export function AppFooter() {
             </h3>
             <div className="mt-4 flex gap-3">
               <a
-                href="https://github.com"
+                href={GITHUB_REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-sidebar-border bg-sidebar-accent/30 text-sidebar-foreground transition hover:border-sidebar-primary/50 hover:text-sidebar-primary"
@@ -109,19 +113,10 @@ export function AppFooter() {
               >
                 <Github className="h-4 w-4" />
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-sidebar-border bg-sidebar-accent/30 text-sidebar-foreground transition hover:border-sidebar-primary/50 hover:text-sidebar-primary"
-                aria-label="Twitter / X"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
             </div>
             <p className="mt-3 text-sm text-sidebar-foreground/75">
               <a
-                href="https://github.com"
+                href={GITHUB_REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sidebar-foreground/90 hover:text-sidebar-primary"
