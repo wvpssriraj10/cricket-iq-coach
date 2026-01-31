@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
-import { TrendingUp, Target, Zap, Lightbulb, X, ListTodo } from "lucide-react";
+import { TrendingUp, Target, Zap, Lightbulb, X, ListTodo, ChevronRight, ArrowRight, Flame, Trophy } from "lucide-react";
 import { KPICard } from "@/components/kpi-card";
 import { PerformanceChart } from "@/components/performance-chart";
 import { DrillRatingChart } from "@/components/drill-rating-chart";
@@ -10,7 +10,7 @@ import { SessionsByFocusChart } from "@/components/sessions-by-focus-chart";
 import { RecentSessions } from "@/components/recent-sessions";
 import { TopPerformers } from "@/components/top-performers";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 // Fetcher: throw on non-OK so SWR sets error and we can show demo fallback + banner.
 async function fetcher(url: string) {
@@ -111,12 +112,13 @@ export function DashboardContent() {
       {isDemoData && !demoBannerDismissed && (
         <div
           role="status"
-          className="relative rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 pr-10 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200"
+          className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-amber-500/5 backdrop-blur-sm px-5 py-4 pr-12"
         >
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-transparent" />
           <button
             type="button"
             aria-label="Dismiss demo data banner"
-            className="absolute right-2 top-2 rounded p-1 text-amber-600 hover:bg-amber-200/50 dark:text-amber-300 dark:hover:bg-amber-800/50"
+            className="absolute right-3 top-3 rounded-lg p-1.5 text-amber-500/80 hover:bg-amber-500/10 transition-colors"
             onClick={() => {
               setDemoBannerDismissed(true);
               if (typeof window !== "undefined") sessionStorage.setItem(DEMO_BANNER_KEY, "1");
@@ -124,19 +126,29 @@ export function DashboardContent() {
           >
             <X className="h-4 w-4" />
           </button>
-          <p className="font-medium">Using demo data</p>
-          <p className="mt-1 text-amber-700 dark:text-amber-300">
-            Connect Supabase to see real KPIs and charts. See <code className="rounded bg-amber-200/50 px-1 dark:bg-amber-800/50">docs/SUPABASE_SETUP.md</code> in the project for setup.
-          </p>
+          <div className="relative flex items-start gap-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-500/20">
+              <Flame className="h-4 w-4 text-amber-500" />
+            </div>
+            <div>
+              <p className="font-semibold text-amber-500">Using demo data</p>
+              <p className="mt-0.5 text-sm text-amber-500/70">
+                Connect Supabase to see real KPIs and charts. See <code className="rounded bg-amber-500/10 px-1.5 py-0.5 text-xs">docs/SUPABASE_SETUP.md</code> for setup.
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
       {/* Empty state: API OK but no sessions yet */}
       {isEmpty && (
-        <Card className="border-dashed border-muted-foreground/30 bg-muted/20">
-          <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-            <p className="font-medium text-foreground">No sessions yet</p>
-            <p className="mt-1 text-sm text-muted-foreground">
+        <Card className="border-dashed border-muted-foreground/20 bg-muted/10 rounded-2xl">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-muted/50 mb-4">
+              <Trophy className="h-8 w-8 text-muted-foreground/50" />
+            </div>
+            <p className="font-semibold text-foreground text-lg">No sessions yet</p>
+            <p className="mt-1 text-sm text-muted-foreground max-w-md">
               Set up Supabase, run the schema script, and add players and sessions to see KPIs and charts here.
             </p>
           </CardContent>
@@ -145,96 +157,108 @@ export function DashboardContent() {
 
       {/* Filters: player, role, time range */}
       <section aria-label="Filter data">
+<<<<<<< HEAD
         <Card className="border-border/80 shadow-md">
+=======
+        <Card className="rounded-2xl border-border/50 bg-card/50 backdrop-blur-sm">
+>>>>>>> origin/website-enhancement
           <CardContent className="pt-6">
             <div className="flex flex-wrap items-end gap-4">
-            {isValidating && effectiveData && (
-              <span className="text-xs text-muted-foreground">Updating…</span>
-            )}
-            <div className="space-y-2">
-              <Label className="text-muted-foreground">Time range</Label>
-              <Select value={range} onValueChange={setRange}>
-                <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Range" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="5">Last 5 sessions</SelectItem>
-                  <SelectItem value="10">Last 10 sessions</SelectItem>
-                </SelectContent>
-              </Select>
+              {isValidating && effectiveData && (
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                  Updating...
+                </div>
+              )}
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Time range</Label>
+                <Select value={range} onValueChange={setRange}>
+                  <SelectTrigger className="w-[160px] rounded-xl border-border/50 bg-muted/30 hover:bg-muted/50 transition-colors">
+                    <SelectValue placeholder="Range" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl border-border/50">
+                    <SelectItem value="all">All time</SelectItem>
+                    <SelectItem value="5">Last 5 sessions</SelectItem>
+                    <SelectItem value="10">Last 10 sessions</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Role</Label>
+                <Select value={role} onValueChange={setRole}>
+                  <SelectTrigger className="w-[160px] rounded-xl border-border/50 bg-muted/30 hover:bg-muted/50 transition-colors">
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl border-border/50">
+                    <SelectItem value="all">All roles</SelectItem>
+                    <SelectItem value="batter">Batter</SelectItem>
+                    <SelectItem value="bowler">Bowler</SelectItem>
+                    <SelectItem value="allrounder">All-rounder</SelectItem>
+                    <SelectItem value="keeper">Keeper</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Player</Label>
+                <PlayerSelect value={player} onValueChange={setPlayer} />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label className="text-muted-foreground">Role</Label>
-              <Select value={role} onValueChange={setRole}>
-                <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="batter">Batter</SelectItem>
-                  <SelectItem value="bowler">Bowler</SelectItem>
-                  <SelectItem value="allrounder">All-rounder</SelectItem>
-                  <SelectItem value="keeper">Keeper</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label className="text-muted-foreground">Player</Label>
-              <PlayerSelect value={player} onValueChange={setPlayer} />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
       </section>
 
+      {/* KPI Cards */}
       <section aria-label="Key metrics" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard
-          title="Batting average"
+          title="Batting Average"
           value={
             effectiveData?.avgBatting != null
               ? Number(effectiveData.avgBatting).toFixed(1)
-              : "—"
+              : "--"
           }
           subtitle="runs / max(1, dismissals)"
           icon={TrendingUp}
+          trend={{ value: 12, isPositive: true }}
         />
         <KPICard
-          title="Strike rate"
+          title="Strike Rate"
           value={
             effectiveData?.strikeRate != null
               ? Number(effectiveData.strikeRate).toFixed(1)
-              : "—"
+              : "--"
           }
-          subtitle="runs / balls × 100"
+          subtitle="runs / balls x 100"
           icon={Zap}
+          trend={{ value: 8, isPositive: true }}
         />
         <KPICard
-          title="Bowling economy"
+          title="Bowling Economy"
           value={
             effectiveData?.economy != null
               ? Number(effectiveData.economy).toFixed(1)
-              : "—"
+              : "--"
           }
           subtitle="runs / over"
           icon={Target}
+          trend={{ value: 5, isPositive: true }}
         />
         <KPICard
-          title="Wickets per session"
+          title="Wickets/Session"
           value={
             effectiveData?.wicketsPerSession != null
               ? Number(effectiveData.wicketsPerSession).toFixed(1)
               : effectiveData?.totalWickets != null
                 ? String(effectiveData.totalWickets)
-                : "—"
+                : "--"
           }
           subtitle="avg in selected range"
           icon={Target}
         />
       </section>
 
-      {/* Insight rule-based text */}
+      {/* Insight card */}
       {effectiveData?.insight && (
+<<<<<<< HEAD
         <Card className="border-primary/25 bg-gradient-to-r from-primary/10 to-primary/5 shadow-md">
           <CardContent className="flex items-start gap-3 pt-6">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/20 ring-1 ring-primary/30">
@@ -243,25 +267,66 @@ export function DashboardContent() {
             <p className="text-sm font-medium text-foreground">
               {effectiveData.insight}
             </p>
+=======
+        <Card className="overflow-hidden rounded-2xl border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-sm">
+          <CardContent className="flex items-center gap-4 py-5">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/20 ring-1 ring-primary/20">
+              <Lightbulb className="h-6 w-6 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-primary/70 mb-1">AI Insight</p>
+              <p className="text-sm font-medium text-foreground">
+                {effectiveData.insight}
+              </p>
+            </div>
+            <ChevronRight className="h-5 w-5 text-primary/50 hidden sm:block" />
+>>>>>>> origin/website-enhancement
           </CardContent>
         </Card>
       )}
 
+      {/* Charts section */}
       <section aria-label="Charts" className="grid gap-6 lg:grid-cols-2">
-        <PerformanceChart data={effectiveData?.performanceTrend ?? []} />
-        <DrillRatingChart data={effectiveData?.drillRatingTrend ?? []} />
+        <Card className="rounded-2xl border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden">
+          <CardHeader className="border-b border-border/50 bg-muted/20">
+            <CardTitle className="text-base font-semibold">Performance Trend</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <PerformanceChart data={effectiveData?.performanceTrend ?? []} />
+          </CardContent>
+        </Card>
+        <Card className="rounded-2xl border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden">
+          <CardHeader className="border-b border-border/50 bg-muted/20">
+            <CardTitle className="text-base font-semibold">Drill Rating Trend</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <DrillRatingChart data={effectiveData?.drillRatingTrend ?? []} />
+          </CardContent>
+        </Card>
       </section>
+
+      {/* Sessions by focus and performers */}
       <section aria-label="Sessions and performers" className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <SessionsByFocusChart data={effectiveData?.sessionsByFocus ?? []} />
+          <Card className="rounded-2xl border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden h-full">
+            <CardHeader className="border-b border-border/50 bg-muted/20">
+              <CardTitle className="text-base font-semibold">Sessions by Focus</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <SessionsByFocusChart data={effectiveData?.sessionsByFocus ?? []} />
+            </CardContent>
+          </Card>
         </div>
         <TopPerformers performers={effectiveData?.topPerformers ?? []} />
       </section>
 
-      {/* Recent sessions + CTAs */}
+      {/* Recent sessions + Quick Actions */}
       <div className="grid gap-6 lg:grid-cols-2">
         <RecentSessions sessions={effectiveData?.recentSessions ?? []} />
+        
+        {/* Quick Actions */}
         <div className="grid gap-4 sm:grid-cols-2">
+<<<<<<< HEAD
           <Card className="overflow-hidden border-border/80 shadow-md transition-all duration-200 hover:shadow-lg hover:border-primary/20 hover:bg-muted/30">
             <CardContent className="flex flex-col items-center justify-center p-6 text-center">
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/20 shadow-inner">
@@ -296,9 +361,61 @@ export function DashboardContent() {
               </a>
             </CardContent>
           </Card>
+=======
+          <QuickActionCard
+            title="Match Scenarios"
+            description="Chase/defend calculator and cricket IQ"
+            href="/scenarios"
+            icon={Target}
+            gradient="from-primary/20 to-accent/10"
+          />
+          <QuickActionCard
+            title="Practice Planner"
+            description="Schedule practices and add drills"
+            href="/practice"
+            icon={ListTodo}
+            gradient="from-accent/20 to-primary/10"
+          />
+>>>>>>> origin/website-enhancement
         </div>
       </div>
     </div>
+  );
+}
+
+function QuickActionCard({
+  title,
+  description,
+  href,
+  icon: Icon,
+  gradient,
+}: {
+  title: string;
+  description: string;
+  href: string;
+  icon: React.ElementType;
+  gradient: string;
+}) {
+  return (
+    <a
+      href={href}
+      className={cn(
+        "group relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 transition-all duration-300 hover-lift"
+      )}
+    >
+      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-50 transition-opacity group-hover:opacity-100", gradient)} />
+      <div className="relative">
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20 transition-transform group-hover:scale-110">
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+        <h3 className="text-base font-semibold text-foreground mb-1">{title}</h3>
+        <p className="text-xs text-muted-foreground mb-4">{description}</p>
+        <span className="inline-flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+          Get Started
+          <ArrowRight className="h-4 w-4" />
+        </span>
+      </div>
+    </a>
   );
 }
 
@@ -317,10 +434,10 @@ function PlayerSelect({
 
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] rounded-xl border-border/50 bg-muted/30 hover:bg-muted/50 transition-colors">
         <SelectValue placeholder="Player" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="rounded-xl border-border/50">
         {options.map((p) => (
           <SelectItem key={p.id} value={p.id}>
             {p.name}
@@ -334,50 +451,37 @@ function PlayerSelect({
 function DashboardSkeleton() {
   return (
     <div className="space-y-8">
-      <Card>
+      <Card className="rounded-2xl border-border/50 bg-card/50">
         <CardContent className="pt-6">
           <div className="flex gap-4">
-            <Skeleton className="h-9 w-[140px]" />
-            <Skeleton className="h-9 w-[140px]" />
-            <Skeleton className="h-9 w-[180px]" />
+            <Skeleton className="h-10 w-[160px] rounded-xl" />
+            <Skeleton className="h-10 w-[160px] rounded-xl" />
+            <Skeleton className="h-10 w-[180px] rounded-xl" />
           </div>
         </CardContent>
       </Card>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[...Array(4)].map((_, i) => (
-          <Card key={i}>
+          <Card key={i} className="rounded-2xl border-border/50 bg-card/50">
             <CardContent className="p-6">
-              <Skeleton className="mb-2 h-4 w-24" />
-              <Skeleton className="h-8 w-16" />
-              <Skeleton className="mt-2 h-3 w-20" />
+              <Skeleton className="mb-3 h-4 w-24 rounded-lg" />
+              <Skeleton className="h-10 w-20 rounded-lg" />
+              <Skeleton className="mt-3 h-3 w-28 rounded-lg" />
             </CardContent>
           </Card>
         ))}
       </div>
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
+        <Card className="rounded-2xl border-border/50 bg-card/50">
           <CardContent className="p-6">
-            <Skeleton className="mb-4 h-5 w-40" />
-            <Skeleton className="h-64 w-full" />
+            <Skeleton className="mb-4 h-5 w-40 rounded-lg" />
+            <Skeleton className="h-64 w-full rounded-xl" />
           </CardContent>
         </Card>
-        <Card>
+        <Card className="rounded-2xl border-border/50 bg-card/50">
           <CardContent className="p-6">
-            <Skeleton className="mb-4 h-5 w-48" />
-            <Skeleton className="h-64 w-full" />
-          </CardContent>
-        </Card>
-      </div>
-      <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardContent className="p-6">
-            <Skeleton className="mb-4 h-5 w-32" />
-            <Skeleton className="h-64 w-full" />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-6">
-            <Skeleton className="h-64 w-full" />
+            <Skeleton className="mb-4 h-5 w-48 rounded-lg" />
+            <Skeleton className="h-64 w-full rounded-xl" />
           </CardContent>
         </Card>
       </div>
