@@ -104,7 +104,6 @@ export default function PlayersPage() {
     fetcher
   );
 
-
   const recentSessions = useMemo(
     () => [...sessions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8),
     [sessions]
@@ -535,9 +534,9 @@ export default function PlayersPage() {
           <RecentSessions sessions={recentSessions} />
         </section>
 
-        {/* 2-column: Add player + Squad list */}
-        <section aria-label="Squad management" className="grid gap-6 lg:grid-cols-2">
-          <Card className="rounded-xl border bg-card shadow-sm lg:max-w-md">
+        {/* 2-column: Add player + Squad list — first column sized to form so no gap */}
+        <section aria-label="Squad management" className="grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]">
+          <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                 <UserPlus className="h-5 w-5" />
