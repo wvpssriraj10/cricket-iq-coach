@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AppSidebar } from "@/components/app-sidebar";
+import { AppFooter } from "@/components/app-footer";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -61,7 +62,7 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
       )}
 
       {/* Main content — offset by sidebar width on desktop so it doesn't sit under the fixed sidebar */}
-      <main className="min-h-screen w-full flex-1 overflow-auto bg-gradient-to-b from-primary/[0.04] via-background to-background lg:ml-64">
+      <main className="flex min-h-screen w-full flex-1 flex-col overflow-auto bg-gradient-to-b from-primary/[0.04] via-background to-background lg:ml-64">
         <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/85">
           <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" aria-hidden />
           <div className="relative flex h-16 items-center gap-4 px-6 lg:px-8">
@@ -79,7 +80,8 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
             </div>
           </div>
         </header>
-        <div className="min-h-[calc(100vh-4rem)] p-6 lg:p-8">{children}</div>
+        <div className="min-h-[calc(100vh-4rem)] flex-1 p-6 lg:p-8">{children}</div>
+        <AppFooter />
       </main>
     </div>
   );
