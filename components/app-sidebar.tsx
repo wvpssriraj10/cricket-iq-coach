@@ -11,6 +11,8 @@ import {
   CalendarCheck,
   FileSpreadsheet,
   ListTodo,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,26 +30,34 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground shadow-lg">
-      <div className="flex h-16 items-center gap-3 border-b border-sidebar-border/80 px-6">
-        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl shadow-md">
+    <aside className="flex h-screen w-72 flex-col bg-sidebar border-r border-sidebar-border/50">
+      {/* Logo section with gradient accent */}
+      <div className="relative flex h-20 items-center gap-3 px-6">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-sidebar-border to-transparent" />
+        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl ring-2 ring-primary/20 glow-sm">
           <Image
             src="/logo.png"
             alt="Cricket IQ Coach"
             fill
             className="object-contain"
             priority
-            sizes="40px"
+            sizes="48px"
           />
         </div>
         <div className="min-w-0">
-          <h1 className="text-base font-semibold tracking-tight">Cricket IQ</h1>
-          <p className="text-xs text-sidebar-foreground/70">Coach Analytics</p>
+          <h1 className="text-lg font-bold tracking-tight text-gradient">Cricket IQ</h1>
+          <p className="text-xs text-sidebar-foreground/60 font-medium">Coach Analytics</p>
         </div>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-3 py-4">
-        <ul className="space-y-0.5">
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto px-4 py-6">
+        <div className="mb-3 px-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-sidebar-foreground/40">
+            Main Menu
+          </span>
+        </div>
+        <ul className="space-y-1">
           {navigation.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -57,14 +67,28 @@ export function AppSidebar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                    "group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300",
                     isActive
-                      ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-sm"
-                      : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                      ? "bg-gradient-to-r from-primary/20 to-primary/5 text-primary shadow-sm"
+                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
                   )}
                 >
-                  <item.icon className="h-5 w-5 shrink-0" />
-                  {item.name}
+                  {isActive && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-full bg-primary glow-sm" />
+                  )}
+                  <span className={cn(
+                    "flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
+                    isActive 
+                      ? "bg-primary/10 text-primary" 
+                      : "bg-sidebar-accent/30 text-sidebar-foreground/60 group-hover:bg-sidebar-accent/50 group-hover:text-sidebar-foreground"
+                  )}>
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <span className="flex-1">{item.name}</span>
+                  <ChevronRight className={cn(
+                    "h-4 w-4 opacity-0 transition-all duration-300",
+                    isActive ? "opacity-100 text-primary" : "group-hover:opacity-50"
+                  )} />
                 </Link>
               </li>
             );
@@ -72,15 +96,34 @@ export function AppSidebar() {
         </ul>
       </nav>
 
-      <div className="border-t border-sidebar-border/80 p-4">
-        <div className="flex items-center gap-3 rounded-xl bg-sidebar-accent/30 px-3 py-2.5">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sidebar-accent">
-            <Users className="h-4 w-4" />
+      {/* Pro upgrade card */}
+      <div className="p-4">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-accent/10 p-4">
+          <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
+          <div className="relative">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 mb-3">
+              <Sparkles className="h-5 w-5 text-primary" />
+            </div>
+            <h3 className="text-sm font-semibold text-foreground mb-1">Upgrade to Pro</h3>
+            <p className="text-xs text-muted-foreground mb-3">Unlock advanced analytics and AI insights</p>
+            <button className="w-full rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20">
+              Upgrade Now
+            </button>
           </div>
-          <div className="min-w-0">
-            <p className="text-sm font-medium">Team Squad</p>
-            <p className="text-xs text-sidebar-foreground/70">12 Players</p>
+        </div>
+      </div>
+
+      {/* Team info */}
+      <div className="border-t border-sidebar-border/50 p-4">
+        <div className="flex items-center gap-3 rounded-xl bg-sidebar-accent/30 px-3 py-3 transition-colors hover:bg-sidebar-accent/50 cursor-pointer">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent">
+            <Users className="h-5 w-5 text-primary-foreground" />
           </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-sidebar-foreground">Team Squad</p>
+            <p className="text-xs text-sidebar-foreground/60">12 Active Players</p>
+          </div>
+          <ChevronRight className="h-4 w-4 text-sidebar-foreground/40" />
         </div>
       </div>
     </aside>
