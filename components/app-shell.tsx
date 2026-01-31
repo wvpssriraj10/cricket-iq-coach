@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useState } from "react";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -17,6 +16,11 @@ interface AppShellProps {
 
 export function AppShell({ children, title, subtitle }: AppShellProps) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -25,23 +29,36 @@ export function AppShell({ children, title, subtitle }: AppShellProps) {
         <AppSidebar />
       </div>
 
-      {/* Mobile sidebar */}
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild className="lg:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="fixed left-4 top-4 z-40"
-          >
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0">
-          <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-          <AppSidebar />
-        </SheetContent>
-      </Sheet>
+      {/* Mobile sidebar — only render Sheet after mount to avoid Radix ID hydration mismatch */}
+      {mounted ? (
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild className="lg:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="fixed left-4 top-4 z-40"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64 p-0">
+            <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+            <AppSidebar />
+          </SheetContent>
+        </Sheet>
+      ) : (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="fixed left-4 top-4 z-40 lg:hidden"
+          aria-label="Open menu"
+          type="button"
+        >
+          <Menu className="h-5 w-5" />
+          <span className="sr-only">Open menu</span>
+        </Button>
+      )}
 
       {/* Main content — offset by sidebar width on desktop so it doesn't sit under the fixed sidebar */}
       <main className="min-h-screen w-full flex-1 overflow-auto bg-gradient-to-b from-primary/[0.04] via-background to-background lg:ml-64">
