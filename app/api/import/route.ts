@@ -175,7 +175,7 @@ export async function POST(request: Request) {
           playerId = inserted.id;
           created.players++;
         }
-        playerByName.set(playerName, playerId);
+        playerByName.set(playerName, playerId!);
       }
 
       const sessionKey = `${sessionDateStr}_${focus}`;
@@ -211,7 +211,7 @@ export async function POST(request: Request) {
           sessionId = inserted.id;
           created.sessions++;
         }
-        sessionByKey.set(sessionKey, sessionId);
+        sessionByKey.set(sessionKey, sessionId!);
       }
 
       const runsScored =

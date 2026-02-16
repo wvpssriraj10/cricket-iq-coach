@@ -35,7 +35,8 @@ let sendTimer: ReturnType<typeof setInterval> | null = null;
 
 function captureScroll(): number {
   if (typeof window === "undefined") return 0;
-  const { scrollY, scrollHeight, clientHeight } = document.documentElement;
+  const { scrollY } = window;
+  const { scrollHeight, clientHeight } = document.documentElement;
   const maxScroll = scrollHeight - clientHeight;
   if (maxScroll <= 0) return 1;
   scrollMax = Math.max(scrollMax, scrollY / maxScroll);
@@ -70,7 +71,7 @@ function enqueue(pathname: string): void {
 }
 
 export function startBehavioralTracking(currentPathname: string): () => void {
-  if (typeof window === "undefined") return () => {};
+  if (typeof window === "undefined") return () => { };
   const sessionId = getSessionId();
   enterPathTime = Date.now();
   prevPath = null;

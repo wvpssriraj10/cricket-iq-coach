@@ -29,8 +29,8 @@ export async function GET(request: Request) {
     if (sessError) throw sessError;
     const sessionList = sessionsInScope ?? [];
     const sessionCount = sessionList.length;
-    const sessionIds = sessionList.map((s) => s.id);
-    const dateBySession = new Map(sessionList.map((s) => [s.id, s.date]));
+    const sessionIds = sessionList.map((s: any) => s.id);
+    const dateBySession = new Map(sessionList.map((s: any) => [s.id, s.date]));
 
     if (sessionCount === 0) {
       return NextResponse.json({

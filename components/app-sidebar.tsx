@@ -11,6 +11,8 @@ import {
   CalendarCheck,
   FileSpreadsheet,
   ListTodo,
+  Shield,
+  BarChart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +20,8 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Practice Planner", href: "/practice", icon: ListTodo },
   { name: "Players", href: "/players", icon: Users },
+  { name: "Teams", href: "/teams", icon: Shield },
+  { name: "Compare", href: "/compare", icon: BarChart },
   { name: "Sessions", href: "/sessions", icon: CalendarCheck },
   { name: "Import Excel", href: "/import", icon: FileSpreadsheet },
   { name: "Match Scenarios", href: "/scenarios", icon: Target },

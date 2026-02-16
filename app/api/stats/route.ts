@@ -42,8 +42,8 @@ export async function GET(request: Request) {
 
     if (sessionsError) throw sessionsError;
     const sessions = sessionsData ?? [];
-    const sessionIds = sessions.map((s) => s.id);
-    const dateById = new Map(sessions.map((s) => [s.id, s.date]));
+    const sessionIds = sessions.map((s: any) => s.id);
+    const dateById = new Map(sessions.map((s: any) => [s.id, s.date]));
 
     if (sessionIds.length === 0) return NextResponse.json([]);
 

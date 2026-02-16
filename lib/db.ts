@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -7,7 +7,60 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
  * Server-side Supabase client with service role (bypasses RLS).
  * Use in API routes only. Lazy-initialized so build works without env.
  */
-let _supabase: ReturnType<typeof createClient> | null = null;
+
+// Helper to make system fields optional in inserts
+type DbInsert<T> = Omit<T, "id" | "created_at"> & { id?: string; created_at?: string };
+
+export type Database = {
+  public: {
+    Tables: {
+      players: {
+        Row: Player;
+        Insert: DbInsert<Player>;
+        Update: Partial<DbInsert<Player>>;
+      };
+      sessions: {
+        Row: Session;
+        Insert: DbInsert<Session>;
+        Update: Partial<DbInsert<Session>>;
+      };
+      drills: {
+        Row: Drill;
+        Insert: DbInsert<Drill>;
+        Update: Partial<DbInsert<Drill>>;
+      };
+      drill_results: {
+        Row: DrillResult;
+        Insert: DbInsert<DrillResult>;
+        Update: Partial<DbInsert<DrillResult>>;
+      };
+      performance_stats: {
+        Row: PerformanceStats;
+        Insert: DbInsert<PerformanceStats>;
+        Update: Partial<DbInsert<PerformanceStats>>;
+      };
+      teams: {
+        Row: Team;
+        Insert: DbInsert<Team>;
+        Update: Partial<DbInsert<Team>>;
+      };
+      team_squads: {
+        Row: TeamSquad;
+        Insert: DbInsert<TeamSquad>;
+        Update: Partial<DbInsert<TeamSquad>>;
+      };
+      tournament_performances: {
+        Row: TournamentPerformance;
+        Insert: DbInsert<TournamentPerformance>;
+        Update: Partial<DbInsert<TournamentPerformance>>;
+      };
+    };
+  };
+};
+
+// Fallback to any to avoid strict type errors with missing Supabase definitions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _supabase: any = null;
 
 function getSupabase() {
   if (!_supabase) {
@@ -82,5 +135,34 @@ export type PerformanceStats = {
   overs_bowled: number | null;
   runs_conceded: number | null;
   wickets: number | null;
+  created_at?: string;
+};
+
+export type Team = {
+  id: string;
+  name: string;
+  created_at?: string;
+};
+
+export type TeamSquad = {
+  id: string;
+  team_id: string;
+  player_id: string;
+  created_at?: string;
+};
+
+export type TournamentPerformance = {
+  id: string;
+  player_id: string;
+  tournament_name: string;
+  matches: number;
+  runs: number;
+  wickets: number;
+  catches: number;
+  stumpings: number;
+  fifty: number;
+  hundred: number;
+  top_score: number;
+  best_bowling: string;
   created_at?: string;
 };
