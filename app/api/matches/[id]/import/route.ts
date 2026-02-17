@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { createRequire } from "module";
 
+// Use CommonJS entrypoint for pdf-parse via createRequire.
+// This avoids Turbopack's ESM default‑export issues and works
+// in the Node.js runtime for this API route.
 const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse/lib/pdf-parse.js");
+const pdfParse = require("pdf-parse");
 
 // Ensure this route runs in a full Node.js runtime so that
 // pdf-parse and its dependencies (pdfjs) can use Node APIs
