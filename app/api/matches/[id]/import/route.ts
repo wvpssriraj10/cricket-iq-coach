@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
-import { PDFParse } from "pdf-parse";
+import pdfParse from "pdf-parse";
+
+// Ensure this route runs in a full Node.js runtime so that
+// pdf-parse and its dependencies (pdfjs) can use Node APIs
+// without Turbopack trying to bundle browser workers.
+export const runtime = "nodejs";
 
 // Helper to sanitize text
 function cleanText(text: string) {
@@ -23,9 +28,8 @@ export async function POST(
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
-        // Parse PDF
-        const parser = new PDFParse({ data: buffer });
-        const pdfData = await parser.getText();
+        // Parse PDF using pdf-parse (Node-only, no browser workers)
+        const pdfData = await pdfParse(buffer);
         const text = pdfData.text;
 
         // Parse extracted text to find performances
@@ -49,12 +53,19 @@ export async function POST(
             // Check for Bowling-like pattern: Name followed by O M R W (e.g. "Bowler 4 0 25 1")
             // Or Batting: Name Runs Balls (e.g. "Batter 50 30")
 
-            // Regex for a line starting with text (Name) and ending with numbers
-            // Note: Names can have spaces.
+            // Regex for a line containing Name followed by numbers.
+            // Improved strategy: 
+            // 1. Optional leading index (1, 2, 3...)
+            // 2. Name (string)
+            // 3. Stats (numbers)
 
-            // Example: "Surya 2 0 1" -> Name: Surya, Runs: 2, Balls: 0, 4s: 1?
-            // Let's try to capture: Name (capture group 1), then sequence of numbers.
-            const statsMatch = line.match(/^([a-zA-Z\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*(\d*)\s*(\d*\.?\d*)/);
+            // Capture group 1: Name
+            // Capture groups 2+: Stats
+
+            // Example: "6 Surya 2 0 1" -> Name: Surya, Stats: 2, 0, 1
+            // Example: "Surya 2 0 1" -> Name: Surya, Stats: 2, 0, 1
+
+            const statsMatch = line.match(/^(?:\d+\s+)?([a-zA-Z\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*(\d*)\s*(\d*\.?\d*)/);
 
             if (statsMatch) {
                 const name = statsMatch[1].trim();
@@ -86,8 +97,8 @@ export async function POST(
             rawText: text // Debugging aid
         });
 
-    } catch (error) {
-        console.error("PDF Import Error:", error);
-        return NextResponse.json({ error: "Failed to parse PDF" }, { status: 500 });
+    } catch (error: any) {
+        console.error("PDF Import Workflow Error:", error);
+        return NextResponse.json({ error: `Failed to parse PDF: ${error.message}` }, { status: 500 });
     }
 }
