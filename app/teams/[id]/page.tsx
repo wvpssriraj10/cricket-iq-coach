@@ -76,6 +76,26 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ id: stri
         }
     };
 
+    const fetchAvailablePlayers = async () => {
+        try {
+            const res = await fetch("/api/players", { cache: "no-store" });
+            if (res.ok) {
+                const data: Player[] = await res.json();
+                // Filter out players already in the squad
+                const currentSquadIds = new Set(team?.squad.map(p => p.id) || []);
+                setAvailablePlayers(data.filter(p => !currentSquadIds.has(p.id)));
+            }
+        } catch (error) {
+            console.error("Failed to fetch players", error);
+        }
+    };
+
+    useEffect(() => {
+        if (isAddPlayerOpen && team) {
+            fetchAvailablePlayers();
+        }
+    }, [isAddPlayerOpen, team]);
+
     const ignored = [
         newPlayerBattingArm,
         newPlayerBowlingArm,
