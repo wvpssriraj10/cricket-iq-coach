@@ -50,7 +50,15 @@ const fetcher = (url: string) =>
     return res.json();
   });
 
-type Player = { id: string; name: string; role: string; age_group: string };
+type Player = {
+  id: string;
+  name: string;
+  role: string;
+  age_group: string;
+  batting_arm?: string;
+  bowling_arm?: string;
+  bowler_type?: string;
+};
 type Session = { id: string; date: string; focus: string; age_group: string; duration_minutes: number; num_players: number };
 
 const ROLES = [
@@ -349,6 +357,9 @@ export default function PlayersPage() {
   const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("batter");
   const [editAgeGroup, setEditAgeGroup] = useState("U19");
+  const [editBattingArm, setEditBattingArm] = useState("");
+  const [editBowlingArm, setEditBowlingArm] = useState("");
+  const [editBowlerType, setEditBowlerType] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
 
   async function handleUpdatePlayer(e: React.FormEvent) {
@@ -363,7 +374,10 @@ export default function PlayersPage() {
         body: JSON.stringify({
           name: editName,
           role: editRole,
-          age_group: editAgeGroup
+          age_group: editAgeGroup,
+          batting_arm: editBattingArm,
+          bowling_arm: editBowlingArm,
+          bowler_type: editBowlerType
         })
       });
 
@@ -690,6 +704,9 @@ export default function PlayersPage() {
                                 setEditName(p.name);
                                 setEditRole(p.role);
                                 setEditAgeGroup(p.age_group);
+                                setEditBattingArm(p.batting_arm || "");
+                                setEditBowlingArm(p.bowling_arm || "");
+                                setEditBowlerType(p.bowler_type || "");
                               }}
                             >
                               <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
@@ -785,6 +802,30 @@ export default function PlayersPage() {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label className="text-right">Batting</Label>
+                <Select value={editBattingArm} onValueChange={setEditBattingArm}>
+                  <SelectTrigger className="col-span-3"><SelectValue placeholder="Select arm" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="right">Right Hand</SelectItem>
+                    <SelectItem value="left">Left Hand</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label className="text-right">Bowling</Label>
+                <Select value={editBowlingArm} onValueChange={setEditBowlingArm}>
+                  <SelectTrigger className="col-span-3"><SelectValue placeholder="Select arm" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="right">Right Arm</SelectItem>
+                    <SelectItem value="left">Left Arm</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label className="text-right">Type</Label>
+                <Input placeholder="e.g. Fast, Spin" value={editBowlerType} onChange={(e) => setEditBowlerType(e.target.value)} className="col-span-3" />
               </div>
               <DialogFooter>
                 <Button type="submit" disabled={isUpdating}>
