@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ArrowLeft, Save, Loader2, Check } from "lucide-react";
+import { ArrowLeft, Save, Loader2, Check, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 import { Database, Match, MatchPerformance, Player } from "@/lib/db";
@@ -57,7 +57,70 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     const [match, setMatch] = useState<Match | null>(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [players, setPlayers] = useState<PlayerPerformanceRow[]>([]);
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const res = await fetch(`/api/matches/${matchId}/import`, {
+                method: "POST",
+                body: formData
+            });
+            const result = await res.json();
+
+            if (!res.ok) throw new Error(result.error || "Import failed");
+
+            toast.success(`Parsed ${result.data.length} records from PDF`);
+
+            // Logic to Map Parsed Data to Players
+            // Heuristic Mappings
+            if (result.data) {
+                const updatedPlayers = [...players];
+                result.data.forEach((record: any) => {
+                    // Try to match player by name (fuzzy)
+                    const playerIndex = updatedPlayers.findIndex(p => p.name.toLowerCase().includes(record.name.toLowerCase()) || record.name.toLowerCase().includes(p.name.toLowerCase()));
+
+                    if (playerIndex >= 0) {
+                        const p = updatedPlayers[playerIndex];
+                        const stats = record.stats;
+
+                        // Heuristic: If stats[0] is small (like 0-10) and stats[2] is large, maybe bowling?
+                        // Or simplistic assignment:
+                        // Assuming Batting: Runs(0), Balls(1), 4s(2), 6s(3)
+                        // Assuming Bowling: Overs(0), Maidens(1), Runs(2), Wickets(3)
+
+                        // Let's assume batting is default for now or simple update
+                        // TODO: Refine this logic based on actual PDF content observation
+
+                        // For now, let's just alert the user or console log to verify
+                        console.log("Matched", p.name, record);
+
+                        // Example: Update runs if logical
+                        if (stats.length >= 2) {
+                            // This is risky without better parsing. 
+                            // Let's just create a toast of what we found for now.
+                        }
+                    }
+                });
+                // setPlayers(updatedPlayers); // Uncomment when logic is solid
+            }
+
+        } catch (error: any) {
+            console.error("Import Error:", error);
+            toast.error(error.message);
+        } finally {
+            setUploading(false);
+            // reset input?
+            e.target.value = "";
+        }
+    };
     // const supabase = createClient();
 
     useEffect(() => {
@@ -163,6 +226,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
     // Helper to update local state for a player
     const updatePlayer = (id: string, field: keyof PlayerPerformanceRow, value: string) => {
+        // console.log("Updating", field, value);
         setPlayers(prev => prev.map(p =>
             p.id === id ? { ...p, [field]: value } : p
         ));
@@ -211,11 +275,26 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         </div>
                     </div>
 
-                    <Button onClick={handleSave} disabled={saving}>
-                        {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        {!saving && <Save className="mr-2 h-4 w-4" />}
-                        Save Scorecard
-                    </Button>
+                    <div className="flex gap-2">
+                        <div className="relative">
+                            <input
+                                type="file"
+                                accept=".pdf"
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                onChange={handleFileUpload}
+                                disabled={uploading}
+                            />
+                            <Button variant="outline" disabled={uploading}>
+                                {uploading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Upload className="mr-2 h-4 w-4" />}
+                                Import Scorecard
+                            </Button>
+                        </div>
+                        <Button onClick={handleSave} disabled={saving}>
+                            {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            {!saving && <Save className="mr-2 h-4 w-4" />}
+                            Save Scorecard
+                        </Button>
+                    </div>
                 </div>
 
                 <div className="space-y-6">
@@ -276,7 +355,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                                                 <Input type="number" step="0.1" className="h-8 text-center" value={player.overs} onChange={e => updatePlayer(player.id, 'overs', e.target.value)} />
                                             </TableCell>
                                             <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.maidens} onChange={e => updatePlayer(player.id, 'maidens', e.target.value)} />
+                                                <Input
+                                                    type="number"
+                                                    className="h-8 text-center"
+                                                    value={player.maidens}
+                                                    onChange={e => updatePlayer(player.id, 'maidens', e.target.value)}
+                                                    min={0}
+                                                />
                                             </TableCell>
                                             <TableCell>
                                                 <Input type="number" className="h-8 text-center" value={player.runs_conceded} onChange={e => updatePlayer(player.id, 'runs_conceded', e.target.value)} />
