@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import useSWR from "swr";
 import { AppShell } from "@/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -350,6 +350,39 @@ export default function PlayersPage() {
     } finally {
       setExportingId(null);
     }
+  }
+
+  // Stats State
+  interface PlayerStats {
+    matches: number;
+    runs: number;
+    wickets: number;
+    batting_avg: number | string;
+    strike_rate: number | string;
+    economy: number | string;
+    bowling_avg: number | string;
+    highest_score: number;
+    best_bowling: string;
+  }
+  const [statsPlayer, setStatsPlayer] = useState<Player | null>(null);
+  const [stats, setStats] = useState<PlayerStats | null>(null);
+  const [loadingStats, setLoadingStats] = useState(false);
+
+  useEffect(() => {
+    if (statsPlayer) {
+      setLoadingStats(true);
+      fetch(`/api/player-stats?playerId=${statsPlayer.id}`)
+        .then(res => res.json())
+        .then(data => setStats(data))
+        .catch(err => console.error(err))
+        .finally(() => setLoadingStats(false));
+    } else {
+      setStats(null);
+    }
+  }, [statsPlayer]);
+
+  function openStatsDialog(p: Player) {
+    setStatsPlayer(p);
   }
 
   // Edit Player State
@@ -716,6 +749,15 @@ export default function PlayersPage() {
                               type="button"
                               variant="outline"
                               size="sm"
+                              onClick={() => openStatsDialog(p)}
+                            >
+                              <Zap className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                              <span className="hidden sm:inline">Stats</span>
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
                               onClick={() => handleDownloadProgress(p)}
                               disabled={exportingId === p.id}
                             >
@@ -1029,6 +1071,62 @@ export default function PlayersPage() {
                 </Button>
               </DialogFooter>
             </form>
+          </DialogContent>
+        </Dialog>
+
+        {/* Stats Dialog */}
+        <Dialog open={!!statsPlayer} onOpenChange={(open) => !open && setStatsPlayer(null)}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Player Stats: {statsPlayer?.name}</DialogTitle>
+            </DialogHeader>
+            {loadingStats ? (
+              <div className="flex justify-center py-8">
+                <Loader2 className="h-8 w-8 animate-spin" />
+              </div>
+            ) : stats ? (
+              <div className="grid grid-cols-2 gap-4 py-4">
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Matches</Label>
+                  <p className="text-2xl font-bold">{stats.matches}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Total Runs</Label>
+                  <p className="text-2xl font-bold">{stats.runs}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Batting Avg</Label>
+                  <p className="text-2xl font-bold">{stats.batting_avg}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Strike Rate</Label>
+                  <p className="text-2xl font-bold">{stats.strike_rate}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Highest Score</Label>
+                  <p className="text-2xl font-bold">{stats.highest_score}</p>
+                </div>
+                <div className="col-span-2 border-t my-2"></div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Wickets</Label>
+                  <p className="text-2xl font-bold">{stats.wickets}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Bowling Avg</Label>
+                  <p className="text-2xl font-bold">{stats.bowling_avg}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Economy</Label>
+                  <p className="text-2xl font-bold">{stats.economy}</p>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground text-xs">Best Bowling</Label>
+                  <p className="text-2xl font-bold">{stats.best_bowling}</p>
+                </div>
+              </div>
+            ) : (
+              <p>No stats available.</p>
+            )}
           </DialogContent>
         </Dialog>
 

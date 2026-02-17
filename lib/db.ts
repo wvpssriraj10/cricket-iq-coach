@@ -54,8 +54,50 @@ export type Database = {
         Insert: DbInsert<TournamentPerformance>;
         Update: Partial<DbInsert<TournamentPerformance>>;
       };
+      matches: {
+        Row: Match;
+        Insert: DbInsert<Match>;
+        Update: Partial<DbInsert<Match>>;
+      };
+      match_performances: {
+        Row: MatchPerformance;
+        Insert: DbInsert<MatchPerformance>;
+        Update: Partial<DbInsert<MatchPerformance>>;
+      };
     };
   };
+};
+
+// ... existing code ...
+
+export type Match = {
+  id: string;
+  team_id: string;
+  date: string;
+  opponent: string;
+  venue: string | null;
+  result: "Win" | "Loss" | "Draw" | "Tie" | "No Result" | null;
+  extras: number;
+  created_at?: string;
+};
+
+export type MatchPerformance = {
+  id: string;
+  match_id: string;
+  player_id: string;
+  runs_scored: number;
+  balls_faced: number;
+  fours: number;
+  sixes: number;
+  wickets: number;
+  overs_bowled: number;
+  runs_conceded: number;
+  maidens: number;
+  catches: number;
+  stumpings: number;
+  is_captain: boolean;
+  is_wicketkeeper: boolean;
+  created_at?: string;
 };
 
 // Fallback to any to avoid strict type errors with missing Supabase definitions
