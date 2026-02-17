@@ -26,6 +26,9 @@ export async function POST(
                 return NextResponse.json({ error: "Name and Role are required for new players" }, { status: 400 });
             }
 
+            // Defaulting age_group to U19 if not provided, as 'Senior' is not in the allowed list
+            const validAgeGroup = json.age_group || "U19";
+
             const { data: newPlayer, error: createError } = await db
                 .from("players")
                 .insert({
@@ -34,8 +37,7 @@ export async function POST(
                     batting_arm,
                     bowling_arm,
                     bowler_type,
-                    // Defaulting age_group as it might be required by DB but not specified in prompt details
-                    age_group: "Senior"
+                    age_group: validAgeGroup
                 })
                 .select()
                 .single();

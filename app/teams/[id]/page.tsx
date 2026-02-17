@@ -28,12 +28,17 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ id: stri
 
     // Add Player State
     const [isAddPlayerOpen, setIsAddPlayerOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState("new");
     const [newPlayerName, setNewPlayerName] = useState("");
     const [newPlayerRole, setNewPlayerRole] = useState("batter");
+    const [newPlayerAgeGroup, setNewPlayerAgeGroup] = useState("U19");
     const [newPlayerBattingArm, setNewPlayerBattingArm] = useState("right");
     const [newPlayerBowlingArm, setNewPlayerBowlingArm] = useState("right");
     const [newPlayerBowlerType, setNewPlayerBowlerType] = useState("");
+    const [existingPlayerIdRaw, setExistingPlayerIdRaw] = useState("");
     const [addingPlayer, setAddingPlayer] = useState(false);
+
+    const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
 
     // Add Performance State
     const [isAddPerformanceOpen, setIsAddPerformanceOpen] = useState(false);
@@ -89,19 +94,26 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ id: stri
     ];
 
     const handleAddPlayer = async () => {
-        if (!newPlayerName) return;
+        if (activeTab === "new" && !newPlayerName) return;
+        if (activeTab === "existing" && !existingPlayerIdRaw) return;
+
         setAddingPlayer(true);
         try {
+            const payload = activeTab === "new" ? {
+                name: newPlayerName,
+                role: newPlayerRole,
+                age_group: newPlayerAgeGroup,
+                batting_arm: newPlayerBattingArm,
+                bowling_arm: newPlayerBowlingArm,
+                bowler_type: newPlayerBowlerType
+            } : {
+                existing_player_id: existingPlayerIdRaw
+            };
+
             const res = await fetch(`/api/teams/${id}/squad`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: newPlayerName,
-                    role: newPlayerRole,
-                    batting_arm: newPlayerBattingArm,
-                    bowling_arm: newPlayerBowlingArm,
-                    bowler_type: newPlayerBowlerType
-                }),
+                body: JSON.stringify(payload),
             });
 
             if (!res.ok) throw new Error("Failed to add player");
@@ -109,6 +121,7 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ id: stri
             toast.success("Player added to squad");
             setIsAddPlayerOpen(false);
             setNewPlayerName("");
+            setExistingPlayerIdRaw("");
             // Refresh details
             fetchTeamDetails();
         } catch (error) {
@@ -180,51 +193,97 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ id: stri
                                     <DialogTitle>Add Player to Squad</DialogTitle>
                                     <DialogDescription>Create a new player profile and add them to this team.</DialogDescription>
                                 </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label htmlFor="p-name" className="text-right">Name</Label>
-                                        <Input id="p-name" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} className="col-span-3" />
+                                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                                    <TabsList className="grid w-full grid-cols-2">
+                                        <TabsTrigger value="new">New Player</TabsTrigger>
+                                        <TabsTrigger value="existing">Existing Player</TabsTrigger>
+                                    </TabsList>
+
+                                    <div className="py-4">
+                                        <TabsContent value="new" className="space-y-4 mt-0">
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor="p-name" className="text-right">Name</Label>
+                                                <Input id="p-name" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} className="col-span-3" />
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor="p-role" className="text-right">Role</Label>
+                                                <Select value={newPlayerRole} onValueChange={setNewPlayerRole}>
+                                                    <SelectTrigger className="col-span-3">
+                                                        <SelectValue placeholder="Select role" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="batter">Batter</SelectItem>
+                                                        <SelectItem value="bowler">Bowler</SelectItem>
+                                                        <SelectItem value="allrounder">All-Rounder</SelectItem>
+                                                        <SelectItem value="keeper">Wicket Keeper</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor="p-age" className="text-right">Age Group</Label>
+                                                <Select value={newPlayerAgeGroup} onValueChange={setNewPlayerAgeGroup}>
+                                                    <SelectTrigger className="col-span-3">
+                                                        <SelectValue placeholder="Select age group" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="U12">U12</SelectItem>
+                                                        <SelectItem value="U16">U16</SelectItem>
+                                                        <SelectItem value="U19">U19</SelectItem>
+                                                        <SelectItem value="College">College</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            {/* Style Inputs */}
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label className="text-right">Batting</Label>
+                                                <Select value={newPlayerBattingArm} onValueChange={setNewPlayerBattingArm}>
+                                                    <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="right">Right Hand</SelectItem>
+                                                        <SelectItem value="left">Left Hand</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label className="text-right">Bowling</Label>
+                                                <Select value={newPlayerBowlingArm} onValueChange={setNewPlayerBowlingArm}>
+                                                    <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="right">Right Arm</SelectItem>
+                                                        <SelectItem value="left">Left Arm</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label className="text-right">Type</Label>
+                                                <Input placeholder="e.g. Fast, Spin" value={newPlayerBowlerType} onChange={(e) => setNewPlayerBowlerType(e.target.value)} className="col-span-3" />
+                                            </div>
+                                        </TabsContent>
+
+                                        <TabsContent value="existing" className="mt-0">
+                                            <div className="grid grid-cols-4 items-center gap-4 py-4">
+                                                <Label htmlFor="existing-p" className="text-right">Select Player</Label>
+                                                <Select value={existingPlayerIdRaw} onValueChange={setExistingPlayerIdRaw}>
+                                                    <SelectTrigger className="col-span-3">
+                                                        <SelectValue placeholder="Search players..." />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {availablePlayers.length === 0 ? (
+                                                            <SelectItem value="none" disabled>No other players available</SelectItem>
+                                                        ) : (
+                                                            availablePlayers.map(p => (
+                                                                <SelectItem key={p.id} value={p.id}>{p.name} ({p.role}, {p.age_group})</SelectItem>
+                                                            ))
+                                                        )}
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground text-center">
+                                                Choose a player from the global database to add to this squad.
+                                            </p>
+                                        </TabsContent>
                                     </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label htmlFor="p-role" className="text-right">Role</Label>
-                                        <Select value={newPlayerRole} onValueChange={setNewPlayerRole}>
-                                            <SelectTrigger className="col-span-3">
-                                                <SelectValue placeholder="Select role" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="batter">Batter</SelectItem>
-                                                <SelectItem value="bowler">Bowler</SelectItem>
-                                                <SelectItem value="allrounder">All-Rounder</SelectItem>
-                                                <SelectItem value="keeper">Wicket Keeper</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    {/* Style Inputs */}
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label className="text-right">Batting</Label>
-                                        <Select value={newPlayerBattingArm} onValueChange={setNewPlayerBattingArm}>
-                                            <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="right">Right Hand</SelectItem>
-                                                <SelectItem value="left">Left Hand</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label className="text-right">Bowling</Label>
-                                        <Select value={newPlayerBowlingArm} onValueChange={setNewPlayerBowlingArm}>
-                                            <SelectTrigger className="col-span-3"><SelectValue /></SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="right">Right Arm</SelectItem>
-                                                <SelectItem value="left">Left Arm</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label className="text-right">Type</Label>
-                                        <Input placeholder="e.g. Fast, Spin" value={newPlayerBowlerType} onChange={(e) => setNewPlayerBowlerType(e.target.value)} className="col-span-3" />
-                                    </div>
-                                </div>
+                                </Tabs>
                                 <DialogFooter>
                                     <Button onClick={handleAddPlayer} disabled={addingPlayer}>
                                         {addingPlayer && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Save
