@@ -1,17 +1,9 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
-import { createRequire } from "module";
 
-// Use CommonJS entrypoint for pdf-parse via createRequire.
-// This avoids Turbopack's ESM default‑export issues and works
-// in the Node.js runtime for this API route.
-const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse");
-
-// Ensure this route runs in a full Node.js runtime so that
-// pdf-parse and its dependencies (pdfjs) can use Node APIs
-// without Turbopack trying to bundle browser workers.
+// Ensure this route runs in a full Node.js runtime.
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 // Helper to sanitize text
 function cleanText(text: string) {
@@ -24,6 +16,15 @@ export async function POST(
 ) {
     const { id: matchId } = await params;
 
+    // In production (Vercel), disable server-side PDF parsing to
+    // avoid pdf.js DOM/canvas polyfill issues during build.
+    if (process.env.NODE_ENV === "production") {
+        return NextResponse.json(
+            { error: "PDF import is currently disabled in production. Please use the app in development mode for PDF uploads." },
+            { status: 503 }
+        );
+    }
+
     try {
         const formData = await request.formData();
         const file = formData.get("file") as File;
@@ -34,9 +35,10 @@ export async function POST(
 
         const buffer = Buffer.from(await file.arrayBuffer());
 
-        // Parse PDF using pdf-parse (Node-only, no browser workers)
-        const pdfData = await pdfParse(buffer);
-        const text = pdfData.text;
+        // Dynamically import pdf-parse only in non-production environments.
+        const { default: pdfParse } = await import("pdf-parse" as any);
+        const pdfData = await pdfParse(buffer as any);
+        const text = (pdfData as any).text as string;
 
         // Parse extracted text to find performances
         // Strategy: Look for lines that look like player stats
