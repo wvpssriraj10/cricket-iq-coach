@@ -41,9 +41,12 @@ export async function POST(
         // Parse extracted text to find performances
         // Strategy: Look for lines that look like player stats
         // This is a heuristic based on Cricheroes format specific observations
-        const lines = text.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+        const lines = text
+            .split("\n")
+            .map((l: string) => l.trim())
+            .filter((l: string) => l.length > 0);
 
-        const extractedPerformances: any[] = [];
+        const extractedPerformances: { raw: string; name: string; stats: number[] }[] = [];
 
         // Match Squad to extract player IDs if possible?
         // For now, we return names and raw stats, frontend can match them.
@@ -74,8 +77,8 @@ export async function POST(
             const statsMatch = line.match(/^(?:\d+\s+)?([a-zA-Z\s]+)\s+(\d+)\s+(\d+)\s+(\d+)\s*(\d*)\s*(\d*\.?\d*)/);
 
             if (statsMatch) {
-                const name = statsMatch[1].trim();
-                const nums = statsMatch.slice(2).map(n => n ? parseFloat(n) : 0);
+                const name: string = statsMatch[1].trim();
+                const nums: number[] = statsMatch.slice(2).map((n: string | undefined) => n ? parseFloat(n) : 0);
 
                 // Heuristic to distinguish Batting vs Bowling?
                 // Bowling usually has Overs (can be 4.0), M, R, W. 
