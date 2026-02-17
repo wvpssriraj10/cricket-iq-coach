@@ -2,6 +2,9 @@ import { getDb, isSupabaseConfigured } from "@/lib/db";
 import { NextResponse } from "next/server";
 
 const ALLOWED_PROFILE_KEYS = [
+  "name",
+  "role",
+  "age_group",
   "batting_arm",
   "bowling_arm",
   "bowler_type",

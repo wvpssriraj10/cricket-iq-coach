@@ -42,7 +42,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-import { UserPlus, Users, ClipboardList, Trash2, FileDown, Calendar, Zap, Target, Filter } from "lucide-react";
+import { UserPlus, Users, ClipboardList, Trash2, FileDown, Calendar, Zap, Target, Filter, Loader2 } from "lucide-react";
 
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -344,6 +344,45 @@ export default function PlayersPage() {
     }
   }
 
+  // Edit Player State
+  const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editRole, setEditRole] = useState("batter");
+  const [editAgeGroup, setEditAgeGroup] = useState("U19");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  async function handleUpdatePlayer(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editingPlayer) return;
+
+    setIsUpdating(true);
+    try {
+      const res = await fetch(`/api/players/${editingPlayer.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: editName,
+          role: editRole,
+          age_group: editAgeGroup
+        })
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setMessage({ type: "err", text: body?.error ?? "Failed to update player." });
+        return;
+      }
+
+      setMessage({ type: "ok", text: "Player updated successfully." });
+      setEditingPlayer(null);
+      mutate();
+    } catch (error) {
+      setMessage({ type: "err", text: "Network error. Try again." });
+    } finally {
+      setIsUpdating(false);
+    }
+  }
+
   if (isLoading && players.length === 0) {
     return (
       <AppShell title="Players" subtitle="Add and view your squad">
@@ -520,8 +559,8 @@ export default function PlayersPage() {
                         formatter={(value: number) => [value, "Players"]}
                         labelFormatter={(label) => label}
                       />
-                        <Bar dataKey="count" name="Players" radius={[4, 4, 0, 0]}>
-                          {filteredChartData.map((entry, i) => (
+                      <Bar dataKey="count" name="Players" radius={[4, 4, 0, 0]}>
+                        {filteredChartData.map((entry, i) => (
                           <Cell key={i} fill={entry.fill} />
                         ))}
                       </Bar>
@@ -645,6 +684,21 @@ export default function PlayersPage() {
                               type="button"
                               variant="outline"
                               size="sm"
+                              className="text-primary hover:bg-primary/10 hover:text-primary"
+                              onClick={() => {
+                                setEditingPlayer(p);
+                                setEditName(p.name);
+                                setEditRole(p.role);
+                                setEditAgeGroup(p.age_group);
+                              }}
+                            >
+                              <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                              <span className="hidden sm:inline">Edit</span>
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
                               onClick={() => handleDownloadProgress(p)}
                               disabled={exportingId === p.id}
                             >
@@ -679,6 +733,68 @@ export default function PlayersPage() {
             </CardContent>
           </Card>
         </section>
+
+        {/* Edit Player Dialog */}
+        <Dialog open={!!editingPlayer} onOpenChange={(open) => !open && setEditingPlayer(null)}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Edit Player</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleUpdatePlayer} className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-name" className="text-right">
+                  Name
+                </Label>
+                <Input
+                  id="edit-name"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  className="col-span-3"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-role" className="text-right">
+                  Role
+                </Label>
+                <Select value={editRole} onValueChange={setEditRole}>
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Select role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ROLES.map((r) => (
+                      <SelectItem key={r.value} value={r.value}>
+                        {r.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="edit-age" className="text-right">
+                  Age Group
+                </Label>
+                <Select value={editAgeGroup} onValueChange={setEditAgeGroup}>
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Select age group" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {AGE_GROUPS.map((a) => (
+                      <SelectItem key={a.value} value={a.value}>
+                        {a.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <DialogFooter>
+                <Button type="submit" disabled={isUpdating}>
+                  {isUpdating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Save changes
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
 
         {/* Log performance dialog (manual data entry per player) */}
         <Dialog open={!!logPlayer} onOpenChange={(open) => !open && setLogPlayer(null)}>
