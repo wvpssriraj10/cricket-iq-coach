@@ -7,13 +7,11 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ArrowLeft, Save, Loader2, Check, Upload } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
-import { Database, Match, MatchPerformance, Player } from "@/lib/db";
+import { Match, MatchPerformance, Player } from "@/lib/db";
 
 // Helper to calculate strike rate
 const calculateStrikeRate = (runs: number, balls: number) => {
@@ -24,11 +22,6 @@ const calculateStrikeRate = (runs: number, balls: number) => {
 // Helper to calculate economy rate
 const calculateEconomy = (runs: number, overs: number) => {
     if (overs === 0) return 0;
-    // Handle partial overs (e.g. 4.2 overs = 4*6 + 2 = 26 balls. But standard notation 4.2 is 4 overs 2 balls)
-    // Actually economy is Runs / Overs.
-    // If overs is 4.2, it means 4 and 2/6.
-    // Let's just use the decimal value for now as naive division, or convert.
-    // Standard cricket conversion: 4.2 -> 4 + 2/6 = 4.333
     const overPart = Math.floor(overs);
     const ballPart = (overs - overPart) * 10;
     const totalOvers = overPart + (ballPart / 6);
@@ -37,91 +30,24 @@ const calculateEconomy = (runs: number, overs: number) => {
 
 type PlayerPerformanceRow = Player & {
     performance?: MatchPerformance;
-    // Local state for inputs
-    runs: string;
-    balls: string;
-    fours: string;
-    sixes: string;
-    wickets: string;
-    overs: string;
-    runs_conceded: string;
-    maidens: string;
-    catches: string;
-    stumpings: string;
+    runs: number;
+    balls: number;
+    fours: number;
+    sixes: number;
+    wickets: number;
+    overs: number;
+    runs_conceded: number;
+    maidens: number;
+    catches: number;
+    stumpings: number;
     is_playing: boolean;
 };
 
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string; matchId: string }> }) {
     const { id: teamId, matchId } = use(params);
-    const router = useRouter();
     const [match, setMatch] = useState<Match | null>(null);
     const [loading, setLoading] = useState(true);
-    const [saving, setSaving] = useState(false);
-    const [uploading, setUploading] = useState(false);
     const [players, setPlayers] = useState<PlayerPerformanceRow[]>([]);
-
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setUploading(true);
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const res = await fetch(`/api/matches/${matchId}/import`, {
-                method: "POST",
-                body: formData
-            });
-            const result = await res.json();
-
-            if (!res.ok) throw new Error(result.error || "Import failed");
-
-            toast.success(`Parsed ${result.data.length} records from PDF`);
-
-            // Logic to Map Parsed Data to Players
-            // Heuristic Mappings
-            if (result.data) {
-                const updatedPlayers = [...players];
-                result.data.forEach((record: any) => {
-                    // Try to match player by name (fuzzy)
-                    const playerIndex = updatedPlayers.findIndex(p => p.name.toLowerCase().includes(record.name.toLowerCase()) || record.name.toLowerCase().includes(p.name.toLowerCase()));
-
-                    if (playerIndex >= 0) {
-                        const p = updatedPlayers[playerIndex];
-                        const stats = record.stats;
-
-                        // Heuristic: If stats[0] is small (like 0-10) and stats[2] is large, maybe bowling?
-                        // Or simplistic assignment:
-                        // Assuming Batting: Runs(0), Balls(1), 4s(2), 6s(3)
-                        // Assuming Bowling: Overs(0), Maidens(1), Runs(2), Wickets(3)
-
-                        // Let's assume batting is default for now or simple update
-                        // TODO: Refine this logic based on actual PDF content observation
-
-                        // For now, let's just alert the user or console log to verify
-                        console.log("Matched", p.name, record);
-
-                        // Example: Update runs if logical
-                        if (stats.length >= 2) {
-                            // This is risky without better parsing. 
-                            // Let's just create a toast of what we found for now.
-                        }
-                    }
-                });
-                // setPlayers(updatedPlayers); // Uncomment when logic is solid
-            }
-
-        } catch (error: any) {
-            console.error("Import Error:", error);
-            toast.error(error.message);
-        } finally {
-            setUploading(false);
-            // reset input?
-            e.target.value = "";
-        }
-    };
-    // const supabase = createClient();
 
     useEffect(() => {
         const loadData = async () => {
@@ -149,16 +75,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     return {
                         ...p,
                         performance: perf,
-                        runs: perf?.runs_scored?.toString() || "",
-                        balls: perf?.balls_faced?.toString() || "",
-                        fours: perf?.fours?.toString() || "",
-                        sixes: perf?.sixes?.toString() || "",
-                        wickets: perf?.wickets?.toString() || "",
-                        overs: perf?.overs_bowled?.toString() || "",
-                        runs_conceded: perf?.runs_conceded?.toString() || "",
-                        maidens: perf?.maidens?.toString() || "",
-                        catches: perf?.catches?.toString() || "",
-                        stumpings: perf?.stumpings?.toString() || "",
+                        runs: perf?.runs_scored || 0,
+                        balls: perf?.balls_faced || 0,
+                        fours: perf?.fours || 0,
+                        sixes: perf?.sixes || 0,
+                        wickets: perf?.wickets || 0,
+                        overs: perf?.overs_bowled || 0,
+                        runs_conceded: perf?.runs_conceded || 0,
+                        maidens: perf?.maidens || 0,
+                        catches: perf?.catches || 0,
+                        stumpings: perf?.stumpings || 0,
                         is_playing: !!perf
                     };
                 });
@@ -177,60 +103,6 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             loadData();
         }
     }, [teamId, matchId]);
-
-    const handleSave = async () => {
-        setSaving(true);
-        try {
-            // Filter players who have data entered
-            // Or just save all checked players
-            const performancesToSave = players
-                .filter(p => {
-                    // Check if any stat is entered OR explicitly marked as playing (if we had a checkbox)
-                    // For now, let's look for valid playing data
-                    return p.runs !== "" || p.overs !== "" || p.wickets !== "" || p.catches !== "" || p.stumpings !== "";
-                })
-                .map(p => ({
-                    match_id: matchId,
-                    player_id: p.id,
-                    runs_scored: parseInt(p.runs) || 0,
-                    balls_faced: parseInt(p.balls) || 0,
-                    fours: parseInt(p.fours) || 0,
-                    sixes: parseInt(p.sixes) || 0,
-                    wickets: parseInt(p.wickets) || 0,
-                    overs_bowled: parseFloat(p.overs) || 0,
-                    runs_conceded: parseInt(p.runs_conceded) || 0,
-                    maidens: parseInt(p.maidens) || 0,
-                    catches: parseInt(p.catches) || 0,
-                    stumpings: parseInt(p.stumpings) || 0
-                }));
-
-            const response = await fetch(`/api/matches/${matchId}/performances`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(performancesToSave)
-            });
-
-            if (!response.ok) throw new Error("Failed to save performances");
-
-            toast.success("Match performances saved");
-
-            // Reload data to ensure consistency? Or just continue
-
-        } catch (error) {
-            console.error("Error saving performances:", error);
-            toast.error("Failed to save performances");
-        } finally {
-            setSaving(false);
-        }
-    };
-
-    // Helper to update local state for a player
-    const updatePlayer = (id: string, field: keyof PlayerPerformanceRow, value: string) => {
-        // console.log("Updating", field, value);
-        setPlayers(prev => prev.map(p =>
-            p.id === id ? { ...p, [field]: value } : p
-        ));
-    };
 
     if (loading) {
         return (
@@ -255,6 +127,15 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         );
     }
 
+    const playingXI = players.filter(p => p.is_playing);
+    
+    // Sort batters by balls faced descending as a rough proxy for batting order, 
+    // unless they have runs. Wait, we can't perfectly recover order. 
+    // We just show who batted.
+    const batters = playingXI.filter(p => p.balls > 0 || p.runs > 0);
+    const dnb = playingXI.filter(p => p.balls === 0 && p.runs === 0);
+    const bowlers = playingXI.filter(p => p.overs > 0);
+
     return (
         <AppShell title={`vs ${match.opponent}`} subtitle={`${new Date(match.date).toLocaleDateString()} • ${match.venue || 'No Venue'} • ${match.result || 'Pending Result'}`}>
             <div className="container mx-auto py-8">
@@ -274,114 +155,91 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                             <p className="text-muted-foreground">{new Date(match.date).toLocaleDateString()} at {match.venue}</p>
                         </div>
                     </div>
-
-                    <div className="flex gap-2">
-                        <div className="relative">
-                            <input
-                                type="file"
-                                accept=".pdf"
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                onChange={handleFileUpload}
-                                disabled={uploading}
-                            />
-                            <Button variant="outline" disabled={uploading}>
-                                {uploading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Upload className="mr-2 h-4 w-4" />}
-                                Import Scorecard
-                            </Button>
-                        </div>
-                        <Button onClick={handleSave} disabled={saving}>
-                            {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                            {!saving && <Save className="mr-2 h-4 w-4" />}
-                            Save Scorecard
-                        </Button>
-                    </div>
                 </div>
 
                 <div className="space-y-6">
                     {/* Batting Section */}
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Scorecard</CardTitle>
-                            <CardDescription>Enter performance stats for players who played in this match.</CardDescription>
+                        <CardHeader className="bg-slate-50 border-b">
+                            <CardTitle className="text-lg">Batting Performance</CardTitle>
                         </CardHeader>
-                        <CardContent className="overflow-x-auto">
+                        <CardContent className="p-0">
                             <Table>
                                 <TableHeader>
-                                    <TableRow>
-                                        <TableHead className="w-[180px]">Player</TableHead>
-                                        <TableHead className="text-center w-[80px]">Runs</TableHead>
-                                        <TableHead className="text-center w-[80px]">Balls</TableHead>
-                                        <TableHead className="text-center w-[60px]">4s</TableHead>
-                                        <TableHead className="text-center w-[60px]">6s</TableHead>
-                                        <TableHead className="text-center w-[80px] bg-muted/30">SR</TableHead>
-                                        <TableHead className="text-center w-[80px] border-l">Overs</TableHead>
-                                        <TableHead className="text-center w-[60px]">Mdn</TableHead>
-                                        <TableHead className="text-center w-[80px]">Runs</TableHead>
-                                        <TableHead className="text-center w-[60px]">Wkts</TableHead>
-                                        <TableHead className="text-center w-[80px] bg-muted/30">Econ</TableHead>
-                                        <TableHead className="text-center w-[60px] border-l">Ct</TableHead>
-                                        <TableHead className="text-center w-[60px]">St</TableHead>
+                                    <TableRow className="hover:bg-transparent">
+                                        <TableHead>Batter</TableHead>
+                                        <TableHead className="text-right w-[80px]">R</TableHead>
+                                        <TableHead className="text-right w-[80px]">B</TableHead>
+                                        <TableHead className="text-right w-[80px]">4s</TableHead>
+                                        <TableHead className="text-right w-[80px]">6s</TableHead>
+                                        <TableHead className="text-right w-[80px]">SR</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {players.map(player => (
+                                    {batters.length > 0 ? batters.map(player => (
                                         <TableRow key={player.id}>
                                             <TableCell className="font-medium">
-                                                <div className="flex flex-col">
-                                                    <span>{player.name}</span>
-                                                    <span className="text-xs text-muted-foreground capitalize">{player.role}</span>
-                                                </div>
+                                                {player.name}
+                                                {player.is_captain && ' (c)'}
+                                                {player.is_wicketkeeper && ' (wk)'}
                                             </TableCell>
-
-                                            {/* Batting Inputs */}
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.runs} onChange={e => updatePlayer(player.id, 'runs', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.balls} onChange={e => updatePlayer(player.id, 'balls', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.fours} onChange={e => updatePlayer(player.id, 'fours', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.sixes} onChange={e => updatePlayer(player.id, 'sixes', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell className="text-center font-mono text-sm text-muted-foreground bg-muted/30">
-                                                {calculateStrikeRate(parseInt(player.runs) || 0, parseInt(player.balls) || 0)}
-                                            </TableCell>
-
-                                            {/* Bowling Inputs */}
-                                            <TableCell className="border-l">
-                                                <Input type="number" step="0.1" className="h-8 text-center" value={player.overs} onChange={e => updatePlayer(player.id, 'overs', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input
-                                                    type="number"
-                                                    className="h-8 text-center"
-                                                    value={player.maidens}
-                                                    onChange={e => updatePlayer(player.id, 'maidens', e.target.value)}
-                                                    min={0}
-                                                />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.runs_conceded} onChange={e => updatePlayer(player.id, 'runs_conceded', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.wickets} onChange={e => updatePlayer(player.id, 'wickets', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell className="text-center font-mono text-sm text-muted-foreground bg-muted/30">
-                                                {calculateEconomy(parseInt(player.runs_conceded) || 0, parseFloat(player.overs) || 0)}
-                                            </TableCell>
-
-                                            {/* Fielding Inputs */}
-                                            <TableCell className="border-l">
-                                                <Input type="number" className="h-8 text-center" value={player.catches} onChange={e => updatePlayer(player.id, 'catches', e.target.value)} />
-                                            </TableCell>
-                                            <TableCell>
-                                                <Input type="number" className="h-8 text-center" value={player.stumpings} onChange={e => updatePlayer(player.id, 'stumpings', e.target.value)} />
-                                            </TableCell>
+                                            <TableCell className="text-right font-semibold">{player.runs}</TableCell>
+                                            <TableCell className="text-right">{player.balls}</TableCell>
+                                            <TableCell className="text-right">{player.fours}</TableCell>
+                                            <TableCell className="text-right">{player.sixes}</TableCell>
+                                            <TableCell className="text-right">{calculateStrikeRate(player.runs, player.balls)}</TableCell>
                                         </TableRow>
-                                    ))}
+                                    )) : (
+                                        <TableRow>
+                                            <TableCell colSpan={6} className="text-center text-muted-foreground py-6">No batting stats recorded.</TableCell>
+                                        </TableRow>
+                                    )}
+                                    {/* Extras row could go here if we tracked it per team */}
+                                </TableBody>
+                            </Table>
+                            {dnb.length > 0 && (
+                                <div className="px-4 py-3 border-t text-sm">
+                                    <span className="font-semibold text-muted-foreground mr-2">Did not bat:</span>
+                                    {dnb.map(p => p.name).join(', ')}
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    {/* Bowling Section */}
+                    <Card>
+                        <CardHeader className="bg-slate-50 border-b">
+                            <CardTitle className="text-lg">Bowling Performance</CardTitle>
+                        </CardHeader>
+                        <CardContent className="p-0">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow className="hover:bg-transparent">
+                                        <TableHead>Bowler</TableHead>
+                                        <TableHead className="text-right w-[80px]">O</TableHead>
+                                        <TableHead className="text-right w-[80px]">M</TableHead>
+                                        <TableHead className="text-right w-[80px]">R</TableHead>
+                                        <TableHead className="text-right w-[80px]">W</TableHead>
+                                        <TableHead className="text-right w-[80px]">ECON</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {bowlers.length > 0 ? bowlers.map(player => (
+                                        <TableRow key={player.id}>
+                                            <TableCell className="font-medium">
+                                                {player.name}
+                                            </TableCell>
+                                            <TableCell className="text-right">{player.overs}</TableCell>
+                                            <TableCell className="text-right">{player.maidens}</TableCell>
+                                            <TableCell className="text-right">{player.runs_conceded}</TableCell>
+                                            <TableCell className="text-right font-semibold">{player.wickets}</TableCell>
+                                            <TableCell className="text-right">{calculateEconomy(player.runs_conceded, player.overs)}</TableCell>
+                                        </TableRow>
+                                    )) : (
+                                        <TableRow>
+                                            <TableCell colSpan={6} className="text-center text-muted-foreground py-6">No bowling stats recorded.</TableCell>
+                                        </TableRow>
+                                    )}
                                 </TableBody>
                             </Table>
                         </CardContent>
