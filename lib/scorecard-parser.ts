@@ -291,7 +291,7 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
       
       prefixStr = prefixStr.replace(/^\d+\s+/, "");
       
-      const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
+      const statusPattern = /\b(not out|Not out|Not Out|run out.*|Run out.*|Run Out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|Hit Wicket.*|retired.*|Retired.*|absent.*|Absent.*)$/;
       const statusMatch = prefixStr.match(statusPattern);
       
       let name = prefixStr;
