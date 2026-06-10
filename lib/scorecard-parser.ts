@@ -219,8 +219,8 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
     for (let i = headerIdx - 1; i >= 0; i--) {
       const lineTrimmed = lines[i].trim();
       if (/^\d+\s+/.test(lines[i])) {
-        // Unshift so row 1 comes before row 2
-        rows.unshift(lines[i]);
+        // The lowest number row is always closest to the header, so pushing maintains 1..N order
+        rows.push(lines[i]);
         foundAbove = true;
       } else {
         // Stop if we hit a non-number line, UNLESS we haven't found any rows yet
