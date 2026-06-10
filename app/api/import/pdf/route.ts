@@ -80,15 +80,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Failed to fetch existing players: " + fetchErr.message }, { status: 500 });
     }
 
-    const conflicts = findConflicts(pdfPlayerNames, existingPlayers ?? []);
+    // Temporarily disabled fuzzy matching to skip duplicate names suggestion per user request
+    const conflicts: any[] = [];
 
     return NextResponse.json({
       scorecard,
       pdfPlayerNames,
       conflicts,
-      message: conflicts.length > 0
-        ? `Found ${conflicts.length} potential duplicate player(s). Please resolve before importing.`
-        : `Ready to import: ${scorecard.team1} vs ${scorecard.team2} with ${pdfPlayerNames.length} players.`,
+      message: `Ready to import: ${scorecard.team1} vs ${scorecard.team2} with ${pdfPlayerNames.length} players.`,
     });
   } catch (error) {
     console.error("PDF import error:", error);
