@@ -5,26 +5,15 @@ import { NextResponse } from "next/server";
 import { getDb, isSupabaseConfigured } from "@/lib/db";
 import { parseScorecardText, getAllPlayerNames } from "@/lib/scorecard-parser";
 import { findConflicts } from "@/lib/name-matcher";
-import { PDFParse } from "pdf-parse";
-
-import { tmpdir } from "os";
-import { join } from "path";
-import { writeFileSync, unlinkSync } from "fs";
-import { randomUUID } from "crypto";
+import pdfParse from "pdf-parse";
 
 async function extractTextFromPdf(buffer: Buffer): Promise<{ text: string; num: number }[]> {
-  // Write to a temp file — pdf-parse v2 requires a file:// URL, not a data: URL
-  const tmpPath = join(tmpdir(), `scorecard-${randomUUID()}.pdf`);
-  try {
-    writeFileSync(tmpPath, buffer);
-    const fileUrl = `file://${tmpPath.replace(/\\/g, "/")}`;
-    const parser = new PDFParse({ verbosity: -1, url: fileUrl });
-    await parser.load();
-    const result = await parser.getText() as { pages: { text: string; num: number }[]; text: string; total: number };
-    return result.pages ?? [{ text: result.text ?? "", num: 1 }];
-  } finally {
-    try { unlinkSync(tmpPath); } catch { /* ignore cleanup errors */ }
-  }
+  // pdf-parse v1.1.1 natively accepts buffers and runs perfectly in serverless functions
+  const data = await pdfParse(buffer);
+  
+  // v1.1.1 just returns a flat text string by default, so we wrap it in a single "page"
+  // since our parser just iterates over pages and concatenates them anyway.
+  return [{ text: data.text, num: 1 }];
 }
 
 export async function POST(request: Request) {
