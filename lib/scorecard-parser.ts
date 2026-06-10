@@ -229,32 +229,66 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
       }
 
       if (inBattingSection) {
-        // Try full pattern (with minutes)
-        let bm = iLine.match(battingRowPattern);
-        if (bm) {
-          batting.push({
-            name: cleanPlayerName(bm[2]),
-            status: bm[3].trim(),
-            runs: parseInt(bm[4], 10),
-            balls: parseInt(bm[5], 10),
-            // bm[6] is minutes, skip
-            fours: parseInt(bm[7], 10),
-            sixes: parseInt(bm[8], 10),
-            strikeRate: parseFloat(bm[9]),
-          });
-          continue;
+        // Try to match the numeric stats at the end of the row
+        // Pattern: [R] [B] [M?] [4s] [6s] [SR]
+        const statsMatchFull = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
+        const statsMatchSimple = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
+        
+        let runs = 0, balls = 0, fours = 0, sixes = 0, sr = 0;
+        let prefixStr = "";
+        
+        if (statsMatchFull) {
+          runs = parseInt(statsMatchFull[1], 10);
+          balls = parseInt(statsMatchFull[2], 10);
+          fours = parseInt(statsMatchFull[4], 10);
+          sixes = parseInt(statsMatchFull[5], 10);
+          sr = parseFloat(statsMatchFull[6]);
+          prefixStr = iLine.substring(0, statsMatchFull.index).trim();
+        } else if (statsMatchSimple) {
+          runs = parseInt(statsMatchSimple[1], 10);
+          balls = parseInt(statsMatchSimple[2], 10);
+          fours = parseInt(statsMatchSimple[3], 10);
+          sixes = parseInt(statsMatchSimple[4], 10);
+          sr = parseFloat(statsMatchSimple[5]);
+          prefixStr = iLine.substring(0, statsMatchSimple.index).trim();
+        } else {
+          continue; // not a valid batting row
         }
-        // Try without minutes
-        bm = iLine.match(battingRowSimple);
-        if (bm) {
+        
+        // prefixStr is like: "1  Prithvi BPCA c Harshavardhana.V b Monish C"
+        // Strip the starting number
+        prefixStr = prefixStr.replace(/^\d+\s+/, "");
+        
+        // Now we have "Prithvi BPCA c Harshavardhana.V b Monish C"
+        // Split name and status using a robust regex looking at the end of the string
+        const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
+        const statusMatch = prefixStr.match(statusPattern);
+        
+        let name = prefixStr;
+        let status = "";
+        
+        if (statusMatch) {
+          status = statusMatch[0];
+          name = prefixStr.substring(0, statusMatch.index).trim();
+        } else {
+          // Fallback if regex doesn't match: split by multiple spaces
+          const parts = prefixStr.split(/\s{2,}/);
+          if (parts.length >= 2) {
+             status = parts.pop() || "";
+             name = parts.join(" ");
+          }
+        }
+        
+        // Only push if we actually extracted a name
+        if (name) {
           batting.push({
-            name: cleanPlayerName(bm[2]),
-            status: bm[3].trim(),
-            runs: parseInt(bm[4], 10),
-            balls: parseInt(bm[5], 10),
-            fours: parseInt(bm[6], 10),
-            sixes: parseInt(bm[7], 10),
-            strikeRate: parseFloat(bm[8]),
+            name: cleanPlayerName(name),
+            status: status.trim(),
+            runs,
+            balls,
+            fours,
+            sixes,
+            strikeRate: sr,
           });
         }
       }

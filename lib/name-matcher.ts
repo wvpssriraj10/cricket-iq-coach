@@ -63,7 +63,12 @@ export function arePotentiallyTheSamePerson(nameA: string, nameB: string): boole
 
   // Surnames must match (or one contains the other)
   if (surnameA !== surnameB) {
-    if (!surnameA.includes(surnameB) && !surnameB.includes(surnameA)) return false;
+    if (surnameA.length === 1 || surnameB.length === 1) {
+      // If one of the surnames is just an initial, they must share the same starting letter
+      if (surnameA[0] !== surnameB[0]) return false;
+    } else {
+      if (!surnameA.includes(surnameB) && !surnameB.includes(surnameA)) return false;
+    }
   }
 
   const initialsA = getNonSurnameInitials(partsA);
