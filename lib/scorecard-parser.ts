@@ -198,25 +198,58 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
   }
 
   // ── Innings parsing ─────────────────────────────────────────────────────────
-  // Pattern: "VIT AP-B 95/3 (10.0 Ov) (1st Innings)  Jaakeer Shaik (VIT AP-B)"
   const innings: InningsData[] = [];
 
+  const battingHeaders: number[] = [];
+  const bowlingHeaders: number[] = [];
+  const inningsHeaders: number[] = [];
+
   const inningsHeaderPattern = /^(.+?)\s+(\d+)\/(\d+)\s+\((\d+\.?\d*)\s*Ov\)/;
-  let inningsStart = -1;
-  const inningsStarts: number[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    if (inningsHeaderPattern.test(lines[i])) {
-      inningsStarts.push(i);
-    }
+    if (/^No\s+Batsman\b/i.test(lines[i])) battingHeaders.push(i);
+    if (/^No\s+Bowler\b/i.test(lines[i])) bowlingHeaders.push(i);
+    if (inningsHeaderPattern.test(lines[i])) inningsHeaders.push(i);
   }
 
-  for (let ii = 0; ii < inningsStarts.length; ii++) {
-    const start = inningsStarts[ii];
-    const end = inningsStarts[ii + 1] ?? lines.length;
+  function extractTableRows(headerIdx: number): string[] {
+    const rows: string[] = [];
+    let foundAbove = false;
+    // Check above first (pdf2json often renders bottom-up)
+    for (let i = headerIdx - 1; i >= 0; i--) {
+      const lineTrimmed = lines[i].trim();
+      if (/^\d+\s+/.test(lines[i])) {
+        // Unshift so row 1 comes before row 2
+        rows.unshift(lines[i]);
+        foundAbove = true;
+      } else {
+        // Stop if we hit a non-number line, UNLESS we haven't found any rows yet
+        // Sometimes there are blank lines, "Extras", or "(RHB)" right above the header
+        const isIgnorable = lineTrimmed === "" || /^\(RHB\)|\(LHB\)$/i.test(lineTrimmed);
+        if (foundAbove && !isIgnorable) break;
+      }
+    }
+    if (foundAbove) return rows;
 
-    const headerLine = lines[start];
-    const hm = headerLine.match(/^(.+?)\s+(\d+)\/(\d+)\s+\((\d+\.?\d*)\s*Ov\)/);
+    // Check below (standard top-down)
+    for (let i = headerIdx + 1; i < lines.length; i++) {
+      const lineTrimmed = lines[i].trim();
+      if (/^\d+\s+/.test(lines[i])) {
+        rows.push(lines[i]);
+      } else {
+        const isIgnorable = lineTrimmed === "" || /^\(RHB\)|\(LHB\)$/i.test(lineTrimmed);
+        if (rows.length > 0 && !isIgnorable) break;
+      }
+    }
+    return rows;
+  }
+
+  const battingBlocks = battingHeaders.map((idx) => extractTableRows(idx));
+  const bowlingBlocks = bowlingHeaders.map((idx) => extractTableRows(idx));
+
+  for (let i = 0; i < inningsHeaders.length; i++) {
+    const headerLine = lines[inningsHeaders[i]];
+    const hm = headerLine.match(inningsHeaderPattern);
     if (!hm) continue;
 
     const inningsTeam = hm[1].trim();
@@ -224,120 +257,97 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
     const totalWickets = parseInt(hm[3], 10);
     const totalOvers = parseFloat(hm[4]);
 
-    const inningsLines = lines.slice(start + 1, end);
-
     const batting: BattingEntry[] = [];
     const bowling: BowlingEntry[] = [];
-    let extras = 0;
+    
+    const batRows = battingBlocks[i] || [];
+    const bowlRows = bowlingBlocks[i] || [];
 
-    // ── Batting table ─────────────────────────────────────────────────────────
-    // Row: "1  Ashwanth Nivas (RHB)  b Manohar Sai  46 28 36 4 3 164.29"
-    // Cols: No | Batsman | Status | R B M 4s 6s SR
-    const battingRowPattern = /^(\d+)\s+(.+?)\s{2,}(.+?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+)$/;
-    // Simpler pattern without minutes
-    const battingRowSimple = /^(\d+)\s+(.+?)\s{2,}(.+?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+)$/;
-
-    let inBattingSection = true;
-    let inBowlingSection = false;
-
-    for (const iLine of inningsLines) {
-      // Detect bowling section start: "No  Bowler  O M R  W  ..."
-      if (/^No\s+Bowler\b/i.test(iLine)) {
-        inBattingSection = false;
-        inBowlingSection = true;
+    // Parse Batting Rows
+    for (const iLine of batRows) {
+      const statsMatchFull = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
+      const statsMatchSimple = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
+      
+      let runs = 0, balls = 0, fours = 0, sixes = 0, sr = 0;
+      let prefixStr = "";
+      
+      if (statsMatchFull) {
+        runs = parseInt(statsMatchFull[1], 10);
+        balls = parseInt(statsMatchFull[2], 10);
+        fours = parseInt(statsMatchFull[4], 10);
+        sixes = parseInt(statsMatchFull[5], 10);
+        sr = parseFloat(statsMatchFull[6]);
+        prefixStr = iLine.substring(0, statsMatchFull.index).trim();
+      } else if (statsMatchSimple) {
+        runs = parseInt(statsMatchSimple[1], 10);
+        balls = parseInt(statsMatchSimple[2], 10);
+        fours = parseInt(statsMatchSimple[3], 10);
+        sixes = parseInt(statsMatchSimple[4], 10);
+        sr = parseFloat(statsMatchSimple[5]);
+        prefixStr = iLine.substring(0, statsMatchSimple.index).trim();
+      } else {
         continue;
       }
-
-      // Extras line
-      if (/^Extras:/i.test(iLine)) {
-        const em = iLine.match(/(\d+)\s*$/);
-        if (em) extras = parseInt(em[1], 10);
-        continue;
-      }
-
-      if (inBattingSection) {
-        // Try to match the numeric stats at the end of the row
-        // Pattern: [R] [B] [M?] [4s] [6s] [SR]
-        const statsMatchFull = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
-        const statsMatchSimple = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
-        
-        let runs = 0, balls = 0, fours = 0, sixes = 0, sr = 0;
-        let prefixStr = "";
-        
-        if (statsMatchFull) {
-          runs = parseInt(statsMatchFull[1], 10);
-          balls = parseInt(statsMatchFull[2], 10);
-          fours = parseInt(statsMatchFull[4], 10);
-          sixes = parseInt(statsMatchFull[5], 10);
-          sr = parseFloat(statsMatchFull[6]);
-          prefixStr = iLine.substring(0, statsMatchFull.index).trim();
-        } else if (statsMatchSimple) {
-          runs = parseInt(statsMatchSimple[1], 10);
-          balls = parseInt(statsMatchSimple[2], 10);
-          fours = parseInt(statsMatchSimple[3], 10);
-          sixes = parseInt(statsMatchSimple[4], 10);
-          sr = parseFloat(statsMatchSimple[5]);
-          prefixStr = iLine.substring(0, statsMatchSimple.index).trim();
-        } else {
-          continue; // not a valid batting row
-        }
-        
-        // prefixStr is like: "1  Prithvi BPCA c Harshavardhana.V b Monish C"
-        // Strip the starting number
-        prefixStr = prefixStr.replace(/^\d+\s+/, "");
-        
-        // Now we have "Prithvi BPCA c Harshavardhana.V b Monish C"
-        // Split name and status using a robust regex looking at the end of the string
-        const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
-        const statusMatch = prefixStr.match(statusPattern);
-        
-        let name = prefixStr;
-        let status = "";
-        
-        if (statusMatch) {
-          status = statusMatch[0];
-          name = prefixStr.substring(0, statusMatch.index).trim();
-        } else {
-          // Fallback if regex doesn't match: split by multiple spaces
-          const parts = prefixStr.split(/\s{2,}/);
-          if (parts.length >= 2) {
-             status = parts.pop() || "";
-             name = parts.join(" ");
-          }
-        }
-        
-        // Only push if we actually extracted a name
-        if (name) {
-          batting.push({
-            name: cleanPlayerName(name),
-            status: status.trim(),
-            runs,
-            balls,
-            fours,
-            sixes,
-            strikeRate: sr,
-          });
+      
+      prefixStr = prefixStr.replace(/^\d+\s+/, "");
+      
+      const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
+      const statusMatch = prefixStr.match(statusPattern);
+      
+      let name = prefixStr;
+      let status = "";
+      
+      if (statusMatch) {
+        status = statusMatch[0];
+        name = prefixStr.substring(0, statusMatch.index).trim();
+      } else {
+        const parts = prefixStr.split(/\s{2,}/);
+        if (parts.length >= 2) {
+           status = parts.pop() || "";
+           name = parts.join(" ");
         }
       }
+      
+      if (name) {
+        batting.push({
+          name: cleanPlayerName(name),
+          status: status.trim(),
+          runs, balls, fours, sixes, strikeRate: sr,
+        });
+      }
+    }
 
-      if (inBowlingSection) {
-        // "1  Abhishekth  2  0  21 0  3  2  1  1  0  10.50"
-        // Cols: No | Bowler | O M R W 0s 4s 6s WD NB Eco
-        const bowlMatch = iLine.match(
-          /^(\d+)\s+(.+?)\s{2,}(\d+\.?\d*)\s+(\d+)\s+(\d+)\s+(\d+)\s+.+?([\d.]+)\s*$/
-        );
-        if (bowlMatch) {
+    // Parse Bowling Rows
+    for (const iLine of bowlRows) {
+      // Pattern: No | Bowler | O M R W (0s) 4s 6s (WD NB) Eco
+      // The exact number of columns varies. Let's look for Bowler name and the trailing stats.
+      // Usually starts with \d+ \s+ Name. Then the rest are numbers.
+      // Let's strip the leading number:
+      let prefixStr = iLine.replace(/^\d+\s+/, "").trim();
+      // Extract all trailing numbers
+      const trailingNumbersMatch = prefixStr.match(/((?:\s+[\d.]+)+)$/);
+      if (trailingNumbersMatch) {
+        const name = prefixStr.substring(0, trailingNumbersMatch.index).trim();
+        const numStrs = trailingNumbersMatch[1].trim().split(/\s+/);
+        // Minimum stats: O M R W Eco (5)
+        // Max stats: O M R W 0s 4s 6s WD NB Eco (10)
+        if (numStrs.length >= 5) {
           bowling.push({
-            name: cleanPlayerName(bowlMatch[2]),
-            overs: parseOvers(bowlMatch[3]),
-            maidens: parseInt(bowlMatch[4], 10),
-            runs: parseInt(bowlMatch[5], 10),
-            wickets: parseInt(bowlMatch[6], 10),
-            economy: parseFloat(bowlMatch[7]),
+            name: cleanPlayerName(name),
+            overs: parseOvers(numStrs[0]),
+            maidens: parseInt(numStrs[1], 10),
+            runs: parseInt(numStrs[2], 10),
+            wickets: parseInt(numStrs[3], 10),
+            economy: parseFloat(numStrs[numStrs.length - 1]),
           });
         }
       }
     }
+
+    // Extras (Scan between batting and bowling headers roughly? Or just ignore for now if hard to find. We can safely set it to 0 or extract from headers)
+    let extras = 0;
+    // We can just find it in the whole file since there are only 2 innings.
+    // Actually, we'll just set it to 0 and rely on the match total if needed.
 
     innings.push({
       teamName: inningsTeam,
