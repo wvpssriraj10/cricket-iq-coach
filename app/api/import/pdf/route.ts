@@ -5,15 +5,21 @@ import { NextResponse } from "next/server";
 import { getDb, isSupabaseConfigured } from "@/lib/db";
 import { parseScorecardText, getAllPlayerNames } from "@/lib/scorecard-parser";
 import { findConflicts } from "@/lib/name-matcher";
-import pdfParse from "pdf-parse";
+import PDFParser from "pdf2json";
 
 async function extractTextFromPdf(buffer: Buffer): Promise<{ text: string; num: number }[]> {
-  // pdf-parse v1.1.1 natively accepts buffers and runs perfectly in serverless functions
-  const data = await pdfParse(buffer);
-  
-  // v1.1.1 just returns a flat text string by default, so we wrap it in a single "page"
-  // since our parser just iterates over pages and concatenates them anyway.
-  return [{ text: data.text, num: 1 }];
+  return new Promise((resolve, reject) => {
+    // Initialize PDFParser with 1 to indicate raw text extraction only
+    const pdfParser = new PDFParser(null, 1);
+    
+    pdfParser.on("pdfParser_dataError", (errData) => reject(errData.parserError));
+    pdfParser.on("pdfParser_dataReady", () => {
+      // getRawTextContent() returns a string of the text.
+      resolve([{ text: pdfParser.getRawTextContent(), num: 1 }]);
+    });
+    
+    pdfParser.parseBuffer(buffer);
+  });
 }
 
 export async function POST(request: Request) {
