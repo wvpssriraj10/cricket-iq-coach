@@ -101,7 +101,7 @@ export async function POST(request: Request) {
       // Create new player
       const { data: inserted, error } = await db
         .from("players")
-        .insert({ name: pdfName, role: teamRole, age_group: "Senior" })
+        .insert({ name: pdfName, role: teamRole, age_group: "College" })
         .select("id")
         .single();
       if (error) throw new Error(`Failed to create player "${pdfName}": ${error.message}`);
