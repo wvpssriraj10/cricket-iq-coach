@@ -7,12 +7,24 @@ import { parseScorecardText, getAllPlayerNames } from "@/lib/scorecard-parser";
 import { findConflicts } from "@/lib/name-matcher";
 import { PDFParse } from "pdf-parse";
 
+import { tmpdir } from "os";
+import { join } from "path";
+import { writeFileSync, unlinkSync } from "fs";
+import { randomUUID } from "crypto";
+
 async function extractTextFromPdf(buffer: Buffer): Promise<{ text: string; num: number }[]> {
-  const filePath = `data:application/pdf;base64,${buffer.toString("base64")}`;
-  const parser = new PDFParse({ verbosity: -1, url: filePath });
-  await parser.load();
-  const result = await parser.getText() as { pages: { text: string; num: number }[]; text: string; total: number };
-  return result.pages ?? [{ text: result.text ?? "", num: 1 }];
+  // Write to a temp file — pdf-parse v2 requires a file:// URL, not a data: URL
+  const tmpPath = join(tmpdir(), `scorecard-${randomUUID()}.pdf`);
+  try {
+    writeFileSync(tmpPath, buffer);
+    const fileUrl = `file://${tmpPath.replace(/\\/g, "/")}`;
+    const parser = new PDFParse({ verbosity: -1, url: fileUrl });
+    await parser.load();
+    const result = await parser.getText() as { pages: { text: string; num: number }[]; text: string; total: number };
+    return result.pages ?? [{ text: result.text ?? "", num: 1 }];
+  } finally {
+    try { unlinkSync(tmpPath); } catch { /* ignore cleanup errors */ }
+  }
 }
 
 export async function POST(request: Request) {
