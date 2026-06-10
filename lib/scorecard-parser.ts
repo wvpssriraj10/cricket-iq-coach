@@ -141,31 +141,58 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
 
   const squadIdx = lines.findIndex((l) => /playing squad/i.test(l));
   if (squadIdx !== -1) {
-    // Next line should be the two team headers
-    let teamHeaderLine = lines[squadIdx + 1] ?? "";
-    // Skip if it's part of the header decorations
-    if (/^\d+$/.test(teamHeaderLine)) teamHeaderLine = "";
-
-    // Grab squad rows until we hit an innings header or another section
-    for (let i = squadIdx + 2; i < lines.length; i++) {
+    // In pdf2json, the squad table often appears ABOVE the "Playing Squad" text.
+    // We scan upwards to collect the rows.
+    let foundSquad = false;
+    for (let i = squadIdx - 1; i >= 0; i--) {
       const l = lines[i];
-      // Stop if we hit innings or match officials section
-      if (/innings\b|match officials/i.test(l)) break;
-      // Squad row: starts with a number
-      const squadRowMatch = l.match(/^(\d+)\s+(.+)$/);
-      if (!squadRowMatch) continue;
+      if (/^\d+\s+/.test(l)) {
+        const squadRowMatch = l.match(/^(\d+)\s+(.+)$/);
+        if (squadRowMatch) {
+          const content = squadRowMatch[2];
+          // Split by 2 or more spaces
+          const parts = content.split(/\s{2,}/);
+          if (parts.length >= 2) {
+            const n1 = cleanPlayerName(parts[0]);
+            const n2 = cleanPlayerName(parts[1]);
+            if (n1) squad1.unshift(n1);
+            if (n2) squad2.unshift(n2);
+          } else if (parts.length === 1) {
+            const n1 = cleanPlayerName(parts[0]);
+            if (n1) squad1.unshift(n1);
+          }
+          foundSquad = true;
+        }
+      } else {
+        // If we hit a non-number line and we already collected players, we reached the top
+        if (foundSquad) break;
+      }
+    }
 
-      const content = squadRowMatch[2];
-      // Split by multiple spaces/tab (two names side by side)
-      const parts = content.split(/\t|\s{2,}/);
-      if (parts.length >= 2) {
-        const n1 = cleanPlayerName(parts[0]);
-        const n2 = cleanPlayerName(parts[1]);
-        if (n1) squad1.push(n1);
-        if (n2) squad2.push(n2);
-      } else if (parts.length === 1) {
-        // Some formats only list one column
-        squad1.push(cleanPlayerName(parts[0]));
+    // Fallback: If upwards scan found nothing, try forwards scan
+    if (!foundSquad) {
+      for (let i = squadIdx + 1; i < lines.length; i++) {
+        const l = lines[i];
+        if (/innings\b|match officials/i.test(l)) break;
+        if (/^\d+\s+/.test(l)) {
+          const squadRowMatch = l.match(/^(\d+)\s+(.+)$/);
+          if (squadRowMatch) {
+            const content = squadRowMatch[2];
+            const parts = content.split(/\s{2,}/);
+            if (parts.length >= 2) {
+              const n1 = cleanPlayerName(parts[0]);
+              const n2 = cleanPlayerName(parts[1]);
+              if (n1) squad1.push(n1);
+              if (n2) squad2.push(n2);
+            } else if (parts.length === 1) {
+              const n1 = cleanPlayerName(parts[0]);
+              if (n1) squad1.push(n1);
+            }
+            foundSquad = true;
+          }
+        } else {
+          if (foundSquad) break;
+        }
       }
     }
   }
@@ -331,8 +358,28 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
 
   // Determine which squad belongs to which team using the innings data
   // innings[0] is team1's batting, innings[1] is team2's batting
-  // The squad order from the PDF is [squad_of_team2, squad_of_team1] (VVITU | VIT AP-B)
-  // so we might need to swap depending on format. We keep as-is and trust PDF order.
+  if (innings.length >= 2 && squad1.length > 0 && squad2.length > 0) {
+    const team1Batters = new Set(innings[0].batting.map(b => b.name));
+    const team2Batters = new Set(innings[1].batting.map(b => b.name));
+    
+    // Count matches between squad1 and team1Batters vs team2Batters
+    let squad1MatchTeam1 = 0;
+    let squad1MatchTeam2 = 0;
+    
+    for (const p of squad1) {
+       if (team1Batters.has(p)) squad1MatchTeam1++;
+       if (team2Batters.has(p)) squad1MatchTeam2++;
+    }
+    
+    // If squad1 players batted in innings[1] (team2), swap them!
+    if (squad1MatchTeam2 > squad1MatchTeam1) {
+       const temp = [...squad1];
+       squad1.length = 0;
+       squad1.push(...squad2);
+       squad2.length = 0;
+       squad2.push(...temp);
+    }
+  }
 
   return {
     tournament,
