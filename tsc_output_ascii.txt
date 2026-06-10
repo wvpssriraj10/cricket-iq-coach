@@ -1,0 +1,561 @@
+cricket-iq-coach/components/app-shell.tsx(22,54): error TS1005: '</' expected.
+cricket-iq-coach/components/app-shell.tsx(23,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-shell.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(56,15): error TS1005: '</' expected.
+cricket-iq-coach/components/app-shell.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-shell.tsx(60,8): error TS17008: JSX element 'main' has no corresponding closing tag.
+cricket-iq-coach/components/app-shell.tsx(61,10): error TS17008: JSX element 'header' has no corresponding closing tag.
+cricket-iq-coach/components/app-shell.tsx(63,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/app-shell.tsx(113,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(113,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-shell.tsx(121,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/app-shell.tsx(122,1): error TS1005: '</' expected.
+cricket-iq-coach/components/app-sidebar.tsx(33,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(44,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(44,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(54,34): error TS1005: '</' expected.
+cricket-iq-coach/components/app-sidebar.tsx(55,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(56,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/components/app-sidebar.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(61,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(62,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/components/app-sidebar.tsx(63,7): error TS1109: Expression expected.
+cricket-iq-coach/components/app-sidebar.tsx(66,12): error TS1005: ';' expected.
+cricket-iq-coach/components/app-sidebar.tsx(67,9): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/components/app-sidebar.tsx(84,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(87,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(90,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(114,7): error TS1128: Declaration or statement expected.
+cricket-iq-coach/components/app-sidebar.tsx(116,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/app-sidebar.tsx(117,8): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/app-sidebar.tsx(118,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/app-sidebar.tsx(148,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(148,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/app-sidebar.tsx(157,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/components/app-sidebar.tsx(159,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/app-sidebar.tsx(160,1): error TS1005: '</' expected.
+cricket-iq-coach/components/dashboard-content.tsx(159,41): error TS1005: '</' expected.
+cricket-iq-coach/components/dashboard-content.tsx(160,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/dashboard-content.tsx(164,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(164,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(208,9): error TS17002: Expected corresponding JSX closing tag for 'Card'.
+cricket-iq-coach/components/dashboard-content.tsx(261,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/dashboard-content.tsx(283,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(283,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/dashboard-content.tsx(286,8): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/dashboard-content.tsx(328,52): error TS1005: '</' expected.
+cricket-iq-coach/components/dashboard-content.tsx(329,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/dashboard-content.tsx(330,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/components/dashboard-content.tsx(364,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/dashboard-content.tsx(379,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/dashboard-content.tsx(380,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/components/dashboard-content.tsx(381,7): error TS1109: Expression expected.
+cricket-iq-coach/components/dashboard-content.tsx(382,5): error TS1109: Expression expected.
+cricket-iq-coach/components/dashboard-content.tsx(383,3): error TS1109: Expression expected.
+cricket-iq-coach/components/dashboard-content.tsx(491,1): error TS1005: '}' expected.
+cricket-iq-coach/components/drill-rating-chart.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/drill-rating-chart.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/drill-rating-chart.tsx(35,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/components/drill-rating-chart.tsx(36,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/drill-rating-chart.tsx(88,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(88,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(141,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/drill-rating-chart.tsx(142,1): error TS1005: '</' expected.
+cricket-iq-coach/components/kpi-card.tsx(27,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/kpi-card.tsx(28,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/kpi-card.tsx(29,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/components/kpi-card.tsx(30,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/kpi-card.tsx(31,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/kpi-card.tsx(33,14): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/kpi-card.tsx(49,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(49,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(70,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/kpi-card.tsx(78,14): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/kpi-card.tsx(82,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(82,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/kpi-card.tsx(91,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/kpi-card.tsx(92,1): error TS1005: '</' expected.
+cricket-iq-coach/components/performance-chart.tsx(37,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/performance-chart.tsx(104,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/performance-chart.tsx(177,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/recent-sessions.tsx(30,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/components/recent-sessions.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/recent-sessions.tsx(41,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(43,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(47,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(52,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(54,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(56,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/recent-sessions.tsx(104,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/recent-sessions.tsx(105,1): error TS1005: '</' expected.
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(34,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(35,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(41,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(42,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(150,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/sessions-by-focus-chart.tsx(151,1): error TS1005: '</' expected.
+cricket-iq-coach/components/top-performers.tsx(26,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/top-performers.tsx(27,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/top-performers.tsx(28,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/components/top-performers.tsx(31,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/components/top-performers.tsx(37,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(37,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(39,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/components/top-performers.tsx(42,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/top-performers.tsx(44,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/top-performers.tsx(48,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/top-performers.tsx(53,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/components/top-performers.tsx(67,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(72,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/components/top-performers.tsx(108,12): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/top-performers.tsx(110,9): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/components/top-performers.tsx(111,5): error TS1005: ')' expected.
+cricket-iq-coach/components/top-performers.tsx(111,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/components/top-performers.tsx(113,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/components/top-performers.tsx(114,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(22,54): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(23,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(56,15): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(60,8): error TS17008: JSX element 'main' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(61,10): error TS17008: JSX element 'header' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(63,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(121,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(122,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(33,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(54,34): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(55,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(56,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(61,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(62,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(63,7): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(66,12): error TS1005: ';' expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(67,9): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(84,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(87,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(90,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(114,7): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(116,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(117,8): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(118,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(157,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(159,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(160,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(159,41): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(160,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(208,9): error TS17002: Expected corresponding JSX closing tag for 'Card'.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(261,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(286,8): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(328,52): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(329,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(330,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(364,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(379,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(380,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(381,7): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(382,5): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(383,3): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(491,1): error TS1005: '}' expected.
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(35,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(36,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(141,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(142,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(27,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(28,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(29,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(30,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(31,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(33,14): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(70,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(78,14): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(91,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(92,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(37,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(104,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(177,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(30,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(41,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(43,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(47,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(52,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(54,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(56,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(104,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(105,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(34,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(35,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(41,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(42,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(150,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(151,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(26,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(27,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(28,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(31,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(39,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(42,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(44,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(48,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(53,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(67,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(108,12): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(110,9): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(111,5): error TS1005: ')' expected.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(111,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(113,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(114,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(22,54): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(23,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(56,15): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(60,8): error TS17008: JSX element 'main' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(61,10): error TS17008: JSX element 'header' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(63,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(113,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(121,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-shell.tsx(122,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(33,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(44,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(54,34): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(55,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(56,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(58,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(61,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(62,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(63,7): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(66,12): error TS1005: ';' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(67,9): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(84,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(87,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(90,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(114,7): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(116,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(117,8): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(118,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(148,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(157,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(159,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/app-sidebar.tsx(160,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(159,41): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(160,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(164,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(208,9): error TS17002: Expected corresponding JSX closing tag for 'Card'.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(261,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(283,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(286,8): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(328,52): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(329,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(330,11): error TS2657: JSX expressions must have one parent element.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(364,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(379,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(380,9): error TS1128: Declaration or statement expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(381,7): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(382,5): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(383,3): error TS1109: Expression expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/dashboard-content.tsx(491,1): error TS1005: '}' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(35,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(36,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(88,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(141,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/drill-rating-chart.tsx(142,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(27,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(28,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(29,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(30,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(31,12): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(33,14): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(49,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(70,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(78,14): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(82,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(91,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/kpi-card.tsx(92,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(37,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(104,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/performance-chart.tsx(177,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(28,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(29,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(30,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(36,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(41,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(43,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(47,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(52,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(54,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(56,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(104,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/recent-sessions.tsx(105,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(34,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(35,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(41,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(42,10): error TS17008: JSX element 'div' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(91,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(150,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/sessions-by-focus-chart.tsx(151,1): error TS1005: '</' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(26,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(27,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(28,8): error TS17008: JSX element 'CardHeader' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(31,6): error TS17008: JSX element 'Card' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(37,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(39,8): error TS17008: JSX element 'CardContent' has no corresponding closing tag.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(42,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(44,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(48,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(53,1): error TS1185: Merge conflict marker encountered.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(67,15): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,1): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,2): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,3): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,4): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,5): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,6): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(72,7): error TS1382: Unexpected token. Did you mean `{'>'}` or `&gt;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(108,12): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(110,9): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(111,5): error TS1005: ')' expected.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(111,7): error TS17002: Expected corresponding JSX closing tag for 'div'.
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(113,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+cricket-iq-coach/cricket-iq-coach/cricket-iq-coach/components/top-performers.tsx(114,1): error TS1005: '</' expected.
