@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import useSWR from "swr";
+import Link from "next/link";
 import { useAuth } from "@/components/auth-provider";
 import { AppShell } from "@/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -765,6 +766,16 @@ export default function PlayersPage() {
                             >
                               <Zap className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
                               <span className="hidden sm:inline">Stats</span>
+                            </Button>
+                            <Button
+                              asChild
+                              variant="outline"
+                              size="sm"
+                            >
+                              <Link href={`/profile?id=${p.id}`}>
+                                <UserPlus className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                                <span className="hidden sm:inline">View Profile</span>
+                              </Link>
                             </Button>
                             
                             {!isPlayer && (

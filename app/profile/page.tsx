@@ -7,7 +7,7 @@ import { getPlayerAggregateStats, getPlayerMatches } from './actions'
 import { PlayerSearchForm } from './player-search-form'
 import { AppShell } from '@/components/app-shell'
 
-export default async function ProfilePage() {
+export default async function ProfilePage({ searchParams }: { searchParams: { id?: string } }) {
   const authData = await getUserProfile()
   if (!authData) {
     redirect('/login')
@@ -20,29 +20,33 @@ export default async function ProfilePage() {
   let stats: any = { matches: 0, runs: 0, wickets: 0 }
   let matchHistory: any[] = []
 
-  if (profile.player_id) {
+  const targetId = searchParams?.id || profile.player_id;
+
+  if (targetId) {
     // Fetch player data
     const { data: player } = await supabase
       .from('players')
       .select('*')
-      .eq('id', profile.player_id)
+      .eq('id', targetId)
       .single()
       
     if (player) {
       playerData = player
-      stats = await getPlayerAggregateStats(profile.player_id)
-      matchHistory = await getPlayerMatches(profile.player_id)
+      stats = await getPlayerAggregateStats(targetId)
+      matchHistory = await getPlayerMatches(targetId)
     }
   }
 
+  const isOwnProfile = targetId === profile.player_id;
+
   return (
-    <AppShell title="My Profile" subtitle="Manage your player profile and stats">
+    <AppShell title={isOwnProfile ? "My Profile" : (playerData ? `${playerData.name}'s Profile` : "Profile")} subtitle={isOwnProfile ? "Manage your player profile and stats" : "View player stats and history"}>
       <div className="container max-w-5xl mx-auto py-8">
-        {!profile.player_id || !playerData ? (
+        {!targetId || !playerData ? (
           <div className="max-w-xl mx-auto mt-12 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-8 shadow-xl">
-            <h2 className="text-2xl font-bold mb-4 text-[var(--color-heading)]">Claim Your Profile</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[var(--color-heading)]">Profile Not Found</h2>
             <p className="text-[var(--color-text-secondary)] mb-8">
-              It looks like you haven't linked your player profile yet. Search for your name in the team database to claim your profile and see your stats!
+              {isOwnProfile ? "It looks like you haven't linked your player profile yet. Search for your name in the team database to claim your profile and see your stats!" : "The requested player profile could not be found."}
             </p>
             <PlayerSearchForm />
           </div>
