@@ -13,38 +13,31 @@
 
 ## Features
 
-### Dashboard
-- **KPIs** — Batting average, strike rate, economy, wickets per session
-- **Trend charts** — Performance over time, drill ratings, sessions by focus
-- **Filters** — By player, role, and time range (Last 5 / 10 / All)
-- **Insights** — Rule-based summary text for coaches
+### 🌟 UI/UX & Magic Components
+- **Golden Sports Analytics Theme** — Completely overhauled design system featuring a premium Midnight Blue & Amber aesthetic.
+- **Magic Spotlight Hover Effects** — Interactive KPI cards that follow your cursor with dynamic, glowing spotlights.
+- **Redesigned Auth Flow** — Sleek login interface with floating labels, OAuth integrations, and animated visual backdrops.
 
-### Players
-- **Squad management** — Add, edit, and remove players (batter, bowler, allrounder, keeper)
-- **Profile fields** — Name, role, age group, batting/bowling arm, bowler type, preferred positions
-- **Filters** — Role and age group with live-updating KPIs and charts
-- **Players by role** — Bar chart; recent sessions list
-- **Remove player** — With confirmation; cascades to performance stats
-- **Download progress** — Export a player's full progress (sessions, drills, stats) as a **Word document** (.docx)
+### 📊 Automated Performance Analytics
+- **Live Stats Engine** — Dashboard auto-aggregates stats from every imported match (batting average, strike rate, bowling economy, wickets per session). No manual entry required.
+- **Performance Trends** — Visualized charts for performance over time, drill ratings, and sessions by focus.
+- **Full-Width Data Grids** — Scalable player management tables with real-time search filtering.
 
-### Sessions & Practice
-- **Sessions list** — View and create sessions (date, focus, age group, duration, notes)
-- **Practice planner** — Add drills from catalog, record ratings (1–5) and notes per drill
-- **Drill catalog** — Predefined batting, bowling, fielding, fitness drills with coaching tips
+### 📄 PDF Scorecard Import Engine
+- **CricHeroes Integration** — Upload scorecard PDFs to automatically parse both innings, extract all batters/bowlers, and write to the database.
+- **Smart Conflict Resolution** — Automatically handles player name conflicts (e.g., initial truncations) during import.
 
-### Educational tools (front-end only)
-- **Match scenarios** — Chase/defend calculator and scenario-based MCQs
-- **Field placement** — Visual field with presets for different situations
+### 🏏 Tactical & Educational Tools
+- **Field Placement Tutor** — Interactive SVG ground with drag-and-drop fielder repositioning and context-aware tactical presets (e.g., T20 powerplay, ODI middle overs).
+- **Match Scenario Classroom** — Chase/defend calculator and situational MCQ quizzes to test cricket IQ.
 
-### Import / Export
-- **Excel import** — Bulk import players/sessions/stats from spreadsheet (see `docs/EXCEL_IMPORT_FORMAT.md`)
-- **Word export** — Per-player progress report with session details and performance summary
+### 📋 Practice Planner & Team Management
+- **Drill Catalog** — Schedule sessions and pick from a 21-drill catalog logging ratings (1-5) to track trends.
+- **Squad Management** — Create teams, manage roles, and compare squads head-to-head. Download progress reports as `.docx`.
 
-### AI-ready (optional, off by default)
-- **Feature flags** — All AI features gated by `NEXT_PUBLIC_AI_*` env vars
-- **Behavioral tracking** — Anonymous scroll, dwell, navigation (logging-only API)
-- **Chat widget** — Stub conversational UI for path-aware guidance
-- **Spec** — `docs/AI_ENHANCEMENT_SPEC.md` describes a modular, non-invasive AI layer design
+### 🤖 AI-Ready (Optional)
+- **Feature Flags** — All AI features gated by `NEXT_PUBLIC_AI_*` env vars.
+- **Behavioral Tracking & Chat** — Anonymous scroll tracking and a stub conversational UI.
 
 ---
 
