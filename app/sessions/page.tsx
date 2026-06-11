@@ -170,13 +170,13 @@ export default function SessionsPage() {
                   type="datetime-local"
                   value={sessionDate}
                   onChange={(e) => setSessionDate(e.target.value)}
-                  className="w-48"
+                  className="w-48 h-10"
                 />
               </div>
               <div className="space-y-2">
                 <Label>Focus</Label>
                 <Select value={sessionFocus} onValueChange={setSessionFocus}>
-                  <SelectTrigger className="w-32">
+                  <SelectTrigger className="w-32 h-10">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -191,7 +191,7 @@ export default function SessionsPage() {
               <div className="space-y-2">
                 <Label>Age group</Label>
                 <Select value={sessionAgeGroup} onValueChange={setSessionAgeGroup}>
-                  <SelectTrigger className="w-28">
+                  <SelectTrigger className="w-28 h-10">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -210,7 +210,7 @@ export default function SessionsPage() {
                   min={1}
                   value={sessionDuration}
                   onChange={(e) => setSessionDuration(Number(e.target.value) || 60)}
-                  className="w-24"
+                  className="w-28 h-10"
                 />
               </div>
               <div className="space-y-2">
@@ -220,10 +220,10 @@ export default function SessionsPage() {
                   min={1}
                   value={sessionNumPlayers}
                   onChange={(e) => setSessionNumPlayers(Number(e.target.value) || 1)}
-                  className="w-20"
+                  className="w-24 h-10"
                 />
               </div>
-              <Button type="submit" disabled={sessionSubmitting}>
+              <Button type="submit" disabled={sessionSubmitting} className="h-10 px-6">
                 {sessionSubmitting ? "Creating…" : "Create session"}
               </Button>
             </form>
@@ -254,7 +254,7 @@ export default function SessionsPage() {
                 <div className="space-y-2">
                   <Label>Session</Label>
                   <Select value={statSessionId} onValueChange={setStatSessionId}>
-                    <SelectTrigger className="w-64">
+                    <SelectTrigger className="w-64 h-10">
                       <SelectValue placeholder="Select session" />
                     </SelectTrigger>
                     <SelectContent>
@@ -269,7 +269,7 @@ export default function SessionsPage() {
                 <div className="space-y-2">
                   <Label>Player</Label>
                   <Select value={statPlayerId} onValueChange={setStatPlayerId}>
-                    <SelectTrigger className="w-48">
+                    <SelectTrigger className="w-48 h-10">
                       <SelectValue placeholder="Select player" />
                     </SelectTrigger>
                     <SelectContent>
