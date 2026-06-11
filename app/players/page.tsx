@@ -636,15 +636,15 @@ export default function PlayersPage() {
             </CardContent>
           </Card>
           {!isPlayer && (
-            <Card className="min-w-0 rounded-xl border bg-card shadow-sm self-start">
+            <Card className="min-w-0 rounded-xl border bg-card shadow-sm flex flex-col">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                   <UserPlus className="h-5 w-5" />
                   Add player
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-0">
-                <form onSubmit={handleAdd} className="flex flex-col gap-4">
+              <CardContent className="pt-0 flex-1 flex flex-col">
+                <form onSubmit={handleAdd} className="flex flex-col gap-4 flex-1">
                   <div className="space-y-2">
                     <Label htmlFor="player-name">Name</Label>
                     <Input
@@ -686,17 +686,19 @@ export default function PlayersPage() {
                       </Select>
                     </div>
                   </div>
-                  <Button type="submit" disabled={submitting}>
-                    {submitting ? "Adding…" : "Add player"}
-                  </Button>
+                  <div className="mt-auto pt-2 flex flex-col gap-3">
+                    <Button type="submit" disabled={submitting} className="w-full">
+                      {submitting ? "Adding…" : "Add player"}
+                    </Button>
+                    {message && (
+                      <p
+                        className={`text-sm ${message.type === "ok" ? "text-green-600 dark:text-green-400" : "text-destructive"}`}
+                      >
+                        {message.text}
+                      </p>
+                    )}
+                  </div>
                 </form>
-                {message && (
-                  <p
-                    className={`mt-3 text-sm ${message.type === "ok" ? "text-green-600 dark:text-green-400" : "text-destructive"}`}
-                  >
-                    {message.text}
-                  </p>
-                )}
               </CardContent>
             </Card>
           )}
