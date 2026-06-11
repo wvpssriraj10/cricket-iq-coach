@@ -635,79 +635,75 @@ export default function PlayersPage() {
               </div>
             </CardContent>
           </Card>
-          <RecentSessions sessions={recentSessions} />
+          {!isPlayer && (
+            <Card className="min-w-0 rounded-xl border bg-card shadow-sm self-start">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+                  <UserPlus className="h-5 w-5" />
+                  Add player
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <form onSubmit={handleAdd} className="flex flex-col gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="player-name">Name</Label>
+                    <Input
+                      id="player-name"
+                      placeholder="e.g. Rahul Sharma"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label>Role</Label>
+                      <Select value={role} onValueChange={setRole}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {ROLES.map((r) => (
+                            <SelectItem key={r.value} value={r.value}>
+                              {r.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Age group</Label>
+                      <Select value={ageGroup} onValueChange={setAgeGroup}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {AGE_GROUPS.map((a) => (
+                            <SelectItem key={a.value} value={a.value}>
+                              {a.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <Button type="submit" disabled={submitting}>
+                    {submitting ? "Adding…" : "Add player"}
+                  </Button>
+                </form>
+                {message && (
+                  <p
+                    className={`mt-3 text-sm ${message.type === "ok" ? "text-green-600 dark:text-green-400" : "text-destructive"}`}
+                  >
+                    {message.text}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </section>
 
-        {/* 2-column: Add player + Squad list — first column sized to form so no gap */}
-        <section aria-label="Squad management" className={isPlayer ? "" : "grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]"}>
-          {!isPlayer && (
-            <div className="sticky top-24 self-start">
-              <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
-                <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-                <UserPlus className="h-5 w-5" />
-                Add player
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <form onSubmit={handleAdd} className="flex flex-col gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="player-name">Name</Label>
-                  <Input
-                    id="player-name"
-                    placeholder="e.g. Rahul Sharma"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label>Role</Label>
-                    <Select value={role} onValueChange={setRole}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {ROLES.map((r) => (
-                          <SelectItem key={r.value} value={r.value}>
-                            {r.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Age group</Label>
-                    <Select value={ageGroup} onValueChange={setAgeGroup}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {AGE_GROUPS.map((a) => (
-                          <SelectItem key={a.value} value={a.value}>
-                            {a.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-                <Button type="submit" disabled={submitting}>
-                  {submitting ? "Adding…" : "Add player"}
-                </Button>
-              </form>
-              {message && (
-                <p
-                  className={`mt-3 text-sm ${message.type === "ok" ? "text-green-600 dark:text-green-400" : "text-destructive"}`}
-                >
-                  {message.text}
-                </p>
-              )}
-            </CardContent>
-          </Card>
-            </div>
-          )}
-
+        {/* Players list full width */}
+        <section aria-label="Players list" className="w-full">
           <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
@@ -767,45 +763,64 @@ export default function PlayersPage() {
                                 <span className="hidden sm:inline">View Profile</span>
                               </Link>
                             </Button>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                                  <MoreHorizontal className="h-4 w-4" />
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => openStatsDialog(p)}
+                            >
+                              <Zap className="h-3.5 w-3.5 sm:mr-1.5" />
+                              <span className="hidden sm:inline">Stats</span>
+                            </Button>
+                            {(!isPlayer || profile.player_id === p.id) && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => {
+                                  setEditingPlayer(p);
+                                  setEditName(p.name);
+                                  setEditRole(p.role);
+                                  setEditAgeGroup(p.age_group);
+                                  setEditBattingArm(p.batting_arm || "");
+                                  setEditBowlingArm(p.bowling_arm || "");
+                                  setEditBowlerType(p.bowler_type || "");
+                                }}
+                              >
+                                <ClipboardList className="h-3.5 w-3.5 sm:mr-1.5" />
+                                <span className="hidden sm:inline">Edit</span>
+                              </Button>
+                            )}
+                            {!isPlayer && (
+                              <>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => openLogDialog(p)}
+                                >
+                                  <ClipboardList className="h-3.5 w-3.5 sm:mr-1.5" />
+                                  <span className="hidden sm:inline">Log</span>
                                 </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-40">
-                                <DropdownMenuItem onClick={() => openStatsDialog(p)}>
-                                  <Zap className="mr-2 h-4 w-4" /> Stats
-                                </DropdownMenuItem>
-                                {(!isPlayer || profile.player_id === p.id) && (
-                                  <DropdownMenuItem onClick={() => {
-                                    setEditingPlayer(p);
-                                    setEditName(p.name);
-                                    setEditRole(p.role);
-                                    setEditAgeGroup(p.age_group);
-                                    setEditBattingArm(p.batting_arm || "");
-                                    setEditBowlingArm(p.bowling_arm || "");
-                                    setEditBowlerType(p.bowler_type || "");
-                                  }}>
-                                    <ClipboardList className="mr-2 h-4 w-4" /> Edit
-                                  </DropdownMenuItem>
-                                )}
-                                {!isPlayer && (
-                                  <>
-                                    <DropdownMenuItem onClick={() => openLogDialog(p)}>
-                                      <ClipboardList className="mr-2 h-4 w-4" /> Log Match
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => handleDownloadProgress(p)} disabled={exportingId === p.id}>
-                                      <FileDown className="mr-2 h-4 w-4" /> {exportingId === p.id ? "Downloading..." : "Download"}
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem onClick={() => setPlayerToRemove(p)} className="text-destructive focus:text-destructive">
-                                      <Trash2 className="mr-2 h-4 w-4" /> Delete
-                                    </DropdownMenuItem>
-                                  </>
-                                )}
-                              </DropdownMenuContent>
-                            </DropdownMenu>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDownloadProgress(p)}
+                                  disabled={exportingId === p.id}
+                                >
+                                  <FileDown className="h-3.5 w-3.5 sm:mr-1.5" />
+                                  <span className="hidden sm:inline">
+                                    {exportingId === p.id ? "Wait" : "PDF"}
+                                  </span>
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setPlayerToRemove(p)}
+                                  className="text-destructive hover:text-destructive"
+                                >
+                                  <Trash2 className="h-3.5 w-3.5 sm:mr-1.5" />
+                                  <span className="hidden sm:inline">Del</span>
+                                </Button>
+                              </>
+                            )}
                           </div>
                         </TableCell>
                       </TableRow>
