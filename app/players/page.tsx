@@ -563,22 +563,22 @@ export default function PlayersPage() {
             icon={Users}
           />
           <KPICard
-            title="Total sessions"
-            value={sessions.length}
-            subtitle="All time"
-            icon={Calendar}
-          />
-          <KPICard
             title="Batters"
             value={filteredRoleCounts.batter ?? 0}
-            subtitle="Batting role"
+            subtitle="Pure batters"
             icon={Zap}
           />
           <KPICard
             title="Bowlers"
-            value={(filteredRoleCounts.bowler ?? 0) + (filteredRoleCounts.allrounder ?? 0)}
-            subtitle="Bowling roles"
+            value={filteredRoleCounts.bowler ?? 0}
+            subtitle="Pure bowlers"
             icon={Target}
+          />
+          <KPICard
+            title="All-rounders"
+            value={filteredRoleCounts.allrounder ?? 0}
+            subtitle="Dual roles"
+            icon={Users}
           />
         </section>
 
