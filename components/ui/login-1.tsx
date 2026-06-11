@@ -37,7 +37,7 @@ const AppInput = (props: InputProps) => {
       <div className="relative w-full">
         <input
           type="text"
-          className="peer relative z-10 border-2 border-[var(--color-border)] h-13 w-full rounded-md bg-[var(--color-surface)] px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-[var(--color-bg)] placeholder:font-medium"
+          className="peer relative z-10 border-2 border-[var(--color-border)] h-13 w-full rounded-md bg-[var(--color-surface)] text-[var(--color-text-primary)] px-4 font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-[var(--color-bg)] placeholder:font-medium"
           placeholder={placeholder}
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
@@ -210,6 +210,21 @@ const Login1 = () => {
             <div className='grid gap-4 items-center'>
                 <AppInput placeholder="Email" type="email" name="email" required />
                 <AppInput placeholder="Password" type="password" name="password" required />
+                {isSignUp && (
+                  <div className="flex flex-col gap-2 text-left relative z-10">
+                    <label className="text-sm font-medium text-[var(--color-text-secondary)]">I am a:</label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="role" value="player" defaultChecked className="accent-red-500" />
+                        <span className="text-sm text-[var(--color-heading)]">Player</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="role" value="coach" className="accent-red-500" />
+                        <span className="text-sm text-[var(--color-heading)]">Coach</span>
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
               {errorMsg && <div className="text-red-500 text-sm mt-2">{errorMsg}</div>}
               {!isSignUp && (

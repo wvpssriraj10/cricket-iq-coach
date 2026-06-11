@@ -23,6 +23,7 @@ import { useAuth } from "@/components/auth-provider";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "My Profile", href: "/profile", icon: UserCircle },
   { name: "Practice Planner", href: "/practice", icon: ListTodo },
   { name: "Players", href: "/players", icon: Users },
   { name: "Teams", href: "/teams", icon: Shield },
