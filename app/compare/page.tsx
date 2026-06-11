@@ -218,8 +218,8 @@ export default function ComparePage() {
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey={comparison.team1.name} fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                                        <Bar dataKey={comparison.team2.name} fill="hsl(var(--destructive))" radius={[4, 4, 0, 0]} />
+                                        <Bar dataKey={comparison.team1.name} fill="var(--primary)" radius={[4, 4, 0, 0]} />
+                                        <Bar dataKey={comparison.team2.name} fill="var(--destructive)" radius={[4, 4, 0, 0]} />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </CardContent>

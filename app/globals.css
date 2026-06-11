@@ -3,106 +3,103 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Premium dark theme inspired by Netflix & 21st.dev */
 :root {
-  --background: oklch(0.975 0.006 95);
-  --foreground: oklch(0.18 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 260);
-  --primary: oklch(0.42 0.16 152);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.28 0.04 260);
-  --secondary-foreground: oklch(0.98 0.005 95);
-  --muted: oklch(0.94 0.012 95);
-  --muted-foreground: oklch(0.42 0.02 260);
-  --accent: oklch(0.52 0.18 152);
-  --accent-foreground: oklch(0.99 0 0);
-  --destructive: oklch(0.52 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.015 95);
-  --input: oklch(0.92 0.012 95);
-  --ring: oklch(0.42 0.16 152);
-  --chart-1: oklch(0.42 0.16 152);
-  --chart-2: oklch(0.45 0.15 250);
-  --chart-3: oklch(0.55 0.16 35);
-  --chart-4: oklch(0.5 0.18 300);
-  --chart-5: oklch(0.7 0.16 80);
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #f1f5f9;
+  --muted-foreground: #0f172a;
+  --accent: #f59e0b;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #4f46e5;
+  --chart-1: #4f46e5;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #8b5cf6;
   --radius: 0.75rem;
-  --sidebar: oklch(0.22 0.04 260);
-  --sidebar-foreground: oklch(0.98 0.005 95);
-  --sidebar-primary: oklch(0.52 0.18 152);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.32 0.06 260);
-  --sidebar-accent-foreground: oklch(0.98 0.005 95);
-  --sidebar-border: oklch(0.32 0.05 260);
-  --sidebar-ring: oklch(0.52 0.18 152);
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #4f46e5;
 
-  /* Login Component Variables */
-  --color-bg: #101214;
-  --color-surface: #161A1D;
-  --color-muted-surface: #1D2125;
-  --color-border: #2C333A;
-  --color-text-secondary: #596773;
-  --color-text-primary: #C7D1DB;
-  --color-heading: #DEE4EA;
+  --color-bg: #0a0c10;
+  --color-surface: #141820;
+  --color-muted-surface: #1c212c;
+  --color-border: #2a3040;
+  --color-text-secondary: #6b7a94;
+  --color-text-primary: #d1d9e8;
+  --color-heading: #e4eaf5;
   --spacing-6: 1.5rem;
   --rounded-lg: 0.5rem;
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  --color-text-primary-rgb: 199, 209, 219;
-  --color-bg-2: #C7D1DB;
+  --color-text-primary-rgb: 209, 217, 232;
+  --color-bg-2: #d1d9e8;
 }
 
 .dark {
-  --background: oklch(0.09 0.01 260);
-  --foreground: oklch(0.98 0.005 260);
-  --card: oklch(0.13 0.015 260);
-  --card-foreground: oklch(0.98 0.005 260);
-  --popover: oklch(0.11 0.015 260);
-  --popover-foreground: oklch(0.98 0.005 260);
-  --primary: oklch(0.65 0.2 145);
-  --primary-foreground: oklch(0.1 0.02 145);
-  --secondary: oklch(0.2 0.02 260);
-  --secondary-foreground: oklch(0.95 0.005 260);
-  --muted: oklch(0.18 0.015 260);
-  --muted-foreground: oklch(0.65 0.02 260);
-  --accent: oklch(0.55 0.18 145);
-  --accent-foreground: oklch(0.98 0.005 260);
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(0.98 0.005 260);
-  --border: oklch(0.22 0.02 260);
-  --input: oklch(0.16 0.015 260);
-  --ring: oklch(0.65 0.2 145);
-  --chart-1: oklch(0.65 0.2 145);
-  --chart-2: oklch(0.6 0.18 250);
-  --chart-3: oklch(0.65 0.18 35);
-  --chart-4: oklch(0.6 0.2 300);
-  --chart-5: oklch(0.75 0.18 80);
-  --sidebar: oklch(0.07 0.01 260);
-  --sidebar-foreground: oklch(0.98 0.005 260);
-  --sidebar-primary: oklch(0.65 0.2 145);
-  --sidebar-primary-foreground: oklch(0.1 0.02 145);
-  --sidebar-accent: oklch(0.15 0.02 260);
-  --sidebar-accent-foreground: oklch(0.98 0.005 260);
-  --sidebar-border: oklch(0.18 0.015 260);
-  --sidebar-ring: oklch(0.65 0.2 145);
+  --background: #080b14;
+  --foreground: #f1f5f9;
+  --card: #111827;
+  --card-foreground: #f1f5f9;
+  --popover: #0f1729;
+  --popover-foreground: #f1f5f9;
+  --primary: #06b6d4;
+  --primary-foreground: #080b14;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1a2332;
+  --muted-foreground: #f1f5f9;
+  --accent: #fbbf24;
+  --accent-foreground: #080b14;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #1e293b;
+  --input: #1a2332;
+  --ring: #06b6d4;
+  --chart-1: #06b6d4;
+  --chart-2: #10b981;
+  --chart-3: #fbbf24;
+  --chart-4: #a78bfa;
+  --chart-5: #f472b6;
+  --sidebar: #050812;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #06b6d4;
+  --sidebar-primary-foreground: #080b14;
+  --sidebar-accent: #111827;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #06b6d4;
 
-  /* Login Component Variables */
-  --color-bg: #101214;
-  --color-surface: #161A1D;
-  --color-muted-surface: #1D2125;
-  --color-border: #2C333A;
-  --color-text-secondary: #596773;
-  --color-text-primary: #C7D1DB;
-  --color-heading: #DEE4EA;
-  --color-bg-2: #C7D1DB;
-  --color-text-primary-rgb: 199, 209, 219;
+  --color-bg: #050812;
+  --color-surface: #0d111f;
+  --color-muted-surface: #131a2a;
+  --color-border: #1e293b;
+  --color-text-secondary: #6b7a94;
+  --color-text-primary: #d1d9e8;
+  --color-heading: #e4eaf5;
+  --color-bg-2: #d1d9e8;
+  --color-text-primary-rgb: 209, 217, 232;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: 'Fira Sans', 'Fira Sans Fallback';
+  --font-mono: 'Fira Code', 'Fira Code Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -151,7 +148,13 @@
   body {
     @apply bg-background text-foreground antialiased;
     min-height: 100vh;
+    font-size: 18px !important;
+    line-height: 1.7 !important;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-}
 
+  h1 { font-size: 1.75rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.35rem !important; }
+  p, li, label, .text-sm { font-size: 1rem !important; }
+}

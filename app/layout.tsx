@@ -1,12 +1,21 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Fira_Sans, Fira_Code } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AILayers } from '@/components/ai/ai-layers'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const firaSans = Fira_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-fira-sans",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-fira-code",
+});
 
 export const metadata: Metadata = {
   title: 'Cricket IQ Coach - Analytics Dashboard',
@@ -34,7 +43,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${firaSans.variable} ${firaCode.variable} font-sans antialiased`}>
         <AuthProvider user={authData?.user} profile={authData?.profile as any}>
           {children}
           <Analytics />

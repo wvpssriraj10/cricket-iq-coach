@@ -7,7 +7,8 @@ import { getPlayerAggregateStats, getPlayerMatches } from './actions'
 import { PlayerSearchForm } from './player-search-form'
 import { AppShell } from '@/components/app-shell'
 
-export default async function ProfilePage({ searchParams }: { searchParams: { id?: string } }) {
+export default async function ProfilePage(props: { searchParams: Promise<{ id?: string }> }) {
+  const searchParams = await props.searchParams;
   const authData = await getUserProfile()
   if (!authData) {
     redirect('/login')

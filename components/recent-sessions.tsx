@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface Session {
@@ -14,54 +13,43 @@ interface RecentSessionsProps {
   sessions: Session[];
 }
 
-const focusAreaColors: Record<string, string> = {
-  batting: "bg-primary/10 text-primary",
-  bowling: "bg-secondary/10 text-secondary",
-  fielding: "bg-accent/10 text-accent-foreground",
-  fitness: "bg-chart-4/20 text-foreground",
-  default: "bg-muted text-muted-foreground",
+const focusColors: Record<string, string> = {
+  batting: "bg-primary/10 text-primary border-primary/20",
+  bowling: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20",
+  fielding: "bg-accent/10 text-accent border-accent/20",
+  fitness: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
+  default: "bg-muted text-muted-foreground border-border/50",
 };
 
 export function RecentSessions({ sessions }: RecentSessionsProps) {
   return (
-    <Card className="rounded-xl border-border/80 bg-card shadow-md">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-bold tracking-tight">Recent Sessions</CardTitle>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <div className="space-y-3">
-          {sessions.length === 0 ? (
-            <p className="rounded-xl border border-dashed border-border/80 bg-muted/20 px-4 py-6 text-center text-sm text-muted-foreground">No recent sessions</p>
-          ) : (
-            sessions.map((session) => (
-              <div
-                key={session.id}
-                className="flex items-center justify-between rounded-xl border border-border/80 bg-card p-4 shadow-sm transition-all hover:bg-muted/30 hover:shadow"
-              >
-                <div className="space-y-1">
-                  <p className="font-medium capitalize">
-                    {session.focus} - {session.age_group}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(session.date).toLocaleDateString("en-US", {
-                      weekday: "short",
-                      month: "short",
-                      day: "numeric",
-                    })}{" "}
-                    - {session.duration_minutes} min, {session.num_players} players
-                  </p>
-                </div>
-                <Badge
-                  variant="secondary"
-                  className={focusAreaColors[session.focus] || focusAreaColors.default}
-                >
-                  {session.focus}
-                </Badge>
+    <div className="rounded-2xl border border-border/40 bg-card shadow-sm overflow-hidden">
+      <div className="border-b border-border/40 bg-gradient-to-r from-muted/50 to-transparent px-6 py-4">
+        <h3 className="font-bold text-foreground">Recent Sessions</h3>
+      </div>
+      <div className="p-4 space-y-3">
+        {sessions.length === 0 ? (
+          <p className="rounded-xl border border-dashed border-border/50 bg-muted/10 px-4 py-6 text-center text-sm text-muted-foreground">No recent sessions</p>
+        ) : (
+          sessions.map((session) => (
+            <div key={session.id}
+              className="flex items-center justify-between rounded-xl border border-border/40 bg-muted/20 p-4 transition-all hover:border-primary/20 hover:bg-primary/[0.02] hover:shadow-sm">
+              <div className="space-y-1">
+                <p className="font-semibold text-sm text-foreground capitalize">
+                  {session.focus} &mdash; <span className="text-muted-foreground font-normal">{session.age_group}</span>
+                </p>
+                <p className="text-xs text-muted-foreground/70">
+                  {new Date(session.date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+                  &nbsp;&middot; {session.duration_minutes}min &middot; {session.num_players} players
+                </p>
               </div>
-            ))
-          )}
-        </div>
-      </CardContent>
-    </Card>
+              <Badge variant="outline" className={focusColors[session.focus] || focusColors.default}>
+                {session.focus}
+              </Badge>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 }
