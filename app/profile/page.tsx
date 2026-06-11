@@ -69,65 +69,77 @@ export default async function ProfilePage({ searchParams }: { searchParams: { id
                 </TabsList>
                 
                 <TabsContent value="stats" className="bg-white dark:bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-6 shadow-sm">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     {/* Batting Stats */}
-                    <div>
-                      <h3 className="text-xl font-bold mb-4 text-[var(--color-heading)] border-b pb-2">Batting Career</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Matches</p>
-                          <p className="text-2xl font-bold">{stats.matches}</p>
+                    <div className="bg-white dark:bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl p-6 md:p-8 shadow-sm relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-bl-full pointer-events-none"></div>
+                      <div className="flex items-center gap-3 mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                        <div className="p-2.5 bg-red-50 dark:bg-red-500/10 text-red-600 rounded-xl">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Runs</p>
-                          <p className="text-2xl font-bold">{stats.runs}</p>
+                        <h3 className="text-xl md:text-2xl font-bold text-[var(--color-heading)] tracking-tight">Batting Career</h3>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 md:gap-5">
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Matches</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.matches}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Highest Score</p>
-                          <p className="text-2xl font-bold">{stats.highestScore}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Runs</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.runs}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Average</p>
-                          <p className="text-2xl font-bold">{stats.average}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Highest Score</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.highestScore}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Strike Rate</p>
-                          <p className="text-2xl font-bold">{stats.strikeRate}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Average</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.average}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Boundaries (4s/6s)</p>
-                          <p className="text-2xl font-bold">{stats.totalFours} / {stats.totalSixes}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Strike Rate</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.strikeRate}</p>
+                        </div>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Boundaries</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.totalFours} <span className="text-lg text-slate-400 font-semibold">/</span> {stats.totalSixes}</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Bowling Stats */}
-                    <div>
-                      <h3 className="text-xl font-bold mb-4 text-[var(--color-heading)] border-b pb-2">Bowling Career</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Matches</p>
-                          <p className="text-2xl font-bold">{stats.matches}</p>
+                    <div className="bg-white dark:bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl p-6 md:p-8 shadow-sm relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-full pointer-events-none"></div>
+                      <div className="flex items-center gap-3 mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
+                        <div className="p-2.5 bg-blue-50 dark:bg-blue-500/10 text-blue-600 rounded-xl">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Wickets</p>
-                          <p className="text-2xl font-bold">{stats.wickets}</p>
+                        <h3 className="text-xl md:text-2xl font-bold text-[var(--color-heading)] tracking-tight">Bowling Career</h3>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 md:gap-5">
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Matches</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.matches}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Overs</p>
-                          <p className="text-2xl font-bold">{stats.totalOversBowled}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Wickets</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.wickets}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Runs Conceded</p>
-                          <p className="text-2xl font-bold">{stats.totalRunsConceded}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Overs</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.totalOversBowled}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Economy</p>
-                          <p className="text-2xl font-bold">{stats.economy}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Runs</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.totalRunsConceded}</p>
                         </div>
-                        <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
-                          <p className="text-sm text-[var(--color-text-secondary)] mb-1">Maidens</p>
-                          <p className="text-2xl font-bold">{stats.totalMaidens}</p>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Economy</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.economy}</p>
+                        </div>
+                        <div className="bg-slate-50 hover:bg-slate-100 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 transition-all duration-300 p-4 md:p-5 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                          <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Maidens</p>
+                          <p className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">{stats.totalMaidens}</p>
                         </div>
                       </div>
                     </div>
