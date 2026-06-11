@@ -344,9 +344,6 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
       
       prefixStr = prefixStr.replace(/^\d+\s+/, "");
       
-      const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
-      const statusMatch = prefixStr.match(statusPattern);
-      
       let name = "";
       let status = "";
       
@@ -355,16 +352,18 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
         status = prefixStr;
         currentBatterName = ""; // reset
       } else {
-        if (statusMatch) {
-          status = statusMatch[0];
-          name = prefixStr.substring(0, statusMatch.index).trim();
+        const parts = prefixStr.split(/\s{2,}/);
+        if (parts.length >= 2) {
+          status = parts.pop() || "";
+          name = parts.join(" ");
         } else {
-          const parts = prefixStr.split(/\s{2,}/);
-          if (parts.length >= 2) {
-             status = parts.pop() || "";
-             name = parts.join(" ");
+          const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
+          const statusMatch = prefixStr.match(statusPattern);
+          if (statusMatch) {
+            status = statusMatch[0];
+            name = prefixStr.substring(0, statusMatch.index).trim();
           } else {
-             name = prefixStr;
+            name = prefixStr;
           }
         }
       }

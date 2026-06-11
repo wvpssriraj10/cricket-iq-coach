@@ -77,15 +77,17 @@ Playing Squad
     // Validate Squad Extraction
     // Squad parsing splits lines into two columns (team1 and team2)
     // 1 Dhiraj C Yashu ( C )
-    expect(result.squad1).toContain('Dhiraj C');
-    expect(result.squad1).toContain('Sanjay');
-    expect(result.squad1).toContain('SACHIN S');
-    expect(result.squad1).toContain('Monish C');
-    expect(result.squad1).toContain('W.V.P.S.SRIRAJ');
-    expect(result.squad1).toContain('Shailendra ( C )');
+    const squad1Names = result.squad1.map(p => p.name);
+    expect(squad1Names).toContain('Dhiraj C');
+    expect(squad1Names).toContain('Sanjay');
+    expect(squad1Names).toContain('SACHIN S');
+    expect(squad1Names).toContain('Monish C');
+    expect(squad1Names).toContain('W.V.P.S.SRIRAJ');
+    expect(squad1Names).toContain('Shailendra');
 
-    expect(result.squad2).toContain('Yashu ( C )');
-    expect(result.squad2).toContain('Prithvi BPCA');
-    expect(result.squad2).toContain('Manas Singh ( WK )');
+    const squad2Names = result.squad2.map(p => p.name);
+    expect(squad2Names).toContain('Yashu');
+    expect(squad2Names).toContain('Prithvi BPCA');
+    expect(squad2Names).toContain('Manas Singh');
   });
 });
