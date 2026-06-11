@@ -126,24 +126,6 @@ const Login1 = () => {
       href: '#',
       gradient: 'bg-[var(--color-bg)]',
       provider: 'google',
-    },
-    {
-      icon: <Github size={24} />,
-      href: '#',
-      gradient: 'bg-[var(--color-bg)]',
-      provider: 'github',
-    },
-    {
-      icon: <Twitter size={24} />,
-      href: '#',
-      bg: 'bg-[var(--color-bg)]',
-      provider: 'twitter',
-    },
-    {
-      icon: <Mail size={24} />,
-      href: '#',
-      bg: 'bg-[var(--color-bg)]',
-      provider: null, // Just an icon, maybe later we focus email
     }
   ];
 
