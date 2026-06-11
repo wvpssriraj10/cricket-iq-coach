@@ -112,7 +112,7 @@ export async function POST(request: Request) {
     }
 
     // Add all squad members
-    const allSquadNames = [...scorecard.squad1, ...scorecard.squad2];
+    const allSquadNames = [...scorecard.squad1, ...scorecard.squad2].map(p => p.name);
     // Also collect all names from innings
     for (const inn of scorecard.innings) {
       inn.batting.forEach((b) => allSquadNames.push(b.name));
@@ -139,12 +139,12 @@ export async function POST(request: Request) {
 
     // Determine squad for each team. innings[0] batting → team1 batted, innings[1] batting → team2 batted
     const team1PlayerNames = new Set<string>([
-      ...scorecard.squad1,
+      ...scorecard.squad1.map(p => p.name),
       ...(scorecard.innings[0]?.batting.map((b) => b.name) ?? []),
       ...(scorecard.innings[1]?.bowling.map((b) => b.name) ?? []),
     ]);
     const team2PlayerNames = new Set<string>([
-      ...scorecard.squad2,
+      ...scorecard.squad2.map(p => p.name),
       ...(scorecard.innings[1]?.batting.map((b) => b.name) ?? []),
       ...(scorecard.innings[0]?.bowling.map((b) => b.name) ?? []),
     ]);
@@ -229,7 +229,24 @@ export async function POST(request: Request) {
         .eq("player_id", playerId)
         .limit(1)
         .maybeSingle();
-      if (existing) return;
+
+      if (existing) {
+        const updates: any = {};
+        if (batting) {
+          updates.runs_scored = batting.runs;
+          updates.balls_faced = batting.balls;
+          updates.fours = batting.fours;
+          updates.sixes = batting.sixes;
+        }
+        if (bowling) {
+          updates.wickets = bowling.wickets;
+          updates.overs_bowled = bowling.overs;
+          updates.runs_conceded = bowling.runs;
+          updates.maidens = bowling.maidens;
+        }
+        await db.from("match_performances").update(updates).eq("id", existing.id);
+        return;
+      }
 
       const { error } = await db.from("match_performances").insert({
         match_id: matchId,
@@ -251,22 +268,35 @@ export async function POST(request: Request) {
     }
 
     // Process innings 1 (team1 batting, team2 bowling)
+    const fullSquadMap = new Map<string, { isCaptain: boolean; isWicketKeeper: boolean }>();
+    [...scorecard.squad1, ...scorecard.squad2].forEach(p => {
+      fullSquadMap.set(p.name, { isCaptain: p.isCaptain, isWicketKeeper: p.isWicketKeeper });
+    });
+
+    function getFlags(name: string) {
+       return fullSquadMap.get(name) || { isCaptain: false, isWicketKeeper: false };
+    }
+
     if (inn1) {
       for (const batter of inn1.batting) {
-        await insertPerformance(match1Id, batter.name, batter, null, false, false);
+        const flags = getFlags(batter.name);
+        await insertPerformance(match1Id, batter.name, batter, null, flags.isCaptain, flags.isWicketKeeper);
       }
       for (const bowler of inn1.bowling) {
-        await insertPerformance(match2Id, bowler.name, null, bowler, false, false);
+        const flags = getFlags(bowler.name);
+        await insertPerformance(match2Id, bowler.name, null, bowler, flags.isCaptain, flags.isWicketKeeper);
       }
     }
 
     // Process innings 2 (team2 batting, team1 bowling)
     if (inn2) {
       for (const batter of inn2.batting) {
-        await insertPerformance(match2Id, batter.name, batter, null, false, false);
+        const flags = getFlags(batter.name);
+        await insertPerformance(match2Id, batter.name, batter, null, flags.isCaptain, flags.isWicketKeeper);
       }
       for (const bowler of inn2.bowling) {
-        await insertPerformance(match1Id, bowler.name, null, bowler, false, false);
+        const flags = getFlags(bowler.name);
+        await insertPerformance(match1Id, bowler.name, null, bowler, flags.isCaptain, flags.isWicketKeeper);
       }
     }
 

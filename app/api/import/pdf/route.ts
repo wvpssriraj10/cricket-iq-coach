@@ -10,9 +10,9 @@ import PDFParser from "pdf2json";
 async function extractTextFromPdf(buffer: Buffer): Promise<{ text: string; num: number }[]> {
   return new Promise((resolve, reject) => {
     // Initialize PDFParser with 1 to indicate raw text extraction only
-    const pdfParser = new PDFParser(null, 1);
+    const pdfParser = new (PDFParser as any)(null, 1);
     
-    pdfParser.on("pdfParser_dataError", (errData) => reject(errData.parserError));
+    pdfParser.on("pdfParser_dataError", (errData: any) => reject(errData.parserError));
     pdfParser.on("pdfParser_dataReady", () => {
       // getRawTextContent() returns a string of the text.
       resolve([{ text: pdfParser.getRawTextContent(), num: 1 }]);

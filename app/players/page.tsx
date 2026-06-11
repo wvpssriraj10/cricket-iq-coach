@@ -72,7 +72,9 @@ const AGE_GROUPS = [
   { value: "U12", label: "U12" },
   { value: "U16", label: "U16" },
   { value: "U19", label: "U19" },
+  { value: "U23", label: "U23" },
   { value: "College", label: "College" },
+  { value: "Other", label: "Other" },
 ];
 
 const FOCUS_OPTIONS = [
@@ -89,8 +91,10 @@ const AGE_GROUPS_SESSION = [
   { value: "U16", label: "U16" },
   { value: "U17", label: "U17" },
   { value: "U19", label: "U19" },
+  { value: "U23", label: "U23" },
   { value: "College", label: "College" },
   { value: "Senior", label: "Senior" },
+  { value: "Other", label: "Other" },
 ];
 
 function formatSessionLabel(s: Session) {

@@ -41,6 +41,8 @@ type PlayerPerformanceRow = Player & {
     catches: number;
     stumpings: number;
     is_playing: boolean;
+    is_captain?: boolean;
+    is_wicketkeeper?: boolean;
 };
 
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string; matchId: string }> }) {

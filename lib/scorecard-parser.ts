@@ -30,6 +30,13 @@ export type InningsData = {
   extras: number;
 };
 
+export type SquadPlayer = {
+  name: string;
+  isCaptain: boolean;
+  isWicketKeeper: boolean;
+  exactRawName: string;
+};
+
 export type ParsedScorecard = {
   tournament: string | null;
   matchDate: string | null;   // ISO date string YYYY-MM-DD
@@ -38,15 +45,15 @@ export type ParsedScorecard = {
   team2: string;
   result: string | null;
   innings: InningsData[];
-  squad1: string[];  // Full playing squad for team1
-  squad2: string[];  // Full playing squad for team2
+  squad1: SquadPlayer[];
+  squad2: SquadPlayer[];
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function cleanPlayerName(raw: string): string {
   return raw
-    .replace(/\(RHB\)|\(LHB\)|\(c\)|\(C\)|\(wk\)|\(WK\)|\(†\)/gi, "")
+    .replace(/\(\s*RHB\s*\)|\(\s*LHB\s*\)|\(\s*c\s*\)|\(\s*wk\s*\)|\(\s*†\s*\)/gi, "")
     .replace(/†/g, "")
     .replace(/\s+/g, " ")
     .trim();
@@ -63,6 +70,40 @@ function parseOvers(oStr: string): number {
 function parseDate(raw: string): string | null {
   const m = raw.match(/(\d{4}-\d{2}-\d{2})/);
   return m ? m[1] : null;
+}
+
+function parseSquadPlayer(raw: string): SquadPlayer | null {
+  const t = raw.trim();
+  if (!t) return null;
+  const isCaptain = /\(\s*c\s*\)/i.test(t);
+  const isWicketKeeper = /\(\s*wk\s*\)|\(\s*†\s*\)|†/i.test(t);
+  const name = cleanPlayerName(t);
+  if (!name) return null;
+  return { name, isCaptain, isWicketKeeper, exactRawName: t };
+}
+
+function normalizeForMatch(s: string) {
+  return s.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function matchToSquadName(rowName: string, squadList1: SquadPlayer[], squadList2: SquadPlayer[]): string {
+  const allSquad = [...squadList1, ...squadList2];
+  const normRow = normalizeForMatch(rowName);
+  
+  if (!normRow) return cleanPlayerName(rowName);
+
+  for (const sq of allSquad) {
+    if (normalizeForMatch(sq.name) === normRow) return sq.name;
+  }
+  
+  for (const sq of allSquad) {
+    const normSq = normalizeForMatch(sq.name);
+    if (normSq.includes(normRow) || normRow.includes(normSq)) {
+      return sq.name;
+    }
+  }
+  
+  return cleanPlayerName(rowName);
 }
 
 // ─── Main Parser ──────────────────────────────────────────────────────────────
@@ -136,8 +177,8 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
   // 1   Reddy Hema Sai ( C )    Jaakeer Shaik ( C )
   // 2   Abhishekth    Abhijieeth
   // ...
-  const squad1: string[] = [];
-  const squad2: string[] = [];
+  const squad1: SquadPlayer[] = [];
+  const squad2: SquadPlayer[] = [];
 
   const squadIdx = lines.findIndex((l) => /playing squad/i.test(l));
   if (squadIdx !== -1) {
@@ -153,13 +194,13 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
           // Split by 2 or more spaces
           const parts = content.split(/\s{2,}/);
           if (parts.length >= 2) {
-            const n1 = cleanPlayerName(parts[0]);
-            const n2 = cleanPlayerName(parts[1]);
-            if (n1) squad1.unshift(n1);
-            if (n2) squad2.unshift(n2);
+            const p1 = parseSquadPlayer(parts[0]);
+            const p2 = parseSquadPlayer(parts[1]);
+            if (p1) squad1.unshift(p1);
+            if (p2) squad2.unshift(p2);
           } else if (parts.length === 1) {
-            const n1 = cleanPlayerName(parts[0]);
-            if (n1) squad1.unshift(n1);
+            const p1 = parseSquadPlayer(parts[0]);
+            if (p1) squad1.unshift(p1);
           }
           foundSquad = true;
         }
@@ -180,13 +221,13 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
             const content = squadRowMatch[2];
             const parts = content.split(/\s{2,}/);
             if (parts.length >= 2) {
-              const n1 = cleanPlayerName(parts[0]);
-              const n2 = cleanPlayerName(parts[1]);
-              if (n1) squad1.push(n1);
-              if (n2) squad2.push(n2);
+              const p1 = parseSquadPlayer(parts[0]);
+              const p2 = parseSquadPlayer(parts[1]);
+              if (p1) squad1.push(p1);
+              if (p2) squad2.push(p2);
             } else if (parts.length === 1) {
-              const n1 = cleanPlayerName(parts[0]);
-              if (n1) squad1.push(n1);
+              const p1 = parseSquadPlayer(parts[0]);
+              if (p1) squad1.push(p1);
             }
             foundSquad = true;
           }
@@ -264,9 +305,21 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
     const bowlRows = bowlingBlocks[i] || [];
 
     // Parse Batting Rows
-    for (const iLine of batRows) {
+    let currentBatterName = "";
+
+    for (let i = 0; i < batRows.length; i++) {
+      const iLine = batRows[i];
+
       const statsMatchFull = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
       const statsMatchSimple = iLine.match(/(?:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([\d.]+))$/);
+      
+      if (!statsMatchFull && !statsMatchSimple) {
+        const nameMatch = iLine.match(/^\d+\s+(.+)$/);
+        if (nameMatch) {
+          currentBatterName = cleanPlayerName(nameMatch[1]);
+        }
+        continue;
+      }
       
       let runs = 0, balls = 0, fours = 0, sixes = 0, sr = 0;
       let prefixStr = "";
@@ -291,26 +344,34 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
       
       prefixStr = prefixStr.replace(/^\d+\s+/, "");
       
-      const statusPattern = /\b(not out|Not out|Not Out|run out.*|Run out.*|Run Out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|Hit Wicket.*|retired.*|Retired.*|absent.*|Absent.*)$/;
+      const statusPattern = /\b(not out|run out.*|c & b.*|c\s+.*?\s+b\s+.*|c\s+.*|b\s+.*|lbw.*|st\s+.*|hit wicket.*|retired.*|absent.*)$/i;
       const statusMatch = prefixStr.match(statusPattern);
       
-      let name = prefixStr;
+      let name = "";
       let status = "";
       
-      if (statusMatch) {
-        status = statusMatch[0];
-        name = prefixStr.substring(0, statusMatch.index).trim();
+      if (currentBatterName) {
+        name = currentBatterName;
+        status = prefixStr;
+        currentBatterName = ""; // reset
       } else {
-        const parts = prefixStr.split(/\s{2,}/);
-        if (parts.length >= 2) {
-           status = parts.pop() || "";
-           name = parts.join(" ");
+        if (statusMatch) {
+          status = statusMatch[0];
+          name = prefixStr.substring(0, statusMatch.index).trim();
+        } else {
+          const parts = prefixStr.split(/\s{2,}/);
+          if (parts.length >= 2) {
+             status = parts.pop() || "";
+             name = parts.join(" ");
+          } else {
+             name = prefixStr;
+          }
         }
       }
       
       if (name) {
         batting.push({
-          name: cleanPlayerName(name),
+          name: matchToSquadName(name, squad1, squad2),
           status: status.trim(),
           runs, balls, fours, sixes, strikeRate: sr,
         });
@@ -324,16 +385,17 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
       // Usually starts with \d+ \s+ Name. Then the rest are numbers.
       // Let's strip the leading number:
       let prefixStr = iLine.replace(/^\d+\s+/, "").trim();
-      // Extract all trailing numbers
-      const trailingNumbersMatch = prefixStr.match(/((?:\s+[\d.]+)+)$/);
+      // Extract all trailing numbers (now handling parentheses for extras)
+      const trailingNumbersMatch = prefixStr.match(/((?:\s+[\d.]+|\s+\([\d\s]+\))+)$/);
       if (trailingNumbersMatch) {
         const name = prefixStr.substring(0, trailingNumbersMatch.index).trim();
-        const numStrs = trailingNumbersMatch[1].trim().split(/\s+/);
+        const rawNumbers = trailingNumbersMatch[1].replace(/[()]/g, '').trim();
+        const numStrs = rawNumbers.split(/\s+/);
         // Minimum stats: O M R W Eco (5)
         // Max stats: O M R W 0s 4s 6s WD NB Eco (10)
         if (numStrs.length >= 5) {
           bowling.push({
-            name: cleanPlayerName(name),
+            name: matchToSquadName(name, squad1, squad2),
             overs: parseOvers(numStrs[0]),
             maidens: parseInt(numStrs[1], 10),
             runs: parseInt(numStrs[2], 10),
@@ -362,8 +424,8 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
 
   // If squad parsing didn't work well, build from batting data
   if (squad1.length === 0 && innings.length > 0) {
-    innings[0]?.batting.forEach((b) => squad1.push(b.name));
-    innings[1]?.batting.forEach((b) => squad2.push(b.name));
+    innings[0]?.batting.forEach((b) => squad1.push({ name: b.name, isCaptain: false, isWicketKeeper: false, exactRawName: b.name }));
+    innings[1]?.batting.forEach((b) => squad2.push({ name: b.name, isCaptain: false, isWicketKeeper: false, exactRawName: b.name }));
   }
 
   // Determine which squad belongs to which team using the innings data
@@ -377,8 +439,8 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
     let squad1MatchTeam2 = 0;
     
     for (const p of squad1) {
-       if (team1Batters.has(p)) squad1MatchTeam1++;
-       if (team2Batters.has(p)) squad1MatchTeam2++;
+       if (team1Batters.has(p.name)) squad1MatchTeam1++;
+       if (team2Batters.has(p.name)) squad1MatchTeam2++;
     }
     
     // If squad1 players batted in innings[1] (team2), swap them!
@@ -407,7 +469,7 @@ export function parseScorecardText(pages: { text: string; num: number }[]): Pars
 /** Get all unique player names from a parsed scorecard */
 export function getAllPlayerNames(scorecard: ParsedScorecard): string[] {
   const names = new Set<string>();
-  [...scorecard.squad1, ...scorecard.squad2].forEach((n) => names.add(n));
+  [...scorecard.squad1, ...scorecard.squad2].forEach((p) => names.add(p.name));
   scorecard.innings.forEach((inn) => {
     inn.batting.forEach((b) => names.add(b.name));
     inn.bowling.forEach((b) => names.add(b.name));

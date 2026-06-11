@@ -60,7 +60,7 @@ const BOWLING_PHASES = [
 ];
 
 export default function ImportPage() {
-  const [activeTab, setActiveTab] = useState<"excel" | "pdf">("excel");
+  const [activeTab, setActiveTab] = useState<"excel" | "pdf">("pdf");
 
   // Excel state
   const [file, setFile] = useState<File | null>(null);
