@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Target,
@@ -13,8 +13,11 @@ import {
   ListTodo,
   Shield,
   BarChart,
+  LogOut,
+  UserCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/client";
 
 import { useAuth } from "@/components/auth-provider";
 
@@ -32,9 +35,16 @@ const navigation = [
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const { profile } = useAuth();
+  const router = useRouter();
+  const { user, profile } = useAuth();
   
   const isPlayer = profile?.role === 'player';
+
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.refresh();
+  };
 
   return (
     <aside className="flex h-full min-h-screen w-64 flex-col bg-sidebar text-sidebar-foreground shadow-xl">
@@ -84,16 +94,23 @@ export function AppSidebar() {
         </ul>
       </nav>
 
-      <div className="border-t border-sidebar-border/80 p-4">
+      <div className="border-t border-sidebar-border/80 p-4 space-y-2">
         <div className="flex items-center gap-3 rounded-xl bg-sidebar-accent/40 px-3 py-2.5 ring-1 ring-sidebar-border/50 shadow-sm">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground shadow-inner">
-            <Users className="h-4 w-4" />
+            <UserCircle className="h-5 w-5" />
           </div>
-          <div className="min-w-0">
-            <p className="text-sm font-semibold">Team Squad</p>
-            <p className="text-xs text-sidebar-foreground/75">12 Players</p>
+          <div className="min-w-0 overflow-hidden flex-1">
+            <p className="text-sm font-semibold truncate">{user?.email || 'User'}</p>
+            <p className="text-xs text-sidebar-foreground/75 capitalize">{profile?.role || 'Guest'}</p>
           </div>
         </div>
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-500/10 transition-colors"
+        >
+          <LogOut className="h-5 w-5 shrink-0" />
+          Log Out
+        </button>
       </div>
     </aside>
   );
