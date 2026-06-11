@@ -639,8 +639,9 @@ export default function PlayersPage() {
         {/* 2-column: Add player + Squad list — first column sized to form so no gap */}
         <section aria-label="Squad management" className={isPlayer ? "" : "grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]"}>
           {!isPlayer && (
-            <Card className="min-w-0 rounded-xl border bg-card shadow-sm self-start">
-              <CardHeader className="pb-2">
+            <div className="sticky top-24 self-start">
+              <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
+                <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                 <UserPlus className="h-5 w-5" />
                 Add player
@@ -702,6 +703,7 @@ export default function PlayersPage() {
               )}
             </CardContent>
           </Card>
+            </div>
           )}
 
           <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
