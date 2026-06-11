@@ -135,14 +135,16 @@ export default function PlayersPage() {
 
   const [filterRole, setFilterRole] = useState<string>("all");
   const [filterAgeGroup, setFilterAgeGroup] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPlayers = useMemo(() => {
     return players.filter((p) => {
       const matchRole = filterRole === "all" || p.role === filterRole;
       const matchAge = filterAgeGroup === "all" || p.age_group === filterAgeGroup;
-      return matchRole && matchAge;
+      const matchSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchRole && matchAge && matchSearch;
     });
-  }, [players, filterRole, filterAgeGroup]);
+  }, [players, filterRole, filterAgeGroup, searchQuery]);
 
   const filteredRoleCounts = useMemo(() => {
     const counts: Record<string, number> = { batter: 0, bowler: 0, allrounder: 0, keeper: 0 };
@@ -710,10 +712,18 @@ export default function PlayersPage() {
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                 <Users className="h-5 w-5" />
-                Squad ({error || isLoading ? "—" : filteredPlayers.length})
+                Players list ({error || isLoading ? "—" : filteredPlayers.length})
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="pt-0 space-y-4">
+              <div className="pt-2">
+                <Input
+                  placeholder="Search players by name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="max-w-md bg-background"
+                />
+              </div>
               {error && (
                 <p className="rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
                   Could not load players. Check Supabase is set up and tables exist.
