@@ -135,9 +135,7 @@ export function findConflicts(
     for (const existing of existingPlayers) {
       const normalizedExisting = normalizeName(existing.name);
 
-      // Exact match → not a conflict, will be handled as a silent reuse
-      if (normalizedPdf === normalizedExisting) continue;
-
+      // We no longer skip exact matches, so that users are always prompted to confirm if an exact replica is the same person.
       if (arePotentiallyTheSamePerson(pdfName, existing.name)) {
         const score = nameSimilarity(pdfName, existing.name);
         // Avoid duplicate entries for same pdf name

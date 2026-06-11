@@ -82,20 +82,21 @@ export async function POST(request: Request) {
       // Already resolved
       if (playerIdByName.has(norm)) return playerIdByName.get(norm)!;
 
-      // Check if user said merge with existing
+      // Check if user provided a resolution for this name
       if (resolutionMap.has(norm)) {
         const mergeId = resolutionMap.get(norm);
         if (mergeId) {
           playerIdByName.set(norm, mergeId);
           return mergeId;
         }
-      }
-
-      // Exact match in DB
-      if (existingByNorm.has(norm)) {
-        const id = existingByNorm.get(norm)!;
-        playerIdByName.set(norm, id);
-        return id;
+        // If mergeId is null, the user explicitly chose "Different Player", so we skip the exact match check and create a new one.
+      } else {
+        // Exact match in DB (only fallback if no conflict was presented/resolved)
+        if (existingByNorm.has(norm)) {
+          const id = existingByNorm.get(norm)!;
+          playerIdByName.set(norm, id);
+          return id;
+        }
       }
 
       // Create new player

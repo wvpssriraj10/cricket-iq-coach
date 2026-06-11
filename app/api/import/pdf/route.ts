@@ -80,8 +80,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Failed to fetch existing players: " + fetchErr.message }, { status: 500 });
     }
 
-    // Temporarily disabled fuzzy matching to skip duplicate names suggestion per user request
-    const conflicts: any[] = [];
+    const conflicts = findConflicts(pdfPlayerNames, existingPlayers || []);
 
     return NextResponse.json({
       scorecard,
