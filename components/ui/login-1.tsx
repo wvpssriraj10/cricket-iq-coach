@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react'
 import Image from 'next/image';
 import { Github, Mail, Twitter, Loader2 } from 'lucide-react';
 import { login, signup } from '@/app/login/actions';
+import { createClient } from '@/utils/supabase/client';
 
 interface InputProps {
   label?: string;
@@ -89,6 +90,16 @@ const Login1 = () => {
     });
   };
 
+  const handleOAuth = async (provider: string) => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: provider as any,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  };
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const leftSection = e.currentTarget.getBoundingClientRect();
     setMousePosition({
@@ -114,21 +125,25 @@ const Login1 = () => {
       ),
       href: '#',
       gradient: 'bg-[var(--color-bg)]',
+      provider: 'google',
     },
     {
       icon: <Github size={24} />,
       href: '#',
       gradient: 'bg-[var(--color-bg)]',
+      provider: 'github',
     },
     {
       icon: <Twitter size={24} />,
       href: '#',
       bg: 'bg-[var(--color-bg)]',
+      provider: 'twitter',
     },
     {
       icon: <Mail size={24} />,
       href: '#',
       bg: 'bg-[var(--color-bg)]',
+      provider: null, // Just an icon, maybe later we focus email
     }
   ];
 
@@ -163,6 +178,16 @@ const Login1 = () => {
                           <li key={index} className="list-none">
                             <a
                               href={social.href}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (social.provider) {
+                                  handleOAuth(social.provider);
+                                } else {
+                                  // For email icon, focus the email input
+                                  const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
+                                  if (emailInput) emailInput.focus();
+                                }
+                              }}
                               className={`w-[2.5rem] md:w-[3rem] h-[2.5rem] md:h-[3rem] bg-[var(--color-bg-2)] rounded-full flex justify-center items-center relative z-[1] border-2 border-[var(--color-text-primary)] overflow-hidden group`}
                             >
                               <div
