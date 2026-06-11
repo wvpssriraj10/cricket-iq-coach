@@ -21,9 +21,9 @@ export function ProfileCard({
 }: ProfileCardProps) {
 
   return (
-    <div className="w-full mx-auto bg-white dark:bg-[#1a1f24] rounded-t-xl overflow-hidden shadow-sm">
+    <div className="w-full mx-auto bg-transparent mb-6">
       {/* Red Header Area */}
-      <div className="bg-gradient-to-r from-[#d31027] via-[#e22328] to-[#ea384d] w-full px-6 py-10 md:px-12 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-[#d31027] via-[#e22328] to-[#ea384d] rounded-3xl shadow-xl w-full px-6 py-10 md:px-12 md:py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
         
         {/* Abstract pattern overlay for premium feel */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
