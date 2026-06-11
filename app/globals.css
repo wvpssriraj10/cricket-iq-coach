@@ -38,6 +38,20 @@
   --sidebar-accent-foreground: oklch(0.98 0.005 95);
   --sidebar-border: oklch(0.32 0.05 260);
   --sidebar-ring: oklch(0.52 0.18 152);
+
+  /* Login Component Variables */
+  --color-bg: #101214;
+  --color-surface: #161A1D;
+  --color-muted-surface: #1D2125;
+  --color-border: #2C333A;
+  --color-text-secondary: #596773;
+  --color-text-primary: #C7D1DB;
+  --color-heading: #DEE4EA;
+  --spacing-6: 1.5rem;
+  --rounded-lg: 0.5rem;
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --color-text-primary-rgb: 199, 209, 219;
+  --color-bg-2: #C7D1DB;
 }
 
 .dark {
@@ -73,6 +87,17 @@
   --sidebar-accent-foreground: oklch(0.98 0.005 260);
   --sidebar-border: oklch(0.18 0.015 260);
   --sidebar-ring: oklch(0.65 0.2 145);
+
+  /* Login Component Variables */
+  --color-bg: #101214;
+  --color-surface: #161A1D;
+  --color-muted-surface: #1D2125;
+  --color-border: #2C333A;
+  --color-text-secondary: #596773;
+  --color-text-primary: #C7D1DB;
+  --color-heading: #DEE4EA;
+  --color-bg-2: #C7D1DB;
+  --color-text-primary-rgb: 199, 209, 219;
 }
 
 @theme inline {

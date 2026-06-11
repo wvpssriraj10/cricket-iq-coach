@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import useSWR from "swr";
+import { useAuth } from "@/components/auth-provider";
 import { AppShell } from "@/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -110,6 +111,9 @@ const ROLE_CHART_COLORS: Record<string, string> = {
 };
 
 export default function PlayersPage() {
+  const { profile } = useAuth();
+  const isPlayer = profile?.role === 'player';
+
   const { data: players = [], error, isLoading, mutate } = useSWR<Player[]>("/api/players", fetcher);
   const { data: sessions = [], mutate: mutateSessions } = useSWR<Session[]>(
     "/api/sessions",
@@ -625,9 +629,10 @@ export default function PlayersPage() {
         </section>
 
         {/* 2-column: Add player + Squad list — first column sized to form so no gap */}
-        <section aria-label="Squad management" className="grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]">
-          <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
-            <CardHeader className="pb-2">
+        <section aria-label="Squad management" className={isPlayer ? "" : "grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]"}>
+          {!isPlayer && (
+            <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
+              <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                 <UserPlus className="h-5 w-5" />
                 Add player
@@ -689,6 +694,7 @@ export default function PlayersPage() {
               )}
             </CardContent>
           </Card>
+          )}
 
           <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
             <CardHeader className="pb-2">
@@ -731,24 +737,26 @@ export default function PlayersPage() {
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-1.5">
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="text-primary hover:bg-primary/10 hover:text-primary"
-                              onClick={() => {
-                                setEditingPlayer(p);
-                                setEditName(p.name);
-                                setEditRole(p.role);
-                                setEditAgeGroup(p.age_group);
-                                setEditBattingArm(p.batting_arm || "");
-                                setEditBowlingArm(p.bowling_arm || "");
-                                setEditBowlerType(p.bowler_type || "");
-                              }}
-                            >
-                              <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                              <span className="hidden sm:inline">Edit</span>
-                            </Button>
+                            {(!isPlayer || profile.player_id === p.id) && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="text-primary hover:bg-primary/10 hover:text-primary"
+                                onClick={() => {
+                                  setEditingPlayer(p);
+                                  setEditName(p.name);
+                                  setEditRole(p.role);
+                                  setEditAgeGroup(p.age_group);
+                                  setEditBattingArm(p.batting_arm || "");
+                                  setEditBowlingArm(p.bowling_arm || "");
+                                  setEditBowlerType(p.bowler_type || "");
+                                }}
+                              >
+                                <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                                <span className="hidden sm:inline">Edit</span>
+                              </Button>
+                            )}
                             <Button
                               type="button"
                               variant="outline"
@@ -758,34 +766,39 @@ export default function PlayersPage() {
                               <Zap className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
                               <span className="hidden sm:inline">Stats</span>
                             </Button>
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handleDownloadProgress(p)}
-                              disabled={exportingId === p.id}
-                            >
-                              <FileDown className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                              <span className="hidden sm:inline">{exportingId === p.id ? "…" : "Download"}</span>
-                            </Button>
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={() => openLogDialog(p)}
-                            >
-                              <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                              <span className="hidden sm:inline">Log</span>
-                            </Button>
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              className="text-destructive hover:bg-destructive/10 hover:text-destructive"
-                              onClick={() => setPlayerToRemove(p)}
-                            >
-                              <Trash2 className="h-3.5 w-3.5" />
-                            </Button>
+                            
+                            {!isPlayer && (
+                              <>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDownloadProgress(p)}
+                                  disabled={exportingId === p.id}
+                                >
+                                  <FileDown className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                                  <span className="hidden sm:inline">{exportingId === p.id ? "…" : "Download"}</span>
+                                </Button>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => openLogDialog(p)}
+                                >
+                                  <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
+                                  <span className="hidden sm:inline">Log</span>
+                                </Button>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+                                  onClick={() => setPlayerToRemove(p)}
+                                >
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                </Button>
+                              </>
+                            )}
                           </div>
                         </TableCell>
                       </TableRow>

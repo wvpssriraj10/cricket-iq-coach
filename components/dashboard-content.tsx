@@ -10,6 +10,7 @@ import { SessionsByFocusChart } from "@/components/sessions-by-focus-chart";
 import { RecentSessions } from "@/components/recent-sessions";
 import { TopPerformers } from "@/components/top-performers";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
@@ -68,7 +69,7 @@ const dummyData = {
 
 const DEMO_BANNER_KEY = "cricket-iq-demo-banner-dismissed";
 
-export function DashboardContent() {
+export function DashboardContent({ profile }: { profile?: { role: string, player_id: string } }) {
   const [player, setPlayer] = useState<string>("all");
   const [role, setRole] = useState<string>("all");
   const [range, setRange] = useState<string>("all");
@@ -101,11 +102,19 @@ export function DashboardContent() {
   return (
     <div className="mx-auto max-w-7xl space-y-8">
       {/* Welcome strip */}
-      <section className="rounded-2xl border border-border/80 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent px-6 py-5 shadow-sm">
-        <h2 className="text-lg font-semibold text-foreground">Welcome back</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Here’s your team performance at a glance. Use the filters below to narrow by player, role, or time range.
-        </p>
+      <section className="rounded-2xl border border-border/80 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent px-6 py-5 shadow-sm flex justify-between items-center">
+        <div>
+          <h2 className="text-lg font-semibold text-foreground">Welcome back</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Here’s your team performance at a glance. Use the filters below to narrow by player, role, or time range.
+          </p>
+        </div>
+        {profile?.role === 'player' && (
+          <Button onClick={() => alert('Session Request feature coming soon!')}>
+            <Target className="mr-2 h-4 w-4" />
+            Request Session
+          </Button>
+        )}
       </section>
 
       {/* Demo data banner: shown when API unavailable (e.g. Supabase not configured); dismissible */}

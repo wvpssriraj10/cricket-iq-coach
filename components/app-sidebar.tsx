@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useAuth } from "@/components/auth-provider";
+
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
   { name: "Practice Planner", href: "/practice", icon: ListTodo },
@@ -23,13 +25,16 @@ const navigation = [
   { name: "Teams", href: "/teams", icon: Shield },
   { name: "Compare", href: "/compare", icon: BarChart },
   { name: "Sessions", href: "/sessions", icon: CalendarCheck },
-  { name: "Import Data", href: "/import", icon: FileSpreadsheet },
+  { name: "Import Data", href: "/import", icon: FileSpreadsheet, coachOnly: true },
   { name: "Match Scenarios", href: "/scenarios", icon: Target },
   { name: "Field Placement", href: "/field", icon: Map },
 ];
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { profile } = useAuth();
+  
+  const isPlayer = profile?.role === 'player';
 
   return (
     <aside className="flex h-full min-h-screen w-64 flex-col bg-sidebar text-sidebar-foreground shadow-xl">
@@ -47,13 +52,15 @@ export function AppSidebar() {
         </div>
         <div className="min-w-0">
           <h1 className="text-base font-bold tracking-tight">Cricket IQ</h1>
-          <p className="text-xs text-sidebar-foreground/75">Coach Analytics</p>
+          <p className="text-xs text-sidebar-foreground/75">{isPlayer ? 'Player Portal' : 'Coach Analytics'}</p>
         </div>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <ul className="space-y-0.5">
           {navigation.map((item) => {
+            if (item.coachOnly && isPlayer) return null;
+            
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));

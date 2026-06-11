@@ -22,17 +22,24 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+import { AuthProvider } from '@/components/auth-provider'
+import { getUserProfile } from '@/utils/auth'
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const authData = await getUserProfile();
+
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
-        <AILayers />
+        <AuthProvider user={authData?.user} profile={authData?.profile as any}>
+          {children}
+          <Analytics />
+          <AILayers />
+        </AuthProvider>
       </body>
     </html>
   )

@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/auth-provider";
 import { AppShell } from "@/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -60,6 +62,15 @@ const BOWLING_PHASES = [
 ];
 
 export default function ImportPage() {
+  const router = useRouter();
+  const { profile } = useAuth();
+  
+  useEffect(() => {
+    if (profile?.role === 'player') {
+      router.push('/');
+    }
+  }, [profile, router]);
+
   const [activeTab, setActiveTab] = useState<"excel" | "pdf">("pdf");
 
   // Excel state
