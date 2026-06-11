@@ -31,6 +31,13 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import { KPICard } from "@/components/kpi-card";
 import { RecentSessions } from "@/components/recent-sessions";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -44,7 +51,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-import { UserPlus, Users, ClipboardList, Trash2, FileDown, Calendar, Zap, Target, Filter, Loader2 } from "lucide-react";
+import { UserPlus, Users, ClipboardList, Trash2, FileDown, Calendar, Zap, Target, Filter, Loader2, MoreHorizontal } from "lucide-react";
 
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -632,7 +639,7 @@ export default function PlayersPage() {
         {/* 2-column: Add player + Squad list — first column sized to form so no gap */}
         <section aria-label="Squad management" className={isPlayer ? "" : "grid gap-6 lg:grid-cols-[minmax(280px,28rem)_1fr]"}>
           {!isPlayer && (
-            <Card className="min-w-0 rounded-xl border bg-card shadow-sm">
+            <Card className="min-w-0 rounded-xl border bg-card shadow-sm self-start">
               <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-lg font-semibold tracking-tight">
                 <UserPlus className="h-5 w-5" />
@@ -738,35 +745,6 @@ export default function PlayersPage() {
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex justify-end gap-1.5">
-                            {(!isPlayer || profile.player_id === p.id) && (
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                className="text-primary hover:bg-primary/10 hover:text-primary"
-                                onClick={() => {
-                                  setEditingPlayer(p);
-                                  setEditName(p.name);
-                                  setEditRole(p.role);
-                                  setEditAgeGroup(p.age_group);
-                                  setEditBattingArm(p.batting_arm || "");
-                                  setEditBowlingArm(p.bowling_arm || "");
-                                  setEditBowlerType(p.bowler_type || "");
-                                }}
-                              >
-                                <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                                <span className="hidden sm:inline">Edit</span>
-                              </Button>
-                            )}
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={() => openStatsDialog(p)}
-                            >
-                              <Zap className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                              <span className="hidden sm:inline">Stats</span>
-                            </Button>
                             <Button
                               asChild
                               variant="outline"
@@ -777,39 +755,45 @@ export default function PlayersPage() {
                                 <span className="hidden sm:inline">View Profile</span>
                               </Link>
                             </Button>
-                            
-                            {!isPlayer && (
-                              <>
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => handleDownloadProgress(p)}
-                                  disabled={exportingId === p.id}
-                                >
-                                  <FileDown className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                                  <span className="hidden sm:inline">{exportingId === p.id ? "…" : "Download"}</span>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="outline" size="sm" className="h-8 w-8 p-0">
+                                  <MoreHorizontal className="h-4 w-4" />
                                 </Button>
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => openLogDialog(p)}
-                                >
-                                  <ClipboardList className="mr-1 h-3.5 w-3.5 sm:mr-1.5" />
-                                  <span className="hidden sm:inline">Log</span>
-                                </Button>
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  size="sm"
-                                  className="text-destructive hover:bg-destructive/10 hover:text-destructive"
-                                  onClick={() => setPlayerToRemove(p)}
-                                >
-                                  <Trash2 className="h-3.5 w-3.5" />
-                                </Button>
-                              </>
-                            )}
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="w-40">
+                                <DropdownMenuItem onClick={() => openStatsDialog(p)}>
+                                  <Zap className="mr-2 h-4 w-4" /> Stats
+                                </DropdownMenuItem>
+                                {(!isPlayer || profile.player_id === p.id) && (
+                                  <DropdownMenuItem onClick={() => {
+                                    setEditingPlayer(p);
+                                    setEditName(p.name);
+                                    setEditRole(p.role);
+                                    setEditAgeGroup(p.age_group);
+                                    setEditBattingArm(p.batting_arm || "");
+                                    setEditBowlingArm(p.bowling_arm || "");
+                                    setEditBowlerType(p.bowler_type || "");
+                                  }}>
+                                    <ClipboardList className="mr-2 h-4 w-4" /> Edit
+                                  </DropdownMenuItem>
+                                )}
+                                {!isPlayer && (
+                                  <>
+                                    <DropdownMenuItem onClick={() => openLogDialog(p)}>
+                                      <ClipboardList className="mr-2 h-4 w-4" /> Log Match
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleDownloadProgress(p)} disabled={exportingId === p.id}>
+                                      <FileDown className="mr-2 h-4 w-4" /> {exportingId === p.id ? "Downloading..." : "Download"}
+                                    </DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={() => setPlayerToRemove(p)} className="text-destructive focus:text-destructive">
+                                      <Trash2 className="mr-2 h-4 w-4" /> Delete
+                                    </DropdownMenuItem>
+                                  </>
+                                )}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                           </div>
                         </TableCell>
                       </TableRow>
